@@ -10,9 +10,8 @@ install:
 start:
 	@npm run dev
 
-prisma:
-	@echo "Installing prisma and setting up database"
+migrate:
+	@echo "Installing prisma and migrating database models..."
 	@npm install prisma
-	@npm install
 	@npx prisma migrate dev
 	@npx prisma studio
