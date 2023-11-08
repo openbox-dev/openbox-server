@@ -7,6 +7,7 @@
 ```bash
 make install
 make start
+make migrate
 ```
 
 ### Lancer le projet
