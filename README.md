@@ -2,13 +2,15 @@
 
 ## Installation
 
-### Installer les deps
+### MakeFile
 
+```bash
 make install
+make start
+```
 
 ### Lancer le projet
 
-make start
 
 ### Environment variables
 
@@ -22,7 +24,7 @@ Inside `.env`
 DATABASE_URL="database_url"
 ```
 
-## Dev Experience
+## Dev experience
 
 ### Commit lint
 
