@@ -5,9 +5,14 @@ install:
 	@npm install sass
 	@echo "=== THREE ==="
 	@npm install three
-	@echo "=== PRISMA ==="
-	@npm install prisma
 	@npm install
 
 start:
 	@npm run dev
+
+prisma:
+	@echo "Installing prisma and setting up database"
+	@npm install prisma
+	@npm install
+	@npx prisma migrate dev
+	@npx prisma studio
