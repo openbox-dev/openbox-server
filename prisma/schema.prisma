@@ -54,7 +54,7 @@ model Box {
   box_admin   Box_admin? @relation(name: "BoxToBox_admin")
 }
 
-model Actualites {
+model Actualite {
   id              Int      @id @default(autoincrement())
   title           String   @db.Text
   description     String?  @db.Text
