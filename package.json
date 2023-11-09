@@ -9,7 +9,9 @@
     "dev": "node ./server.mjs",
     "start": "cross-env NODE_ENV=production node ./server.mjs",
     "typecheck": "tsc",
-    "prepare": "husky install | chmod ug+x .husky/*"
+    "prepare": "husky install | chmod ug+x .husky/*",
+    "build:css": "node-sass ./scss -o ./app/styles --output-style compressed",
+    "dev:css": "npm run build:css && node-sass -rw ./scss -o ./app/styles"
   },
   "dependencies": {
     "@prisma/client": "^5.5.2",

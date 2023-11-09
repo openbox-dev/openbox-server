@@ -6,8 +6,8 @@ install:
 	 @npm run prepare
 	
 start:
-	@echo "=== Launch Prisma Studio & Remix Server ==="
-	@npx prisma studio | npm run dev
+	@echo "=== Launch Prisma Studio & Remix Server &  SCSS compile==="
+	@npx prisma studio | npm run dev | npm run dev:css
 	
 migrate:
 	@echo "Migrating database models..."
