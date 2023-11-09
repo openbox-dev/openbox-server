@@ -1,15 +1,13 @@
 install:
 	@echo "Installing dependencies..."
 	@echo "Streamez Asinine"
-	@npm install
+	 @npm install
 	@echo "=== Preparing ==="
-	@npm run prepare
+	 @npm run prepare
 	
 start:
-	@echo "=== Launch Remix Server ==="
-	@npm run dev
-	@echo "=== Launch Prisma Studio ==="
-	@npx prisma studio
+	@echo "=== Launch Prisma Studio & Remix Server ==="
+	@npx prisma studio | npm run dev
 	
 migrate:
 	@echo "Migrating database models..."
