@@ -12,17 +12,18 @@ datasource db {
 
 // MAIN TABLES
 
+// MAIN TABLES
+
 model User {
   id               Int                @id @default(autoincrement())
   firstname        String             @db.Text
   lastname         String             @db.Text
   mail             String             @unique @db.Text
-
   authentication   Authentication?    @relation(name: "UserToAuthentication")
+  role             Role               @default(STUDENT)
   eventparticipant EventParticipant[] @relation(name: "UserToEventParticipant")
   box_admin        Box_admin[]        @relation(name: "UserToBox_admin")
-
-  role             Role               @default(STUDENT)
+  actu             Actu[]             @relation(name: "UserToActu")
 }
 
 model Authentication {
@@ -30,60 +31,63 @@ model Authentication {
   token       String    @db.VarChar(256)
   token_start DateTime? @db.Timestamp()
   token_end   DateTime? @db.Timestamp()
-  userId      Int       @unique
-
   user        User      @relation(name: "UserToAuthentication", fields: [userId], references: [id])
+  userId      Int       @unique
+  agent       String    @db.Text
 }
 
 model Event {
   id               Int                @id @default(autoincrement())
-  boxId            Int
-
   eventparticipant EventParticipant[] @relation(name: "EventToEventParticipant")
   box              Box                @relation(name: "BoxToEvent", fields: [boxId], references: [id])
+  boxId            Int
   eventressource   EventRessource?    @relation(name: "EventToEventRessource")
 }
 
 model Box {
   id          Int        @id @default(autoincrement())
+  event       Event[]    @relation(name: "BoxToEvent")
+  status      BoxStatus
   name        String     @db.Text
   description String     @db.Text
   imageUrl    String?    @db.Text
-
-  event       Event[]    @relation(name: "BoxToEvent")
   box_admin   Box_admin? @relation(name: "BoxToBox_admin")
-
-  status      BoxStatus
 }
 
-// JOIN TABLES
+model Actualites {
+  id              Int      @id @default(autoincrement())
+  title           String   @db.Text
+  description     String?  @db.Text
+  imageUrl        String[] @db.Text
+  videoUrl        String?  @db.Text
+  userId          Int
+  imagePreviewUrl String?  @db.Text
+  author          User     @relation(name: "UserToActu", fields: [userId], references: [id])
+}
+
 model Box_admin {
   id     Int  @id @default(autoincrement())
-  userId Int
-  boxId  Int  @unique
-
   user   User @relation(name: "UserToBox_admin", fields: [userId], references: [id])
+  userId Int
   box    Box  @relation(name: "BoxToBox_admin", fields: [boxId], references: [id])
+  boxId  Int  @unique
 }
 
 model EventRessource {
   id           Int    @id @default(autoincrement())
+  event        Event  @relation(name: "EventToEventRessource", fields: [eventId], references: [id])
   ressourceUrl String @db.Text
   eventId      Int    @unique
-
-  event        Event  @relation(name: "EventToEventRessource", fields: [eventId], references: [id])
 }
 
 // ENUMS
 
 model EventParticipant {
   id      Int                 @id @default(autoincrement())
-  userId  Int
-  eventId Int
-
-  event   Event               @relation(name: "EventToEventParticipant", fields: [eventId], references: [id])
   user    User                @relation(name: "UserToEventParticipant", fields: [userId], references: [id])
-  
+  userId  Int
+  event   Event               @relation(name: "EventToEventParticipant", fields: [eventId], references: [id])
+  eventId Int
   status  ParticipationStatus
 }
 
