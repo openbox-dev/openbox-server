@@ -12,7 +12,6 @@ make migrate
 
 ### Lancer le projet
 
-
 ### Environment variables
 
 ```bash
@@ -24,8 +23,6 @@ Inside `.env`
 ```.env
 DATABASE_URL="database_url"
 ```
-
-## Dev experience
 
 ### Commit lint
 
