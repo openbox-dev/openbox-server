@@ -1,9 +1,9 @@
 install:
 	@echo "Installing dependencies..."
 	@echo "Streamez Asinine"
-	 @npm install
+	@npm install
 	@echo "=== Preparing ==="
-	 @npm run prepare
+	@npm run prepare
 	
 start:
 	@echo "=== Launch Prisma Studio & Remix Server &  SCSS compile==="
