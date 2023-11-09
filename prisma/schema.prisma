@@ -11,13 +11,18 @@ datasource db {
 }
 
 // MAIN TABLES
+
 model User {
-  id             Int             @id @default(autoincrement())
-  firstname      String          @db.Text
-  lastname       String          @db.Text
-  mail           String          @unique @db.Text
-  authentication Authentication? @relation(name: "UserToAuthentication")
-  role           Role            @default(USER)
+  id               Int                @id @default(autoincrement())
+  firstname        String             @db.Text
+  lastname         String             @db.Text
+  mail             String             @unique @db.Text
+
+  authentication   Authentication?    @relation(name: "UserToAuthentication")
+  eventparticipant EventParticipant[] @relation(name: "UserToEventParticipant")
+  box_admin        Box_admin[]        @relation(name: "UserToBox_admin")
+
+  role             Role               @default(STUDENT)
 }
 
 model Authentication {
@@ -25,35 +30,77 @@ model Authentication {
   token       String    @db.VarChar(256)
   token_start DateTime? @db.Timestamp()
   token_end   DateTime? @db.Timestamp()
-  user        User      @relation(name: "UserToAuthentication", fields: [userId], references: [id])
   userId      Int       @unique
+
+  user        User      @relation(name: "UserToAuthentication", fields: [userId], references: [id])
 }
 
 model Event {
-  id Int @id @default(autoincrement())
-}
+  id               Int                @id @default(autoincrement())
+  boxId            Int
 
+  eventparticipant EventParticipant[] @relation(name: "EventToEventParticipant")
+  box              Box                @relation(name: "BoxToEvent", fields: [boxId], references: [id])
+  eventressource   EventRessource?    @relation(name: "EventToEventRessource")
+}
 
 model Box {
-  id Int @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
+  name        String     @db.Text
+  description String     @db.Text
+  imageUrl    String?    @db.Text
+
+  event       Event[]    @relation(name: "BoxToEvent")
+  box_admin   Box_admin? @relation(name: "BoxToBox_admin")
+
+  status      BoxStatus
 }
 
-// JOIN TABLES 
-model EventParticipants {
-  id Int @id @default(autoincrement())
-}
-
+// JOIN TABLES
 model Box_admin {
-  id Int @id @default(autoincrement())
+  id     Int  @id @default(autoincrement())
+  userId Int
+  boxId  Int  @unique
+
+  user   User @relation(name: "UserToBox_admin", fields: [userId], references: [id])
+  box    Box  @relation(name: "BoxToBox_admin", fields: [boxId], references: [id])
 }
 
 model EventRessource {
-  id Int @id @default(autoincrement())
+  id           Int    @id @default(autoincrement())
+  ressourceUrl String @db.Text
+  eventId      Int    @unique
+
+  event        Event  @relation(name: "EventToEventRessource", fields: [eventId], references: [id])
 }
 
 // ENUMS
+
+model EventParticipant {
+  id      Int                 @id @default(autoincrement())
+  userId  Int
+  eventId Int
+
+  event   Event               @relation(name: "EventToEventParticipant", fields: [eventId], references: [id])
+  user    User                @relation(name: "UserToEventParticipant", fields: [userId], references: [id])
+  
+  status  ParticipationStatus
+}
+
 enum Role {
-  ADMIN
-  SUPER_ADMIN
-  USER
+  ANIMATOR
+  MEDIATOR
+  STUDENT
+}
+
+enum BoxStatus {
+  ACCEPTED
+  REFUSED
+  PENDING
+}
+
+enum ParticipationStatus {
+  PRESENT
+  INTERESTED
+  NOT_INTERESTED
 }
