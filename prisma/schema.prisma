@@ -23,7 +23,7 @@ model User {
   role             Role               @default(STUDENT)
   eventparticipant EventParticipant[] @relation(name: "UserToEventParticipant")
   box_admin        Box_admin[]        @relation(name: "UserToBox_admin")
-  actu             Actu[]             @relation(name: "UserToActu")
+  actu             Actualite[]             @relation(name: "UserToActu")
 }
 
 model Authentication {
