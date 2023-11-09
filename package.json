@@ -8,7 +8,8 @@
     "build": "vite build && vite build --ssr",
     "dev": "node ./server.mjs",
     "start": "cross-env NODE_ENV=production node ./server.mjs",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "prepare": "husky install | chmod ug+x .husky/*"
   },
   "dependencies": {
     "@prisma/client": "^5.5.2",
@@ -34,7 +35,7 @@
     "@types/react-dom": "^18.2.7",
     "cross-env": "^7.0.3",
     "eslint": "^8.38.0",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "typescript": "^5.1.6",
     "vite": "^4.5.0",
     "vite-tsconfig-paths": "^4.2.1"
