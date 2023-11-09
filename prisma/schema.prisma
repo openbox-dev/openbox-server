@@ -10,7 +10,50 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// MAIN TABLES
 model User {
-    id Int @id @default(autoincrement())
-    email String @unique
+  id             Int             @id @default(autoincrement())
+  firstname      String          @db.Text
+  lastname       String          @db.Text
+  mail           String          @unique @db.Text
+  authentication Authentication? @relation(name: "UserToAuthentication")
+  role           Role            @default(USER)
+}
+
+model Authentication {
+  id          Int       @id @default(autoincrement())
+  token       String    @db.VarChar(256)
+  token_start DateTime? @db.Timestamp()
+  token_end   DateTime? @db.Timestamp()
+  user        User      @relation(name: "UserToAuthentication", fields: [userId], references: [id])
+  userId      Int       @unique
+}
+
+model Event {
+  id Int @id @default(autoincrement())
+}
+
+
+model Box {
+  id Int @id @default(autoincrement())
+}
+
+// JOIN TABLES 
+model EventParticipants {
+  id Int @id @default(autoincrement())
+}
+
+model Box_admin {
+  id Int @id @default(autoincrement())
+}
+
+model EventRessource {
+  id Int @id @default(autoincrement())
+}
+
+// ENUMS
+enum Role {
+  ADMIN
+  SUPER_ADMIN
+  USER
 }
