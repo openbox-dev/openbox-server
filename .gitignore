@@ -1,4 +1,14 @@
+# Node
 node_modules
+
+# IDEs
+.idea
+
+# Compiled output
+/dist
+
+# System files
+.DS_Store
 
 /.cache
 /build
