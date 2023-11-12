@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,322 +11,100 @@ datasource db {
 }
 
 // MAIN TABLES
+
+// MAIN TABLES
+
 model User {
-  id               Int                 @id @default(autoincrement())
-  firstName        String
-  lastName         String
-  email            String              @unique
-  discord          String?             @unique
-  contactEmail     String?             @unique
-  // password String
-  promo            User_promotion
-  role             User_role[]         @default([STUDENT])
-
-  // Relations
-  authentification Authentification[]  @relation(name: "UserToAuthentication")
-  newsletter       Newsletter[]        @relation(name: "UserToNewsletter")
-  boxAdmin         Box_admin[]         @relation(name: "UserToBoxAdmin")
-  boxFollower      Box_follower[]      @relation(name: "UserToBoxFollower")
-  eventParticipant Event_participant[] @relation(name: "UserToEventParticipant")
+  id               Int                @id @default(autoincrement())
+  firstname        String             @db.Text
+  lastname         String             @db.Text
+  mail             String             @unique @db.Text
+  authentication   Authentication?    @relation(name: "UserToAuthentication")
+  role             Role               @default(STUDENT)
+  eventparticipant EventParticipant[] @relation(name: "UserToEventParticipant")
+  box_admin        Box_admin[]        @relation(name: "UserToBox_admin")
+  actu             Actualite[]             @relation(name: "UserToActu")
 }
 
-model Authentification {
-  userId      Int
-  agent       String
-  token       String   @unique
-  tokenStart  DateTime @default(now())
-  tokenEnd    DateTime
-
-  @@id([userId, agent])
-
-  // Relations
-  user        User     @relation(name: "UserToAuthentication", fields: [userId], references: [id])
-}
-
-model Newsletter {
-  id        Int                    @id @default(autoincrement())
-  writer    Int
-  title     String
-  image     String
-  heading   String
-  content   String
-  status    Newsletter_status      @default(VISIBLED)
-
-  // Relations
-  user      User                   @relation(name: "UserToNewsletter", fields: [writer], references: [id])
-  ressource Newsletter_ressource[] @relation(name: "NewsletterToRessource")
-}
-
-model Newsletter_ressource {
-  id           Int        @id @default(autoincrement())
-  newsletterId Int
-  url          String
-
-  // Relations
-  newslettter  Newsletter @relation(name: "NewsletterToRessource", fields: [newsletterId], references: [id])
-}
-
-model Box {
-  id          Int            @id @default(autoincrement())
-  status      Box_status     @default(PENDING)
-  name        String
-  description String
-  image       String?
-
-  // Relations
-  boxAdmin    Box_admin[]    @relation(name: "BoxToBoxAdmin")
-  boxFollower Box_follower[] @relation(name: "BoxToBoxFollower")
-  event       Event[]        @relation(name: "BoxToEvent")
+model Authentication {
+  id          Int       @id @default(autoincrement())
+  token       String    @db.VarChar(256)
+  token_start DateTime? @db.Timestamp()
+  token_end   DateTime? @db.Timestamp()
+  user        User      @relation(name: "UserToAuthentication", fields: [userId], references: [id])
+  userId      Int       @unique
+  agent       String    @db.Text
 }
 
 model Event {
-  id               Int                 @id @default(autoincrement())
+  id               Int                @id @default(autoincrement())
+  eventparticipant EventParticipant[] @relation(name: "EventToEventParticipant")
+  box              Box                @relation(name: "BoxToEvent", fields: [boxId], references: [id])
   boxId            Int
-  name             String
-  description      String
-  image            String
-  room             Event_room?
-  status           Event_status        @default(SOON)
-  startDate        DateTime?
-  endDate          DateTime?
-
-  // Relations
-  box              Box                 @relation(name: "BoxToEvent", fields: [boxId], references: [id])
-  eventParticipant Event_participant[] @relation(name: "EventToEventParticipant")
-  eventAnimator    Event_animator[]    @relation(name: "EventToEventAnimator")
-  eventRessource   Event_ressource[]   @relation(name: "EventToEventRessource")
+  eventressource   EventRessource?    @relation(name: "EventToEventRessource")
 }
 
-model Event_ressource {
-  id      Int    @id @default(autoincrement())
-  eventId Int
-  url     String
-
-  // Relations
-  event   Event  @relation(name: "EventToEventRessource", fields: [eventId], references: [id])
+model Box {
+  id          Int        @id @default(autoincrement())
+  event       Event[]    @relation(name: "BoxToEvent")
+  status      BoxStatus
+  name        String     @db.Text
+  description String     @db.Text
+  imageUrl    String?    @db.Text
+  box_admin   Box_admin? @relation(name: "BoxToBox_admin")
 }
 
-model Animator {
-  id            Int              @id @default(autoincrement())
-  firstName     String
-  lastName      String
-  email         String?          @unique
-  picture       String?
-  linkedIn      String?          @unique
-  discord       String?          @unique
-  twitter       String?          @unique
-  website       String?
-
-  // Relations
-  eventAnimator Event_animator[] @relation(name: "AnimatorToEventAnimator")
+model Actualite {
+  id              Int      @id @default(autoincrement())
+  title           String   @db.Text
+  description     String?  @db.Text
+  imageUrl        String[] @db.Text
+  videoUrl        String?  @db.Text
+  userId          Int
+  imagePreviewUrl String?  @db.Text
+  author          User     @relation(name: "UserToActu", fields: [userId], references: [id])
 }
 
-// JOIN TABLES
 model Box_admin {
-  boxId   Int
-  userId  Int
-  
-  @@id([boxId, userId])
-
-  // Relations
-  box     Box  @relation(name: "BoxToBoxAdmin", fields: [boxId], references: [id])
-  user    User @relation(name: "UserToBoxAdmin", fields: [userId], references: [id])
+  id     Int  @id @default(autoincrement())
+  user   User @relation(name: "UserToBox_admin", fields: [userId], references: [id])
+  userId Int
+  box    Box  @relation(name: "BoxToBox_admin", fields: [boxId], references: [id])
+  boxId  Int  @unique
 }
 
-model Box_follower {
-  boxId    Int
-  userId   Int
-  status   Box_follower_status?
-  notified Boolean              @default(false)
-
-  @@id([boxId, userId])
-
-  // Relations
-  box      Box                  @relation(name: "BoxToBoxFollower", fields: [boxId], references: [id])
-  user     User                 @relation(name: "UserToBoxFollower", fields: [userId], references: [id])
-}
-
-model Event_participant {
-  userId  Int
-  eventId Int
-  status  Event_participant_status
-
-  @@id([userId, eventId])
-
-  // Relations
-  user    User                      @relation(name: "UserToEventParticipant", fields: [userId], references: [id])
-  event   Event                     @relation(name: "EventToEventParticipant", fields: [eventId], references: [id])
-}
-
-model Event_animator {
-  animatorId Int
-  eventId    Int
-
-  @@id ([animatorId, eventId])
-
-  // Relations
-  animator   Animator @relation(name: "AnimatorToEventAnimator", fields: [animatorId], references: [id])
-  event      Event    @relation(name: "EventToEventAnimator", fields: [eventId], references: [id])
+model EventRessource {
+  id           Int    @id @default(autoincrement())
+  event        Event  @relation(name: "EventToEventRessource", fields: [eventId], references: [id])
+  ressourceUrl String @db.Text
+  eventId      Int    @unique
 }
 
 // ENUMS
-enum User_role {
-  STUDENT
+
+model EventParticipant {
+  id      Int                 @id @default(autoincrement())
+  user    User                @relation(name: "UserToEventParticipant", fields: [userId], references: [id])
+  userId  Int
+  event   Event               @relation(name: "EventToEventParticipant", fields: [eventId], references: [id])
+  eventId Int
+  status  ParticipationStatus
+}
+
+enum Role {
   ANIMATOR
   MEDIATOR
+  STUDENT
 }
 
-enum User_promotion {
-  ALUMNI
-  DATA1
-  DATA2
-  DATA3
-  H1
-  H2
-  H3
-  H4
-  H5
-  MASTERCTO1
-  MASTERCTO2
-  MASTERCYBERSECURITE1
-  MASTERCYBERSECURITE2
-  MASTERDATA1
-  MASTERDATA2
-  MASTERPM1
-  MASTERPM2
-  MASTERWEBMARKETING1
-  MASTERWEBMARKETING2
-  PREPAMD
-  WEB1
-  WEB2
-  WEB3
-  WEBMARKETING1
-  WEBMARKETING2
-  WEBMARKETING3
-}
-
-enum Newsletter_status {
-  VISIBLED
-  HIDDEN
-}
-
-enum Box_status {
+enum BoxStatus {
   ACCEPTED
-  PENDING
   REFUSED
-  STOPPED
+  PENDING
 }
 
-enum Box_follower_status {
+enum ParticipationStatus {
+  PRESENT
   INTERESTED
   NOT_INTERESTED
-}
-
-enum Event_participant_status {
-  PRESENT
-  MAYBE
-  NOT_PRESENT
-}
-
-enum Event_room {
-  TO_DEFINE
-  AMPHI
-  A001
-  A002
-  A003
-  A004
-  A005
-  A006
-  A007
-  A008
-  A009
-  A010
-  A101
-  A102
-  A103
-  A104
-  A105
-  A106
-  A107
-  A108
-  A109
-  A110
-  A201
-  A202
-  A203
-  A204
-  A205
-  A206
-  A207
-  A208
-  A209
-  A210
-  B001
-  B002
-  B003
-  B004
-  B005
-  B006
-  B007
-  B008
-  B009
-  B010
-  B101
-  B102
-  B103
-  B104
-  B105
-  B106
-  B107
-  B108
-  B109
-  B110
-  B201
-  B202
-  B203
-  B204
-  B205
-  B206
-  B207
-  B208
-  B209
-  B210
-  C001
-  C002
-  C003
-  C004
-  C005
-  C006
-  C007
-  C008
-  C009
-  C010
-  C101
-  C102
-  C103
-  C104
-  C105
-  C106
-  C107
-  C108
-  C109
-  C110
-  C201
-  C202
-  C203
-  C204
-  C205
-  C206
-  C207
-  C208
-  C209
-  C210
-}
-
-enum Event_status {
-  CANCEL
-  PASS
-  SOON
-  NOW
-  STREAMED
 }
