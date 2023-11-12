@@ -42,7 +42,7 @@ model Authentification {
 
 model Newsletter {
   id        Int                    @id @default(autoincrement())
-  writer    Int
+  writerId  Int
   title     String
   image     String
   heading   String
@@ -203,7 +203,7 @@ enum User_promotion {
 }
 
 enum Newsletter_status {
-  VISIBLED
+  VISIBLE
   HIDDEN
 }
 
@@ -321,8 +321,8 @@ enum Event_room {
 }
 
 enum Event_status {
-  CANCEL
-  PASS
+  CANCELLED
+  PASSED
   SOON
   NOW
   STREAMED
