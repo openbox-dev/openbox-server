@@ -8,16 +8,19 @@
     align-items: center;
     justify-content: space-between;
     gap: 2rem; }
-    .Header nav ul.navigation-links {
+    .Header nav .sm-logo {
+      display: none; }
+    .Header nav .navigation-links {
       list-style: none;
       display: flex;
       font-size: 18px;
       gap: 1rem; }
-      .Header nav ul.navigation-links li a {
+      .Header nav .navigation-links li a {
         text-decoration: none;
         color: var(--color-primary-green); }
-        .Header nav ul.navigation-links li a:hover {
-          text-decoration: underline; }
+        .Header nav .navigation-links li a:hover {
+          text-decoration: underline;
+          color: var(--color-primary-black); }
   .Header .auth-links {
     display: flex;
     gap: 1rem; }
@@ -37,3 +40,19 @@
     .Header .auth-links a + a {
       color: var(--color-primary-white);
       background-color: var(--color-primary-green); }
+  .Header .burger-menu {
+    display: none; }
+    .Header .burger-menu img {
+      cursor: pointer; }
+
+@media only screen and (max-width: 1110px) {
+  .Header nav .sm-logo {
+    display: block; }
+  .Header nav .md-logo {
+    display: none; }
+  .Header nav .navigation-links {
+    display: none; }
+  .Header .auth-links {
+    display: none; }
+  .Header .burger-menu {
+    display: block; } }
