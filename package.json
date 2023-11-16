@@ -24,8 +24,11 @@
     "prisma": "^5.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "remix-auth": "^3.6.0",
+    "remix-validated-form": "^5.1.5",
     "sass": "^1.69.5",
-    "three": "^0.158.0"
+    "three": "^0.158.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.2.0",
