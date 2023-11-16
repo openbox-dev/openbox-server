@@ -1,0 +1,56 @@
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+
+    ul.navigation-links {
+      list-style: none;
+      display: flex;
+      font-size: 18px;
+      gap: 1rem;
+
+      li a {
+        text-decoration: none;
+        color: var(--color-primary-green);
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .auth-links {
+    display: flex;
+    gap: 1rem;
+
+    a {
+      text-decoration: none;
+      font-size: 18px;
+      padding: 8px 32px;
+      border: none;
+      border-radius: 50px;
+      background: none;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--color-primary-green);
+
+      &:hover {
+        color: var(--color-primary-white);
+        background-color: var(--color-primary-black);
+      }
+    }
+
+    a + a {
+      color: var(--color-primary-white);
+      background-color: var(--color-primary-green);
+    }
+  }
+}

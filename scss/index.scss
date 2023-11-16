@@ -1,15 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
 
 :root {
   --color-primary-black: #182b1b;
   --color-primary-white: #fafafa;
   --color-primary-grey: #8c8880;
-  --color-primary-green-accent: #4a6c6f;
+  --color-primary-green: #4a6c6f;
 
   --color-border-grey: #eeeeee;
 
-  --padding-lr: 90px;
-  --padding-cards: 16px;
+  --padding-section-large: 90px;
+  --padding-section-small: 16px;
 
   --spacing-margin: 32px;
 
@@ -29,4 +29,9 @@ html,
 
 body {
   font-family: var(--primary-font-family);
+  background-color: var(--color-primary-white);
+
+  > * {
+    padding: var(--padding-section-small) var(--padding-section-large);
+  }
 }
