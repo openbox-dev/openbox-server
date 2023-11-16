@@ -8,6 +8,14 @@ export default function Home() {
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
       <Header />
+
+      <ul>
+        {articlesData.success
+          ? articlesData.data.map((article) => {
+              return <li>{article.title}</li>;
+            })
+          : "Aucune Actu à afficher"}
+      </ul>
     </div>
   );
 }
