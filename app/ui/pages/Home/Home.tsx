@@ -12,7 +12,7 @@ export default function Home() {
       <ul>
         {articlesData.success
           ? articlesData.data.map((article) => {
-              return <li>{article.title}</li>;
+              return <li key={article.id}>{article.title}</li>;
             })
           : "Aucune Actu à afficher"}
       </ul>
