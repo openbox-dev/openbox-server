@@ -1,0 +1,49 @@
+:root {
+  --card-3d-height: 420px;
+}
+
+.Home {
+  .hero-banner {
+    padding: 64px 0;
+    display: flex;
+    flex-flow: column;
+    gap: 32px;
+    h1 {
+      font-size: var(--font-size-xl);
+      font-weight: 600;
+      margin-bottom: 20px;
+      span {
+        text-decoration: underline;
+      }
+    }
+
+    p {
+      font-size: var(--font-size-m);
+      color: var(--color-primary-grey);
+    }
+
+    .threejs-container {
+      width: 100%;
+      height: 33vw;
+      //   aspect-ratio: 2.75 / 1;
+      border: 3px solid var(--color-border-grey);
+      border-radius: var(--border-radius);
+      // en attendant
+      background-color: #3574d3;
+    }
+  }
+}
+
+@media only screen and (max-width: 1110px) {
+  :root {
+    --font-size-xl: 2rem;
+    --card-3d-height: 343px;
+  }
+
+  .Home {
+    .hero-banner {
+      padding: 16px 0;
+      gap: 20px;
+    }
+  }
+}

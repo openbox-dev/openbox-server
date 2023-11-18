@@ -9,8 +9,9 @@
   --color-light-green: #ebf0ec;
 
   --color-border-grey: #eeeeee;
+  --border-radius: 18px;
 
-  --padding-section-large: 90px 64px;
+  --padding-section-large: 64px 90px;
   --padding-section-small: 16px;
 
   --spacing-margin: 32px;
@@ -27,6 +28,7 @@ html,
 * {
   margin: 0;
   padding: 0;
+  font-family: "Open Sans", sans-serif;
 }
 
 body {
@@ -34,12 +36,33 @@ body {
   background-color: var(--color-primary-white);
 
   > * {
-    padding: var(--padding-section-small) var(--padding-section-large);
+    padding: var(--padding-section-large);
+
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.SeeMore {
+  font-size: var(--font-size-m);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 64px;
+
+  span {
+    min-width: 132px;
   }
 }
 
 @media only screen and (max-width: 1110px) {
   :root {
     --padding-section-large: 16px 32px;
+    --font-size-m: 1rem;
+  }
+
+  .SeeMore {
+    gap: 32px;
   }
 }
