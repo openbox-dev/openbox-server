@@ -9,6 +9,7 @@
   --color-light-green: #ebf0ec;
 
   --color-border-grey: #eeeeee;
+  --border-radius: 18px;
 
   --padding-section-large: 64px 90px;
   --padding-section-small: 16px;
@@ -42,8 +43,26 @@ body {
   }
 }
 
+.SeeMore {
+  font-size: var(--font-size-m);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 64px;
+
+  span {
+    min-width: 132px;
+  }
+}
+
 @media only screen and (max-width: 1110px) {
   :root {
     --padding-section-large: 16px 32px;
+    --font-size-m: 1rem;
+  }
+
+  .SeeMore {
+    gap: 32px;
   }
 }

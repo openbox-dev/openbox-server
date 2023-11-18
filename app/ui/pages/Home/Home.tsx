@@ -1,6 +1,7 @@
 import { useLoaderData } from "@remix-run/react";
 import type { loader } from "~/routes/_index";
 import Header from "../../common/Header/Header";
+import SeeMore from "~/ui/common/SeeMore/SeeMore";
 
 export default function Home() {
   const articlesData = useLoaderData<typeof loader>();
@@ -10,11 +11,13 @@ export default function Home() {
       <Header />
 
       <section className="hero-banner">
-        <h1>OpenBox est un mouvement initié par des <span>Héticiens</span></h1>
-        <p>— Ce mouvement vise à faire grandir le savoir et le pouvoir d’agir de chaque Heticien grâce au partage, la rencontre et la découverte.</p>
-        <div className="threejs-container">
-          
+        <div>
+          <h1>OpenBox est un mouvement initié par des <span>Héticiens</span></h1>
+          <p>— Ce mouvement vise à faire grandir le savoir et le pouvoir d’agir de chaque Heticien grâce au partage, la rencontre et la découverte.</p>
         </div>
+        <div className="threejs-container">
+        </div>
+        <SeeMore />
       </section>
 
       {/* <ul>
