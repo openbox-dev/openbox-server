@@ -2,9 +2,9 @@ import { Link } from "@remix-run/react";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 
-import MediumLogo from "../../../assets/medium-logo.svg";
-import SmallLogo from "../../../assets/small-logo.svg";
-import BurgerIcon from "../../../assets/burger.svg";
+import MediumLogo from "../../../assets/logo/medium-logo.svg";
+import SmallLogo from "../../../assets/logo/small-logo.svg";
+import BurgerIcon from "../../../assets/icon/burger.svg";
 
 import ModalMenu from "./ModalMenu";
 

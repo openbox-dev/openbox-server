@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
 import { motion } from "framer-motion";
 
-import CloseIcon from "../../../assets/close.svg";
+import CloseIcon from "../../../assets/icon/close.svg";
 
 interface ModalMenuProps {
   navigationLinks: Record<string, string>;
