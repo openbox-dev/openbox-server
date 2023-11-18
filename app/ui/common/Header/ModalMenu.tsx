@@ -36,6 +36,7 @@ export default function ModalMenu({
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      exit="hidden"
     >
       <div className="close-menu" onClick={() => closeModal()}>
         fermer

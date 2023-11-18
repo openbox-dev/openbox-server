@@ -1,8 +1,11 @@
 import { Link } from "@remix-run/react";
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+
 import MediumLogo from "../../../assets/medium-logo.svg";
 import SmallLogo from "../../../assets/small-logo.svg";
 import BurgerIcon from "../../../assets/burger.svg";
-import { useState } from "react";
+
 import ModalMenu from "./ModalMenu";
 
 export default function Header() {
@@ -39,12 +42,15 @@ export default function Header() {
       <div className="burger-menu" onClick={() => setIsModalActive(true)}>
         <img src={BurgerIcon} className="sm-logo" alt="Burger Menu Icon" />
       </div>
-      {isModalActive && (
-        <ModalMenu
-          navigationLinks={navigationLinks}
-          closeModal={() => setIsModalActive(false)}
-        />
-      )}
+
+      <AnimatePresence>
+        {isModalActive && (
+          <ModalMenu
+            navigationLinks={navigationLinks}
+            closeModal={() => setIsModalActive(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
