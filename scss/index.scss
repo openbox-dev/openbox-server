@@ -10,6 +10,8 @@
 
   --color-border-grey: #eeeeee;
 
+  --color-neutral-100: #F5F5F5;
+
   --padding-section-large: 90px 64px;
   --padding-section-small: 16px;
 
@@ -30,7 +32,7 @@ html,
 }
 
 body {
-  font-family: var(--primary-font-family);
+  font-family: "Open Sans", sans-serif;
   background-color: var(--color-primary-white);
 
   > * {
