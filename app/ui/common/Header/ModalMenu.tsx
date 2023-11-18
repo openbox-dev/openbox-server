@@ -41,18 +41,24 @@ export default function ModalMenu({
       exit="hidden"
     >
       <div className="close-menu" onClick={() => closeModal()}>
-        Fermer
-        <img src={CloseIcon} className="close-logo" alt="Close Menu Icon" />
+        <span>Fermer</span>
+        {/* <img src={CloseIcon} className="close-logo" alt="Close Menu Icon" /> */}
       </div>
       <motion.ul className="modalNavigationLinks">
         {Object.entries(navigationLinks).map(([pageName, pageUrl]) => {
           return (
-            <motion.li variants={navVariants}>
-              <Link to={pageUrl}>{pageName}</Link>
+            <motion.li key={pageName} variants={navVariants}>
+              <Link to={pageUrl}>{pageName.toUpperCase()}</Link>
             </motion.li>
           );
         })}
       </motion.ul>
+
+      {/* TODO */}
+      {/* <motion.div className="modalNavigationLinks">
+        <p>Rejoignez la communauté Discord</p>
+        <a href="#">LIEN DISCORD</a>
+      </motion.div> */}
     </motion.div>
   );
 }

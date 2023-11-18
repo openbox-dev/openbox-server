@@ -1,1 +1,88 @@
-.Header{display:flex;align-items:center;justify-content:space-between;font-weight:700}.Header nav{display:flex;align-items:center;justify-content:space-between;gap:2rem}.Header nav .sm-logo{display:none}.Header nav .navigation-links{list-style:none;display:flex;font-size:18px;gap:1rem}.Header nav .navigation-links li a{text-decoration:none;color:var(--color-primary-green)}.Header nav .navigation-links li a:hover{text-decoration:underline;color:var(--color-primary-black)}.Header .auth-links{display:flex;gap:1rem}.Header .auth-links a{text-decoration:none;font-size:18px;padding:8px 32px;border:none;border-radius:50px;background:none;cursor:pointer;font-weight:700;color:var(--color-primary-green)}.Header .auth-links a:hover{color:var(--color-primary-white);background-color:var(--color-primary-black)}.Header .auth-links a+a{color:var(--color-primary-white);background-color:var(--color-primary-green)}.Header .burger-menu{display:none}.Header .burger-menu img{cursor:pointer}@media only screen and (max-width: 1110px){.Header nav .sm-logo{display:block}.Header nav .md-logo{display:none}.Header nav .navigation-links{display:none}.Header .auth-links{display:none}.Header .burger-menu{display:block}}
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700; }
+  .Header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem; }
+    .Header nav .sm-logo {
+      display: none; }
+    .Header nav .navigation-links {
+      list-style: none;
+      display: flex;
+      font-size: 1.125rem;
+      gap: 1rem; }
+      .Header nav .navigation-links li a {
+        text-decoration: none;
+        color: var(--color-primary-green); }
+        .Header nav .navigation-links li a:hover {
+          text-decoration: underline;
+          color: var(--color-primary-black); }
+  .Header .auth-links {
+    display: flex;
+    gap: 1rem; }
+    .Header .auth-links a {
+      text-decoration: none;
+      font-size: 18px;
+      padding: 8px 32px;
+      border: none;
+      border-radius: 50px;
+      background: none;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--color-primary-green); }
+      .Header .auth-links a:hover {
+        color: var(--color-primary-white);
+        background-color: var(--color-primary-black); }
+    .Header .auth-links a + a {
+      color: var(--color-primary-white);
+      background-color: var(--color-primary-green); }
+  .Header .burger-menu {
+    display: none; }
+    .Header .burger-menu img {
+      cursor: pointer; }
+
+.ModalMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: var(--color-primary-white);
+  z-index: 2;
+  color: var(--color-primary-green);
+  font-size: var(--font-size-l);
+  font-weight: 600;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  background-color: var(--color-light-green); }
+  .ModalMenu .close-menu {
+    width: 100%;
+    background-color: var(--color-primary-green);
+    padding: 1rem;
+    color: var(--color-primary-white); }
+  .ModalMenu .modalNavigationLinks {
+    padding: var(--padding-section-small) var(--padding-section-large);
+    list-style: none;
+    display: flex;
+    flex-flow: column nowrap;
+    border-radius: 18px; }
+    .ModalMenu .modalNavigationLinks li a {
+      text-decoration: none;
+      color: var(--color-primary-black); }
+
+@media only screen and (max-width: 1110px) {
+  .Header nav .sm-logo {
+    display: block; }
+  .Header nav .md-logo {
+    display: none; }
+  .Header nav .navigation-links {
+    display: none; }
+  .Header .auth-links {
+    display: none; }
+  .Header .burger-menu {
+    display: block; } }
