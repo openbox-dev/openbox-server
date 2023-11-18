@@ -10,7 +10,7 @@
 
   --color-border-grey: #eeeeee;
 
-  --padding-section-large: 90px 64px;
+  --padding-section-large: 64px 90px;
   --padding-section-small: 16px;
 
   --spacing-margin: 32px;
@@ -27,6 +27,7 @@ html,
 * {
   margin: 0;
   padding: 0;
+  font-family: "Open Sans", sans-serif;
 }
 
 body {
@@ -34,7 +35,10 @@ body {
   background-color: var(--color-primary-white);
 
   > * {
-    padding: var(--padding-section-small) var(--padding-section-large);
+    padding: var(--padding-section-large);
+
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
 

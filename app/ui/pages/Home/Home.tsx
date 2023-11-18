@@ -6,16 +6,24 @@ export default function Home() {
   const articlesData = useLoaderData<typeof loader>();
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
+    <div className="Home">
       <Header />
 
-      <ul>
+      <section className="hero-banner">
+        <h1>OpenBox est un mouvement initié par des <span>Héticiens</span></h1>
+        <p>— Ce mouvement vise à faire grandir le savoir et le pouvoir d’agir de chaque Heticien grâce au partage, la rencontre et la découverte.</p>
+        <div className="threejs-container">
+          
+        </div>
+      </section>
+
+      {/* <ul>
         {articlesData.success
           ? articlesData.data.map((article) => {
               return <li key={article.id}>{article.title}</li>;
             })
           : "Aucune Actu à afficher"}
-      </ul>
+      </ul> */}
     </div>
   );
 }

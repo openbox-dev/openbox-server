@@ -1,0 +1,32 @@
+.Home {
+    .hero-banner {
+        padding: 64px 0;
+        h1 {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin-bottom: 20px;
+            span {
+                text-decoration: underline;
+            }
+        }
+
+        p {
+            font-size: var(--font-size-m);
+            color: var(--color-primary-grey);
+        }
+    }
+}
+
+@media only screen and (max-width: 1110px) {
+    :root {
+      --font-size-m: 1rem;
+      --font-size-xl: 2rem;
+    }
+
+    .Home {
+        .hero-banner {
+            padding: 16px 0;
+        }
+    }
+  }
+  
