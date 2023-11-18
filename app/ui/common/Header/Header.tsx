@@ -27,18 +27,6 @@ export default function Header() {
               </li>
             );
           })}
-          <li>
-            <Link to={"/"}>Accueil</Link>
-          </li>
-          <li>
-            <Link to={"/calendar"}>Calendrier</Link>
-          </li>
-          <li>
-            <Link to={"/openvote"}>OpenVote</Link>
-          </li>
-          <li>
-            <Link to={"/box"}>Les Box</Link>
-          </li>
         </ul>
       </nav>
 
@@ -51,7 +39,12 @@ export default function Header() {
       <div className="burger-menu" onClick={() => setIsModalActive(true)}>
         <img src={BurgerIcon} className="sm-logo" alt="Burger Menu Icon" />
       </div>
-      {isModalActive && <ModalMenu />}
+      {isModalActive && (
+        <ModalMenu
+          navigationLinks={navigationLinks}
+          closeModal={() => setIsModalActive(false)}
+        />
+      )}
     </div>
   );
 }
