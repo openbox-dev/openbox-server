@@ -19,29 +19,32 @@ export default function Header() {
 
   return (
     <div className="Header">
-      <nav>
-        <img src={MediumLogo} className="md-logo" alt="OpenBox logo" />
-        <img src={SmallLogo} className="sm-logo" alt="OpenBox logo" />
-        <ul className="navigation-links">
-          {Object.entries(navigationLinks).map(([pageName, pageUrl]) => {
-            return (
-              <li>
-                <Link to={pageUrl}>{pageName}</Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+      {!isModalActive && (
+        <>
+          <nav>
+            <img src={MediumLogo} className="md-logo" alt="OpenBox logo" />
+            <img src={SmallLogo} className="sm-logo" alt="OpenBox logo" />
+            <ul className="navigation-links">
+              {Object.entries(navigationLinks).map(([pageName, pageUrl]) => {
+                return (
+                  <li>
+                    <Link to={pageUrl}>{pageName}</Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
-      {/* TODO: ajouter user guard pour quand le user est co */}
-      <div className="auth-links">
-        <Link to={"/auth/login"}>Connexion</Link>
-        <Link to={"/auth/register"}>Inscription</Link>
-      </div>
+          <div className="auth-links">
+            <Link to={"/auth/login"}>Connexion</Link>
+            <Link to={"/auth/register"}>Inscription</Link>
+          </div>
 
-      <div className="burger-menu" onClick={() => setIsModalActive(true)}>
-        <img src={BurgerIcon} className="sm-logo" alt="Burger Menu Icon" />
-      </div>
+          <div className="burger-menu" onClick={() => setIsModalActive(true)}>
+            <img src={BurgerIcon} className="sm-logo" alt="Burger Menu Icon" />
+          </div>
+        </>
+      )}
 
       <AnimatePresence>
         {isModalActive && (
