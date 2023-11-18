@@ -35,6 +35,7 @@ export default function Header() {
             </ul>
           </nav>
 
+          {/* TODO: ajouter user guard pour quand le user est co */}
           <div className="auth-links">
             <Link to={"/auth/login"}>Connexion</Link>
             <Link to={"/auth/register"}>Inscription</Link>
