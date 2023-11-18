@@ -1,6 +1,8 @@
 import { Link } from "@remix-run/react";
 import { motion } from "framer-motion";
 
+import CloseIcon from "../../../assets/close.svg";
+
 interface ModalMenuProps {
   navigationLinks: Record<string, string>;
   closeModal: () => void;
@@ -39,7 +41,8 @@ export default function ModalMenu({
       exit="hidden"
     >
       <div className="close-menu" onClick={() => closeModal()}>
-        fermer
+        Fermer
+        <img src={CloseIcon} className="close-logo" alt="Close Menu Icon" />
       </div>
       <motion.ul className="modalNavigationLinks">
         {Object.entries(navigationLinks).map(([pageName, pageUrl]) => {
