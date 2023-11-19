@@ -3,23 +3,28 @@
 }
 
 .Home {
-  .hero-banner {
+  .section-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  p.section-description {
+    font-size: var(--font-size-m);
+    color: var(--color-primary-grey);
+    font-weight: 400;
+  }
+
+  section {
     padding: 64px 0;
     display: flex;
     flex-flow: column;
     gap: 32px;
-    h1 {
-      font-size: var(--font-size-xl);
-      font-weight: 600;
-      margin-bottom: 20px;
-      span {
-        text-decoration: underline;
-      }
-    }
+  }
 
-    p {
-      font-size: var(--font-size-m);
-      color: var(--color-primary-grey);
+  .hero-banner {
+    span {
+      text-decoration: underline;
     }
 
     .threejs-container {
@@ -38,6 +43,9 @@
     display: flex;
     flex-flow: column;
     gap: 32px;
+  }
+
+  .box-explain-section {
   }
 }
 
