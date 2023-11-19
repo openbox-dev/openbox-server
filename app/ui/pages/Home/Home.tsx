@@ -12,7 +12,7 @@ import SeeMore from "~/ui/common/SeeMore/SeeMore";
 const boxes = [BlueBox, BrownBox, BeigeBox, RedBox];
 
 export default function Home() {
-  // const {latestActualites, comingEvents} = useLoaderData<typeof loader>();
+  const serverData = useLoaderData<typeof loader>();
 
   return (
     <div className="Home">
@@ -34,7 +34,7 @@ export default function Home() {
         <h2>Nos évènements récents</h2>
         <div className="event-list"></div>
         {/* link */}
-        <div>ici les box events </div>
+        <div>ici les events card </div>
         <Link to={"/calendar"}>
           Voir le calendrier <img src={arrowLink} alt="Arrow icon" />
         </Link>
@@ -72,13 +72,6 @@ export default function Home() {
           Voir toute l’actualité <img src={arrowLink} alt="Arrow icon" />
         </Link>
       </section>
-      {/* <ul>
-        {articlesData.success
-          ? articlesData.data.map((article) => {
-              return <li key={article.id}>{article.title}</li>;
-            })
-          : "Aucune Actu à afficher"}
-      </ul> */}
     </div>
   );
 }

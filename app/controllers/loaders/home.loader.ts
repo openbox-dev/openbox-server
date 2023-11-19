@@ -7,8 +7,11 @@ export async function HomeLoader() {
 
   const latestActualites = await ActualiteService.getLatest();
   const comingEvents: any = [];
+  const popularBoxes: any = [];
+
   return {
     latestActualites,
     comingEvents: comingEvents,
+    popularBoxes: popularBoxes,
   };
 }
