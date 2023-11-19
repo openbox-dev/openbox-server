@@ -58,8 +58,18 @@ export default function Home() {
         </div>
         {/* box cards */}
         <div>ici les box cards</div>
-        <Link to={"/calendar"}>
+        <Link to={"/box"}>
           Découvrir nos Box <img src={arrowLink} alt="Arrow icon" />
+        </Link>
+      </section>
+
+      <section className="actualite-section">
+        <h2>L’actu OpenBox</h2>
+        <div className="actualite-list"></div>
+        {/* link */}
+        <div>ici la derniere actualites </div>
+        <Link to={"/actualites"}>
+          Voir toute l’actualité <img src={arrowLink} alt="Arrow icon" />
         </Link>
       </section>
       {/* <ul>
