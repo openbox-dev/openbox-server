@@ -37,7 +37,7 @@ export default function Footer() {
           <ul id="social-media-list" className="list">
             {Object.entries(socialMediaLinks).map(([socialMedia, links]) => {
               return (
-                <li className="social-media list-item">
+                <li className="social-media list-item" key={socialMedia}>
                   <a href={links}>
                     <span>{socialMedia}</span>
                     <img
