@@ -35,8 +35,8 @@ export default function Header() {
 
       {/* TODO: ajouter user guard pour quand le user est co */}
       <div className="auth-links">
-        <Link to={"/auth/login"}>Connexion</Link>
-        <Link to={"/auth/register"}>Inscription</Link>
+        <Link to={"/login"}>Connexion</Link>
+        <Link to={"/register"}>Inscription</Link>
       </div>
 
       <div className="burger-menu" onClick={() => setIsModalActive(true)}>
