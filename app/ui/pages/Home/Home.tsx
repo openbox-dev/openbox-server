@@ -4,7 +4,7 @@ import Header from "../../common/Header/Header";
 import SeeMore from "~/ui/common/SeeMore/SeeMore";
 
 export default function Home() {
-  const articlesData = useLoaderData<typeof loader>();
+  // const {latestActualites, comingEvents} = useLoaderData<typeof loader>();
 
   return (
     <div className="Home">
@@ -26,6 +26,14 @@ export default function Home() {
         <h2>Nos évènements récents</h2>
         <div className="event-list"></div>
         {/* link */}
+        
+      </section>
+
+      <section className="box-explain-section">
+        <h2>Qu'est ce qu'une box ?</h2>
+        <p>
+— Les Box sont des opportunités de découvrir des sujets atypiques, rencontrer des personnes ou s'améliorer sur un aspect particulier de la tech comme du quotidien. Elles se présentent sous la forme d’ateliers, de médias partagés, de rencontres, et plus encore.
+        </p>
       </section>
 
       {/* <ul>
