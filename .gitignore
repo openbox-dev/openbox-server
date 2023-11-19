@@ -6,7 +6,7 @@ node_modules
 
 # Compiled output
 /dist
-/app/styles
+/app/styles/**
 
 # System files
 .DS_Store
