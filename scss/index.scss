@@ -7,8 +7,9 @@
   --color-primary-green: #4a6c6f;
 
   --color-light-green: #ebf0ec;
-
   --color-border-grey: #eeeeee;
+  --color-neutral-100: #f5f5f5;
+
   --border-radius: 18px;
 
   --padding-section-large: 64px 90px;
@@ -32,7 +33,7 @@ html,
 }
 
 body {
-  font-family: var(--primary-font-family);
+  font-family: "Open Sans", sans-serif;
   background-color: var(--color-primary-white);
 
   > * {

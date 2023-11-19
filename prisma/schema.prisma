@@ -48,6 +48,7 @@ model Newsletter {
   heading   String
   content   String
   status    Newsletter_status      @default(VISIBLED)
+  createdAt  DateTime @default(now()) @db.Date
 
   // Relations
   user      User                   @relation(name: "UserToNewsletter", fields: [writer], references: [id])
@@ -69,6 +70,7 @@ model Box {
   name        String
   description String
   image       String?
+  createdAt  DateTime @default(now()) @db.Date
 
   // Relations
   boxAdmin    Box_admin[]    @relation(name: "BoxToBoxAdmin")
