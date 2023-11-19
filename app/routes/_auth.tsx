@@ -1,5 +1,5 @@
 import { LinksFunction, MetaFunction } from "@remix-run/node";
-import Auth from "~/ui/pages/Auth/Auth";
+import AuthLayout from "~/ui/pages/Auth/AuthLayout";
 
 export const meta: MetaFunction = () => {
   return [
@@ -16,5 +16,5 @@ export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: "" }];
 };
 
-export default Auth;
+export default AuthLayout;
 // export {};

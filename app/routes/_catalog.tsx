@@ -1,5 +1,6 @@
 import { LinksFunction, MetaFunction } from "@remix-run/node";
-import Auth from "~/ui/pages/Auth/Auth";
+import Auth from "~/ui/pages/Auth/AuthLayout";
+import CatalogLayout from "~/ui/pages/Catalog/CatalogLayout";
 
 export const meta: MetaFunction = () => {
   return [
@@ -16,5 +17,5 @@ export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: "" }];
 };
 
-// export default Component;
+export default CatalogLayout;
 // export {CatalogLoader as loader, CatalogAction as action};

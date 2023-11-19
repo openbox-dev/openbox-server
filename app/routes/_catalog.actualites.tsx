@@ -1,5 +1,5 @@
 import { LinksFunction, MetaFunction } from "@remix-run/node";
-import RegisterForm from "~/ui/pages/Auth/components/RegisterForm";
+import ActuCatalog from "~/ui/pages/Catalog/ActuCatalog/ActuCatalog";
 
 export const meta: MetaFunction = () => {
   return [
@@ -16,5 +16,5 @@ export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: "" }];
 };
 
-// export default Component;
-// export {CatalogEventLoader as loader, CatalogEventAction as action};
+export default ActuCatalog;
+// export {CatalogActuLoadr as loader, CatalogActuAction as action};
