@@ -10,6 +10,7 @@ import { LinksFunction } from "@remix-run/node";
 
 import indexStyle from "./styles/index.css?url";
 import headerStyle from "./styles/header.css?url";
+import Header from "./ui/common/Header/Header";
 
 export const links: LinksFunction = () => [
   {
@@ -32,6 +33,7 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <Header />
         <Outlet />
         <ScrollRestoration />
         <LiveReload />

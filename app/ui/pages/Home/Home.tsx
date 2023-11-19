@@ -8,8 +8,6 @@ export default function Home() {
 
   return (
     <div className="Home">
-      <Header />
-
       <section className="hero-banner">
         <div>
           <h1>
