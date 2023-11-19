@@ -87,3 +87,45 @@
     }
   }
 }
+
+@media only screen and (max-width: 1110px) {
+  .Footer {
+    padding: 32px 16px;
+    row-gap: 32px;
+    align-items: center;
+
+    .topside-footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      row-gap: 32px;
+      padding: 32px;
+
+      .newsletter-container {
+        flex: 1;
+        order: 1;
+        padding: 24px 0;
+
+        .newsletter-label {
+          font-weight: 600;
+          font-size: 32px;
+        }
+
+        .newsletter-input {
+          font-size: 16px;
+          width: 303px;
+        }
+      }
+
+      .newsletter-container:last-child {
+        order: -1;
+      }
+    }
+
+    .copyright-container {
+      .lg-logo {
+        display: none;
+      }
+    }
+  }
+}

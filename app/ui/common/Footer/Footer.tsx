@@ -73,7 +73,7 @@ export default function Footer() {
       <div id="coypright-container" className="copyright-container">
         <p className="copyright-text">&copy; 2023 Groupe 7 Studio</p>
 
-        <img src={LargeLogo} className="md-logo" alt="OpenBox Logo" />
+        <img src={LargeLogo} className="lg-logo" alt="OpenBox Logo" />
       </div>
     </footer>
   );
