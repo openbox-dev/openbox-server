@@ -4,6 +4,7 @@ export async function HomeLoader() {
   // TODO:
   // - Get latest Newsletter
   // - Get 3 coming Events
+  // - Get 2 Boxes
 
   const latestActualites = await ActualiteService.getLatest();
   const comingEvents: any = [];

@@ -2,7 +2,6 @@ import prisma from "~/utils/prisma";
 
 export const ActualiteService = {
   getAll: async () => {
-    // logic
     try {
       return {
         data: await prisma.newsletter.findMany(),
