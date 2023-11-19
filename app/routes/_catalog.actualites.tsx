@@ -4,10 +4,10 @@ import ActuCatalog from "~/ui/pages/Catalog/ActuCatalog/ActuCatalog";
 export const meta: MetaFunction = () => {
   return [
     {
-      title: "OpenBox - Les Events",
+      title: "OpenBox - Les Actualités",
     },
     {
-      description: "Page de catalogue des évènements de OpenBox",
+      description: "Page de catalogue des actualités de OpenBox",
     },
   ];
 };
@@ -17,4 +17,4 @@ export const links: LinksFunction = () => {
 };
 
 export default ActuCatalog;
-// export {CatalogActuLoadr as loader, CatalogActuAction as action};
+// export {CatalogActuLoader as loader, CatalogActuAction as action};
