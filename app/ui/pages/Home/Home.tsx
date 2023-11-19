@@ -12,12 +12,22 @@ export default function Home() {
 
       <section className="hero-banner">
         <div>
-          <h1>OpenBox est un mouvement initié par des <span>Héticiens</span></h1>
-          <p>— Ce mouvement vise à faire grandir le savoir et le pouvoir d’agir de chaque Heticien grâce au partage, la rencontre et la découverte.</p>
+          <h1>
+            OpenBox est un mouvement initié par des <span>Héticiens</span>
+          </h1>
+          <p>
+            — Ce mouvement vise à faire grandir le savoir et le pouvoir d’agir
+            de chaque Heticien grâce au partage, la rencontre et la découverte.
+          </p>
         </div>
-        <div className="threejs-container">
-        </div>
+        <div className="threejs-container"></div>
         <SeeMore />
+      </section>
+
+      <section className="event-section">
+        <h2>Nos évènements récents</h2>
+        <div className="event-list"></div>
+        {/* link */}
       </section>
 
       {/* <ul>
