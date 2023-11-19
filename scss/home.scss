@@ -32,6 +32,13 @@
       background-color: #3574d3;
     }
   }
+
+  .event-section {
+    padding: 64px 0;
+    display: flex;
+    flex-flow: column;
+    gap: 32px;
+  }
 }
 
 @media only screen and (max-width: 1110px) {
