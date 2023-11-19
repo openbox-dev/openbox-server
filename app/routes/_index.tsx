@@ -7,7 +7,7 @@ import { HomeAction } from "~/controllers/actions/home.action";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "OpenBox - Accueil" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
@@ -19,8 +19,8 @@ export const links: LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: homeStyle
-  }
+    href: homeStyle,
+  },
 ];
 
 export default Home;
