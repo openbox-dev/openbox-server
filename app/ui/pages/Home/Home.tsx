@@ -1,7 +1,15 @@
 import { Link, useLoaderData } from "@remix-run/react";
 import type { loader } from "~/routes/_index";
-import Header from "../../common/Header/Header";
+
+import BlueBox from "../../../assets/logo/blue-box.svg";
+import RedBox from "../../../assets/logo/red-box.svg";
+import BeigeBox from "../../../assets/logo/beige-box.svg";
+import BrownBox from "../../../assets/logo/brown-box.svg";
+import arrowLink from "../../../assets/icon/greenArrowLink.svg";
+
 import SeeMore from "~/ui/common/SeeMore/SeeMore";
+
+const boxes = [BlueBox, BrownBox, BeigeBox, RedBox];
 
 export default function Home() {
   // const {latestActualites, comingEvents} = useLoaderData<typeof loader>();
@@ -26,7 +34,10 @@ export default function Home() {
         <h2>Nos évènements récents</h2>
         <div className="event-list"></div>
         {/* link */}
-        <Link to={"/calendar"}>Voir le calendrier (flèche)</Link>
+        <div>ici les box events </div>
+        <Link to={"/calendar"}>
+          Voir le calendrier <img src={arrowLink} alt="Arrow icon" />
+        </Link>
       </section>
 
       <section className="box-explain-section">
@@ -39,6 +50,17 @@ export default function Home() {
             d’ateliers, de médias partagés, de rencontres, et plus encore.
           </p>
         </div>
+
+        <div className="boxes-container">
+          {boxes.map((coloredBox, index) => {
+            return <img src={coloredBox} alt="Icone de box" key={index} />;
+          })}
+        </div>
+        {/* box cards */}
+        <div>ici les box cards</div>
+        <Link to={"/calendar"}>
+          Découvrir nos Box <img src={arrowLink} alt="Arrow icon" />
+        </Link>
       </section>
       {/* <ul>
         {articlesData.success
