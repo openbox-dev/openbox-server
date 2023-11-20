@@ -9,23 +9,11 @@ import {
 import { LinksFunction } from "@remix-run/node";
 
 import indexStyle from "./styles/index.css?url";
-import headerStyle from "./styles/header.css?url";
-import footerStyle from "./styles/footer.css?url";
-import Header from "./ui/common/Header/Header";
-import Footer from "./ui/common/Footer/Footer";
 
 export const links: LinksFunction = () => [
   {
     rel: "stylesheet",
     href: indexStyle,
-  },
-  {
-    rel: "stylesheet",
-    href: headerStyle,
-  },
-  {
-    rel: "stylesheet",
-    href: footerStyle,
   },
 ];
 
