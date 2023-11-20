@@ -47,7 +47,11 @@ export default function ModalMenu({
       <motion.ul className="modalNavigationLinks">
         {Object.entries(navigationLinks).map(([pageName, pageUrl]) => {
           return (
-            <motion.li key={pageName} variants={navVariants}>
+            <motion.li
+              key={pageName}
+              variants={navVariants}
+              onClick={() => closeModal()}
+            >
               <Link to={pageUrl}>{pageName.toUpperCase()}</Link>
             </motion.li>
           );

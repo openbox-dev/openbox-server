@@ -1,6 +1,18 @@
-import { ArticleService } from "~/services/article.service";
+import { ActualiteService } from "~/services/article.service";
 
 export async function HomeLoader() {
-  const articles = await ArticleService.getAll();
-  return articles;
+  // TODO:
+  // - Get latest Newsletter
+  // - Get 3 coming Events
+  // - Get 2 Boxes
+
+  const latestActualites = await ActualiteService.getLatest();
+  const comingEvents: any = [];
+  const popularBoxes: any = [];
+
+  return {
+    latestActualites,
+    comingEvents: comingEvents,
+    popularBoxes: popularBoxes,
+  };
 }

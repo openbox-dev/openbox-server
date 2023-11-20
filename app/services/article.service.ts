@@ -1,16 +1,28 @@
 import prisma from "~/utils/prisma";
 
-export const ArticleService = {
+export const ActualiteService = {
   getAll: async () => {
-    // logic
     try {
       return {
         data: await prisma.newsletter.findMany(),
         success: true,
       };
-    } catch {
+    } catch (e) {
       return {
-        data: [],
+        data: e,
+        success: false,
+      };
+    }
+  },
+  getLatest: async () => {
+    try {
+      return {
+        data: await prisma.newsletter.findFirstOrThrow(),
+        success: true,
+      };
+    } catch (e) {
+      return {
+        data: e,
         success: false,
       };
     }
