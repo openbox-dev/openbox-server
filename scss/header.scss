@@ -19,13 +19,17 @@
       font-size: 1.125rem;
       gap: 1rem;
 
-      li a {
-        text-decoration: none;
-        color: var(--color-primary-green);
+      li {
+        display: flex;
+        align-items: center;
+        a {
+          text-decoration: none;
+          color: var(--color-primary-green);
 
-        &:hover {
-          text-decoration: underline;
-          color: var(--color-primary-black);
+          &:hover {
+            text-decoration: underline;
+            color: var(--color-primary-black);
+          }
         }
       }
     }
