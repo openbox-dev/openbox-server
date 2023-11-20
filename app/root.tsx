@@ -25,8 +25,8 @@ export const links: LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: footerStyle
-  }
+    href: footerStyle,
+  },
 ];
 
 export default function App() {
@@ -39,12 +39,10 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Header />
         <Outlet />
         <ScrollRestoration />
         <LiveReload />
         <Scripts />
-        <Footer></Footer>
       </body>
     </html>
   );
