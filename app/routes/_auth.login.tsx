@@ -12,9 +12,9 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: "" }];
-};
+// export const links: LinksFunction = () => {
+//   return [{ rel: "stylesheet", href: "" }];
+// };
 
 export default LoginForm;
 // export {};
