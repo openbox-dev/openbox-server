@@ -1,4 +1,7 @@
 import { LinksFunction, MetaFunction } from "@remix-run/node";
+
+import { registerAction } from "~/controllers/actions/auth.action";
+
 import RegisterForm from "~/ui/pages/Auth/components/RegisterForm";
 
 export const meta: MetaFunction = () => {
@@ -17,4 +20,4 @@ export const meta: MetaFunction = () => {
 // };
 
 export default RegisterForm;
-// export {};
+export { registerAction as action };
