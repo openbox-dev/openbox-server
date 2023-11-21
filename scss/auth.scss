@@ -1,0 +1,117 @@
+.AuthLayout {
+  display: flex;
+  justify-content: center;
+  > * {
+    width: 50vw;
+    height: 100vh;
+  }
+
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 32px;
+  }
+
+  input {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--color-neutral-100);
+    font-size: 14px;
+  }
+
+  a {
+    color: var(--color-primary-green);
+    width: fit-content;
+    img {
+      height: 32px;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    min-width: 608px;
+
+    label {
+      display: flex;
+      font-size: 16px;
+      flex-direction: column;
+    }
+
+    .user-data {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .error-text {
+      color: var(--color-secondary-red);
+    }
+
+    button {
+      padding: 8px;
+      font-size: 16px;
+      background: var(--color-primary-green);
+      color: var(--color-primary-white);
+      border-radius: 6px;
+      border: 1px solid var(--color-neutral-100);
+      cursor: pointer;
+
+      &:hover {
+        color: var(--color-primary-black);
+        background-color: var(--color-primary-white);
+      }
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.RegisterForm,
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.LoginForm {
+  span.or-divider {
+    margin: 32px 0;
+    font-size: 16px;
+  }
+
+  .Oauth-cta {
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid var(--color-neutral-100);
+    background-color: var(--color-light-green);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--color-primary-green);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-primary-white);
+      background-color: var(--color-primary-green);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: var(--color-primary-grey);
+      color: var(--color-primary-black);
+    }
+  }
+}
+
+body {
+  > * {
+    padding: 0;
+  }
+}
