@@ -79,6 +79,15 @@
   justify-content: center;
 }
 
+.RegisterForm {
+  select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--color-neutral-100);
+    font-size: 14px;
+  }
+}
+
 .LoginForm {
   span.or-divider {
     margin: 32px 0;

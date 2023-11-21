@@ -1,11 +1,19 @@
+import { ChangeEvent, useState } from "react";
 import { Form, Link, useActionData } from "@remix-run/react";
 
-import arrowLink from "../../../../assets/icon/greenArrowLink.svg";
+import { User_promotion } from "@prisma/client";
 import { action } from "~/routes/_auth.register";
-import { json } from "@remix-run/node";
+
+import arrowLink from "../../../../assets/icon/greenArrowLink.svg";
 
 export default function RegisterForm() {
   const formErrors = useActionData<typeof action>();
+  const [promo, setPromo] = useState<User_promotion>(User_promotion.WEB1);
+
+  const handlePromotionChange = (e: ChangeEvent<HTMLSelectElement>): void => {
+    const value = e.target.value;
+    setPromo(value as User_promotion);
+  };
 
   return (
     <div className="RegisterForm">
@@ -59,13 +67,20 @@ export default function RegisterForm() {
           </label>
           <label>
             <span>Promo</span>
-            <input
-              required
-              type="text"
+            <select
+              value={promo}
+              onChange={handlePromotionChange}
               name="promo"
               id="promo"
-              placeholder="WEB2"
-            />
+            >
+              {Object.keys(User_promotion).map((promotion) => {
+                return (
+                  <option key={promotion} value={promotion}>
+                    {promotion}
+                  </option>
+                );
+              })}
+            </select>
           </label>
         </div>
         <label>
