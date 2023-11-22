@@ -124,3 +124,31 @@ body {
     padding: 0;
   }
 }
+
+@media only screen and (max-width: 1110px) {
+  .AuthLayout {
+    flex-flow: column;
+
+    > * {
+      width: 100vw;
+    }
+
+    .infinite-boxes-container {
+      position: absolute;
+      z-index: -1;
+      background: green;
+      opacity: 0.3;
+    }
+
+    .LoginForm,
+    .RegisterForm {
+      form {
+        min-width: 304px;
+
+        .user-data {
+          display: block;
+        }
+      }
+    }
+  }
+}

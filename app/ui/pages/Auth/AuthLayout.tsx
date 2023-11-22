@@ -4,7 +4,7 @@ export default function AuthLayout() {
   return (
     <div className="AuthLayout">
       <Outlet />
-      <div>other side</div>
+      <div className="infinite-boxes-container">other side</div>
     </div>
   );
 }
