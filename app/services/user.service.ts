@@ -2,11 +2,11 @@ import prisma from "~/utils/prisma";
 import { registerCredentials } from "~/schemas/user.schema";
 import { expireDelay } from "~/constants/token";
 import { Prisma, User } from "@prisma/client";
+import { redirect } from "@remix-run/node";
 
-interface AuthUserResponse {
-  data: User | Error;
-  success: boolean;
-}
+type AuthUserResponse =
+  | { data: User; success: true }
+  | { data: Error; success: false };
 
 export const UserService = {
   createUser: async (credentials: Omit<registerCredentials, "password">) => {
@@ -99,14 +99,35 @@ export const UserService = {
       const userSelect: Prisma.AuthentificationSelect = {
         user: true,
       };
-      const user = await prisma.authentification.findUniqueOrThrow({
+      const { user } = await prisma.authentification.findUniqueOrThrow({
         where: { token },
         select: userSelect,
       });
       return {
-        data: user.user,
+        data: user,
         success: true,
       };
+    } catch (e) {
+      return {
+        data: e as Error,
+        success: false,
+      };
+    }
+  },
+  getAuthorization: async (token: string, path: string) => {
+    try {
+      if (!token) {
+        console.log("fail");
+        return redirect("/login");
+      }
+
+      const result = await UserService.getAuthUser(token);
+      if (result.success) {
+        console.log(result.data.role);
+        return {
+          role: result.data.role,
+        };
+      }
     } catch (e) {
       return {
         data: e as Error,
