@@ -16,7 +16,7 @@ const containerVariants = {
     opacity: 1,
     scale: 1,
     transition: {
-      delayChildren: 0.3,
+      delayChildren: 0.1,
       staggerChildren: 0.2,
     },
   },
@@ -63,16 +63,16 @@ export default function ModalMenu({
         {user ? (
           <motion.li variants={navVariants} onClick={() => closeModal()}>
             <>
-              <Link to={"logout"}>{"Déconnexion".toUpperCase()}</Link>
+              <Link to={"logout"}>{"Se déconnecter".toUpperCase()}</Link>
             </>
           </motion.li>
         ) : (
           <>
-            <motion.li>
-              <Link to={"/login"}>Connexion</Link>
+            <motion.li variants={navVariants} onClick={() => closeModal()}>
+              <Link to={"/login"}>{"S'inscrire".toUpperCase()}</Link>
             </motion.li>
-            <motion.li>
-              <Link to={"/register"}>Connexion</Link>
+            <motion.li variants={navVariants} onClick={() => closeModal()}>
+              <Link to={"/register"}>{"Se connecter".toUpperCase()}</Link>
             </motion.li>
           </>
         )}
