@@ -46,6 +46,7 @@
     }
 
     .error-text {
+      width: inherit;
       color: var(--color-secondary-red);
     }
 
@@ -195,7 +196,7 @@ body {
     .InfiniteSlider {
       position: absolute;
       z-index: -1;
-      opacity: 0.9;
+      opacity: 0.7;
     }
 
     .LoginForm,
