@@ -13,7 +13,7 @@ export const sessionStorage = createCookieSessionStorage({
     // Expires can also be set (although maxAge overrides it when used in combination).
     // Note that this method is NOT recommended as `new Date` creates only one date on each server deployment, not a dynamic date in the future!
     //
-    expires: new Date(Date.now() + 60 * 60 * 24 * 2 * 1000),
+    // expires: new Date(Date.now() + 60 * 60 * 24 * 2 * 1000),
     httpOnly: true,
     maxAge: 60,
     path: "/",
@@ -22,12 +22,3 @@ export const sessionStorage = createCookieSessionStorage({
     // secure: true,
   },
 });
-
-export const destroyFunction = async (request: any) => {
-  const session = await sessionStorage.getSession(
-    request.headers.get("Cookie")
-  );
-  const newCookie = await sessionStorage.destroySession(session);
-
-  return redirect("/login", { headers: { "Set-Cookie": newCookie } });
-};
