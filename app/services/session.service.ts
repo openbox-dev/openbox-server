@@ -3,7 +3,9 @@ import {
   LoaderFunctionArgs,
   redirect,
 } from "@remix-run/node";
+import { expireDelay } from "~/constants/token";
 import { sessionStorage } from "~/utils/session.server";
+import { UserService } from "./user.service";
 
 export const SessionService = {
   setAccessToken: async (
@@ -20,7 +22,7 @@ export const SessionService = {
     return redirect("/", {
       headers: {
         "Set-Cookie": await sessionStorage.commitSession(session, {
-          expires: new Date(Date.now() + 60 * 60 * 24 * 5 * 1000),
+          expires: new Date(Date.now() + expireDelay),
         }),
       },
     });
@@ -33,8 +35,15 @@ export const SessionService = {
     let session = await sessionStorage.getSession(
       request.headers.get("Cookie")
     );
+    const token = session.get("access_token");
+    const { data, success } = await UserService.getAuthUser(token);
 
-    return session.has("access_token");
+    if (!session.has("access_token") && success) {
+      await UserService.deleteAuth(token);
+      return "";
+    }
+
+    return session.has("access_token") ? token : "";
   },
   destroySession: async (
     {
@@ -47,7 +56,6 @@ export const SessionService = {
     let session = await sessionStorage.getSession(
       request.headers.get("Cookie")
     );
-
     return redirect(redirectTo, {
       headers: {
         "Set-Cookie": await sessionStorage.destroySession(session),

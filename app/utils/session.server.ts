@@ -1,5 +1,6 @@
 import { createCookieSessionStorage, redirect } from "@remix-run/node";
 import { IdTokenResult } from "firebase/auth";
+import { expireDelay } from "~/constants/token";
 // import { getSessionToken } from "./db-firebase";
 
 const sessionSecret = process.env.SESSION_SECRET;
@@ -15,7 +16,7 @@ export const sessionStorage = createCookieSessionStorage({
     //
     // expires: new Date(Date.now() + 60 * 60 * 24 * 2 * 1000),
     httpOnly: true,
-    maxAge: 60,
+    maxAge: expireDelay,
     path: "/",
     sameSite: "lax",
     secrets: [sessionSecret],
