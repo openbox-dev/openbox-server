@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Header user={serverData.user} />
       <div className="Home">
         <section className="hero-banner">
           <div>
