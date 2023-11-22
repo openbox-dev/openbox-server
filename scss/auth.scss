@@ -69,6 +69,65 @@
       align-items: center;
     }
   }
+
+  .InfiniteSlider {
+    overflow: hidden;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 144px;
+
+    .infinite-boxes-track {
+      display: flex;
+      gap: 32px;
+      flex-flow: row nowrap;
+      rotate: 30deg;
+
+      img {
+        aspect-ratio: 1;
+        position: relative;
+        animation: slide 10s linear infinite;
+      }
+    }
+
+    .infinite-boxes-track:nth-child(2) {
+      img {
+        animation: slide 10s linear infinite;
+      }
+    }
+
+    .infinite-boxes-track:nth-child(3) {
+      img {
+        animation: reverseSlide 10s linear infinite;
+      }
+    }
+
+    .infinite-boxes-track:nth-child(5) {
+      img {
+        animation: reverseSlide 10s linear infinite;
+      }
+    }
+
+    @keyframes slide {
+      0% {
+        left: 0;
+      }
+      100% {
+        left: -100%;
+      }
+      0% {
+        left: 0;
+      }
+    }
+
+    @keyframes reverseSlide {
+      0% {
+        left: -50%;
+      }
+      100% {
+        left: 50%;
+      }
+    }
+  }
 }
 
 .RegisterForm,
@@ -133,11 +192,10 @@ body {
       width: 100vw;
     }
 
-    .infinite-boxes-container {
+    .InfiniteSlider {
       position: absolute;
       z-index: -1;
-      background: green;
-      opacity: 0.3;
+      opacity: 0.9;
     }
 
     .LoginForm,
