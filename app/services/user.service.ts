@@ -1,7 +1,4 @@
 import prisma from "~/utils/prisma";
-import { withZod } from "@remix-validated-form/with-zod";
-import { ValidatedForm, validationError } from "remix-validated-form";
-import { z } from "zod";
 import { registerCredentials } from "~/schemas/user.schema";
 
 export const UserService = {
