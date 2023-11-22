@@ -2,9 +2,11 @@ import { Link } from "@remix-run/react";
 import { motion } from "framer-motion";
 
 import CloseIcon from "../../../assets/icon/close.svg";
+import { User } from "@prisma/client";
 
 interface ModalMenuProps {
   navigationLinks: Record<string, string>;
+  user?: User;
   closeModal: () => void;
 }
 
@@ -30,6 +32,7 @@ const navVariants = {
 
 export default function ModalMenu({
   navigationLinks,
+  user,
   closeModal,
 }: ModalMenuProps) {
   return (
@@ -56,6 +59,23 @@ export default function ModalMenu({
             </motion.li>
           );
         })}
+
+        {user ? (
+          <motion.li variants={navVariants} onClick={() => closeModal()}>
+            <>
+              <Link to={"logout"}>{"Déconnexion".toUpperCase()}</Link>
+            </>
+          </motion.li>
+        ) : (
+          <>
+            <motion.li>
+              <Link to={"/login"}>Connexion</Link>
+            </motion.li>
+            <motion.li>
+              <Link to={"/register"}>Connexion</Link>
+            </motion.li>
+          </>
+        )}
       </motion.ul>
 
       {/* TODO */}
