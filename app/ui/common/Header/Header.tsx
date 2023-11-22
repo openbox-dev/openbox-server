@@ -63,6 +63,7 @@ export default function Header({ user }: HeaderProps) {
         {isModalActive && (
           <ModalMenu
             navigationLinks={navigationLinks}
+            user={user}
             closeModal={() => setIsModalActive(false)}
           />
         )}
