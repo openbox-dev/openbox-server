@@ -6,6 +6,7 @@ import { signInSchema } from "~/schemas/user.schema";
 
 import { auth } from "~/utils/db-firebase";
 import { SessionService } from "~/services/session.service";
+import { UserService } from "~/services/user.service";
 
 export async function signInAction({ request }: ActionFunctionArgs) {
   try {
@@ -18,7 +19,10 @@ export async function signInAction({ request }: ActionFunctionArgs) {
 
     const { user } = await signInWithEmailAndPassword(auth, email, password);
     if (user) {
-      return await SessionService.setAccessToken(await user.getIdToken(), {
+      const userToken = await user.getIdToken();
+      await UserService.deleteAuth(userToken);
+      await UserService.addAuth(email, userToken);
+      return await SessionService.setAccessToken(userToken, {
         request,
       });
     } else {

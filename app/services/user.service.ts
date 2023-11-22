@@ -1,5 +1,12 @@
 import prisma from "~/utils/prisma";
 import { registerCredentials } from "~/schemas/user.schema";
+import { expireDelay } from "~/constants/token";
+import { Prisma, User } from "@prisma/client";
+
+interface AuthUserResponse {
+  data: User | Error;
+  success: boolean;
+}
 
 export const UserService = {
   createUser: async (credentials: Omit<registerCredentials, "password">) => {
@@ -28,13 +35,14 @@ export const UserService = {
       }
     }
   },
-  getOne: async (credential: Pick<registerCredentials, "email">) => {
+  getOne: async ({ email }: Pick<registerCredentials, "email">) => {
     try {
-      const user = await prisma.user.findUnique({
+      const user = await prisma.user.findUniqueOrThrow({
         where: {
-          email: credential.email,
+          email,
         },
       });
+
       return {
         data: user,
         success: true,
@@ -42,6 +50,66 @@ export const UserService = {
     } catch (e) {
       return {
         data: e,
+        success: false,
+      };
+    }
+  },
+  addAuth: async (email: string, token: string) => {
+    try {
+      const user = await prisma.user.findUniqueOrThrow({
+        where: {
+          email,
+        },
+      });
+      const auth = await prisma.authentification.create({
+        data: {
+          userId: user.id,
+          agent: "",
+          token: token,
+          tokenEnd: new Date(Date.now() + expireDelay),
+        },
+      });
+      return {
+        data: auth,
+        success: true,
+      };
+    } catch (e) {
+      return {
+        data: e,
+        success: false,
+      };
+    }
+  },
+  deleteAuth: async (token: string, email: string = "") => {
+    try {
+      await prisma.authentification.delete({ where: { token } });
+      return {
+        data: null,
+        success: true,
+      };
+    } catch (e) {
+      return {
+        data: e,
+        success: false,
+      };
+    }
+  },
+  getAuthUser: async (token: string): Promise<AuthUserResponse> => {
+    try {
+      const userSelect: Prisma.AuthentificationSelect = {
+        user: true,
+      };
+      const user = await prisma.authentification.findUniqueOrThrow({
+        where: { token },
+        select: userSelect,
+      });
+      return {
+        data: user.user,
+        success: true,
+      };
+    } catch (e) {
+      return {
+        data: e as Error,
         success: false,
       };
     }
