@@ -1,20 +1,11 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
+import { SessionService } from "~/services/session.service";
 import { sessionStorage } from "~/utils/session.server";
 
 export async function authLoader({ request }: LoaderFunctionArgs) {
-  const session = await sessionStorage.getSession(
-    request.headers.get("Cookie")
-  );
-
-  if (session.has("access_token")) {
+  if (await SessionService.isTokenValid({ request })) {
     return redirect("/");
   }
 
-  const data = { error: session.get("error") };
-
-  return json(data, {
-    headers: {
-      "Set-Cookie": await sessionStorage.commitSession(session),
-    },
-  });
+  return json(false);
 }

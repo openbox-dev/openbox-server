@@ -1,9 +1,12 @@
 import { json, type ActionFunctionArgs, redirect } from "@remix-run/node";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { ZodError } from "zod";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 import { signInSchema } from "~/schemas/user.schema";
+
 import { auth } from "~/utils/db-firebase";
-import { sessionStorage } from "~/utils/session.server";
+import { SessionService } from "~/services/session.service";
+
 export async function signInAction({ request }: ActionFunctionArgs) {
   try {
     const data = await request.formData();
@@ -11,26 +14,19 @@ export async function signInAction({ request }: ActionFunctionArgs) {
       email: data.get("email"),
       password: data.get("password"),
     };
-
     const { email, password } = signInSchema.parse(formResult);
-    console.log(email, password);
+
     const { user } = await signInWithEmailAndPassword(auth, email, password);
-
     if (user) {
-      let session = await sessionStorage.getSession(
-        request.headers.get("Cookie")
-      );
-      session.set("access_token", await user.getIdToken());
-
-      return redirect("/", {
-        headers: {
-          "Set-Cookie": await sessionStorage.commitSession(session, {
-            expires: new Date(Date.now() + 60 * 60 * 24 * 2 * 1000),
-          }),
-        },
+      return await SessionService.setAccessToken(await user.getIdToken(), {
+        request,
+      });
+    } else {
+      return json({
+        data: null,
+        success: false,
       });
     }
-    return json(user);
   } catch (e) {
     if (e instanceof ZodError) {
       console.log(e);
