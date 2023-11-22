@@ -23,7 +23,7 @@ export default function RegisterForm() {
       <Form method="post">
         {formErrors && !formErrors.success ? (
           typeof formErrors.data === "string" ? (
-            <span>{formErrors.data}</span>
+            <span className="error-text">{formErrors.data}</span>
           ) : (
             formErrors.data.map((error) => (
               <span className="error-text">

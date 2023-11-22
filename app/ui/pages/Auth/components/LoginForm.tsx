@@ -1,15 +1,20 @@
-import { Form, Link } from "@remix-run/react";
+import { Form, Link, useActionData } from "@remix-run/react";
 
 import arrowLink from "../../../../assets/icon/greenArrowLink.svg";
 import heticLogo from "../../../../assets/logo/hetic.svg";
+import { action } from "~/routes/_auth.login";
 
 export default function LoginForm() {
+  const formErrors = useActionData<typeof action>();
   return (
     <div className="LoginForm">
       <h1>
         Bienvenue sur <Link to={"/"}>OpenBox</Link>
       </h1>
       <Form method="post">
+        {formErrors && !formErrors.success && (
+          <span className="error-text">{formErrors.data}</span>
+        )}
         <label>
           <span>Email</span>
           <input

@@ -7,6 +7,7 @@ import { signInSchema } from "~/schemas/user.schema";
 import { auth } from "~/utils/db-firebase";
 import { SessionService } from "~/services/session.service";
 import { UserService } from "~/services/user.service";
+import { FirebaseError } from "firebase/app";
 
 export async function signInAction({ request }: ActionFunctionArgs) {
   try {
@@ -25,29 +26,14 @@ export async function signInAction({ request }: ActionFunctionArgs) {
       return await SessionService.setAccessToken(userToken, {
         request,
       });
-    } else {
-      return json({
-        data: null,
-        success: false,
-      });
     }
   } catch (e) {
-    if (e instanceof ZodError) {
-      console.log(e);
-      return json({
-        data: e.issues.map((issue) => {
-          return {
-            path: issue.path[0],
-            message: issue.message,
-          };
-        }),
-        success: false,
-      });
-    } else {
-      return json({
-        data: e,
-        success: false,
-      });
-    }
+    return json({
+      data:
+        e instanceof FirebaseError
+          ? "Erreur, veuillez réessayer"
+          : "Données invalides, vérifiez que vous avez créer un compte",
+      success: false,
+    });
   }
 }
