@@ -1,6 +1,6 @@
 import { LinksFunction, MetaFunction } from "@remix-run/node";
 
-import { registerAction } from "~/controllers/actions/auth.action";
+import { registerAction } from "~/controllers/actions/register.action";
 
 import RegisterForm from "~/ui/pages/Auth/components/RegisterForm";
 

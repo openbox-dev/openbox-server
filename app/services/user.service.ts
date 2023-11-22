@@ -2,12 +2,12 @@ import prisma from "~/utils/prisma";
 import { withZod } from "@remix-validated-form/with-zod";
 import { ValidatedForm, validationError } from "remix-validated-form";
 import { z } from "zod";
-import { registerCredentials } from "~/models/user.model";
+import { registerCredentials } from "~/schemas/user.schema";
 
 export const UserService = {
   createUser: async (credentials: Omit<registerCredentials, "password">) => {
     try {
-      const user = await prisma.user.findFirst({
+      const user = await prisma.user.findUnique({
         where: {
           email: credentials.email,
         },
@@ -29,6 +29,24 @@ export const UserService = {
           success: false,
         };
       }
+    }
+  },
+  getOne: async (credential: Pick<registerCredentials, "email">) => {
+    try {
+      const user = await prisma.user.findUnique({
+        where: {
+          email: credential.email,
+        },
+      });
+      return {
+        data: user,
+        success: true,
+      };
+    } catch (e) {
+      return {
+        data: e,
+        success: false,
+      };
     }
   },
 };

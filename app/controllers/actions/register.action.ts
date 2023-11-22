@@ -2,7 +2,7 @@ import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
 import { FirebaseError } from "firebase/app";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { z } from "zod";
-import { registerSchema } from "~/models/user.model";
+import { registerSchema } from "~/schemas/user.schema";
 import { UserService } from "~/services/user.service";
 import { auth } from "~/utils/db-firebase";
 
