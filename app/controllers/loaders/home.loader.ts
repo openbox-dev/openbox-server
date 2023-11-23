@@ -15,7 +15,7 @@ export async function HomeLoader({ request }: LoaderFunctionArgs) {
   const token = await SessionService.isTokenValid({ request });
   const { data, ...rest } = await UserService.getAuthUser(token);
   return json({
-    user: data instanceof Error ? undefined : data,
+    user: data instanceof Error ? null : data,
     latestActualites,
     comingEvents: comingEvents,
     popularBoxes: popularBoxes,

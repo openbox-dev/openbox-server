@@ -6,7 +6,7 @@ import { User } from "@prisma/client";
 
 interface ModalMenuProps {
   navigationLinks: Record<string, string>;
-  user?: User;
+  user: User | null;
   closeModal: () => void;
 }
 

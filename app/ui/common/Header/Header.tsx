@@ -10,7 +10,7 @@ import ModalMenu from "./ModalMenu";
 import { User } from "@prisma/client";
 
 interface HeaderProps {
-  user?: User;
+  user: User | null;
 }
 
 export default function Header({ user }: HeaderProps) {
