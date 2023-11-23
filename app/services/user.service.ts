@@ -5,7 +5,7 @@ import { Prisma, User } from "@prisma/client";
 import { redirect } from "@remix-run/node";
 
 type AuthUserResponse =
-  | { data: User; success: true }
+  | { data: User | null; success: true }
   | { data: Error; success: false };
 
 export const UserService = {
@@ -35,7 +35,9 @@ export const UserService = {
       }
     }
   },
-  getOne: async ({ email }: Pick<registerCredentials, "email">) => {
+  getOne: async ({
+    email,
+  }: Pick<registerCredentials, "email">): Promise<AuthUserResponse> => {
     try {
       const user = await prisma.user.findUniqueOrThrow({
         where: {
@@ -49,7 +51,7 @@ export const UserService = {
       };
     } catch (e) {
       return {
-        data: e,
+        data: e as Error,
         success: false,
       };
     }
@@ -61,10 +63,17 @@ export const UserService = {
           email,
         },
       });
-      const auth = await prisma.authentification.create({
-        data: {
+      const auth = await prisma.authentification.upsert({
+        where: {
+          userId: user.id,
+        },
+        create: {
           userId: user.id,
           agent: "",
+          token: token,
+          tokenEnd: new Date(Date.now() + expireDelay),
+        },
+        update: {
           token: token,
           tokenEnd: new Date(Date.now() + expireDelay),
         },
@@ -82,7 +91,16 @@ export const UserService = {
   },
   deleteAuth: async (token: string, email: string = "") => {
     try {
-      await prisma.authentification.delete({ where: { token } });
+      const result = email ? await UserService.getOne({ email }) : null;
+      if (result) {
+        if (result.success && result.data) {
+          await prisma.authentification.delete({
+            where: { userId: result.data.id },
+          });
+        }
+      } else {
+        await prisma.authentification.delete({ where: { token } });
+      }
       return {
         data: null,
         success: true,
@@ -99,14 +117,22 @@ export const UserService = {
       const userSelect: Prisma.AuthentificationSelect = {
         user: true,
       };
-      const { user } = await prisma.authentification.findUniqueOrThrow({
+      const result = await prisma.authentification.findUnique({
         where: { token },
         select: userSelect,
       });
-      return {
-        data: user,
-        success: true,
-      };
+      console.log(result);
+      if (result) {
+        return {
+          data: result.user,
+          success: true,
+        };
+      } else {
+        return {
+          data: null,
+          success: true,
+        };
+      }
     } catch (e) {
       return {
         data: e as Error,
@@ -122,7 +148,7 @@ export const UserService = {
       }
 
       const result = await UserService.getAuthUser(token);
-      if (result.success) {
+      if (result.success && result.data) {
         console.log(result.data.role);
         return {
           role: result.data.role,

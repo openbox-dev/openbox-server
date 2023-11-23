@@ -38,7 +38,7 @@ export const SessionService = {
     const token = session.get("access_token");
     const { data, success } = await UserService.getAuthUser(token);
 
-    if (!session.has("access_token") && success) {
+    if (!success && session.has("access_token")) {
       await UserService.deleteAuth(token);
       return "";
     }
@@ -56,6 +56,8 @@ export const SessionService = {
     let session = await sessionStorage.getSession(
       request.headers.get("Cookie")
     );
+    const token = session.get("access_token");
+    await UserService.deleteAuth(token);
     return redirect(redirectTo, {
       headers: {
         "Set-Cookie": await sessionStorage.destroySession(session),

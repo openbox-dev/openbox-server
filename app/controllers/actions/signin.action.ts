@@ -21,7 +21,6 @@ export async function signInAction({ request }: ActionFunctionArgs) {
     const { user } = await signInWithEmailAndPassword(auth, email, password);
     if (user) {
       const userToken = await user.getIdToken();
-      await UserService.deleteAuth(userToken);
       await UserService.addAuth(email, userToken);
       return await SessionService.setAccessToken(userToken, {
         request,

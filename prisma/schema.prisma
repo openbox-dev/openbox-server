@@ -28,7 +28,7 @@ model User {
 }
 
 model Authentification {
-  userId      Int
+  userId      Int @unique
   agent       String
   token       String   @unique @id
   tokenStart  DateTime @default(now())
