@@ -1,10 +1,11 @@
 import { Outlet } from "@remix-run/react";
+import InfiniteSlider from "./components/InfiniteBox";
 
 export default function AuthLayout() {
   return (
-    <div>
-      auth
+    <div className="AuthLayout">
       <Outlet />
+      <InfiniteSlider />
     </div>
   );
 }

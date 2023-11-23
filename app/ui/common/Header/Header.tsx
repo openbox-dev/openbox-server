@@ -7,8 +7,13 @@ import SmallLogo from "../../../assets/logo/small-logo.svg";
 import BurgerIcon from "../../../assets/icon/burger.svg";
 
 import ModalMenu from "./ModalMenu";
+import { User } from "@prisma/client";
 
-export default function Header() {
+interface HeaderProps {
+  user?: User;
+}
+
+export default function Header({ user }: HeaderProps) {
   const [isModalActive, setIsModalActive] = useState(false);
   const navigationLinks = {
     Accueil: "/",
@@ -35,8 +40,19 @@ export default function Header() {
 
       {/* TODO: ajouter user guard pour quand le user est co */}
       <div className="auth-links">
-        <Link to={"/login"}>Connexion</Link>
-        <Link to={"/register"}>Inscription</Link>
+        {user ? (
+          <>
+            <span>
+              {user.firstName} {user.lastName}
+            </span>
+            <Link to={"logout"}>Déconnexion</Link>
+          </>
+        ) : (
+          <>
+            <Link to={"/login"}>Connexion</Link>
+            <Link to={"/register"}>Inscription</Link>
+          </>
+        )}
       </div>
 
       <div className="burger-menu" onClick={() => setIsModalActive(true)}>
@@ -47,6 +63,7 @@ export default function Header() {
         {isModalActive && (
           <ModalMenu
             navigationLinks={navigationLinks}
+            user={user}
             closeModal={() => setIsModalActive(false)}
           />
         )}

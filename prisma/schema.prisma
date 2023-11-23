@@ -28,13 +28,11 @@ model User {
 }
 
 model Authentification {
-  userId      Int
+  userId      Int @unique
   agent       String
-  token       String   @unique
+  token       String   @unique @id
   tokenStart  DateTime @default(now())
   tokenEnd    DateTime
-
-  @@id([userId, agent])
 
   // Relations
   user        User     @relation(name: "UserToAuthentication", fields: [userId], references: [id])
