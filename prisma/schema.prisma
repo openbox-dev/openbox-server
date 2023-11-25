@@ -68,8 +68,7 @@ model Box {
   name        String
   description String
   image       String?
-  createdAt  DateTime @default(now()) @db.Date
-
+  createdAt  DateTime @default(now())
   // Relations
   boxAdmin    Box_admin[]    @relation(name: "BoxToBoxAdmin")
   boxFollower Box_follower[] @relation(name: "BoxToBoxFollower")
@@ -84,7 +83,7 @@ model Event {
   image            String
   room             Event_room?
   status           Event_status        @default(SOON)
-  startDate        DateTime?
+  startDate        DateTime
   endDate          DateTime?
 
   // Relations
