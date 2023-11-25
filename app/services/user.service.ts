@@ -121,7 +121,6 @@ export const UserService = {
         where: { token },
         select: userSelect,
       });
-      console.log(result);
       if (result) {
         return {
           data: result.user,
@@ -143,13 +142,11 @@ export const UserService = {
   getAuthorization: async (token: string, path: string) => {
     try {
       if (!token) {
-        console.log("fail");
         return redirect("/login");
       }
 
       const result = await UserService.getAuthUser(token);
       if (result.success && result.data) {
-        console.log(result.data.role);
         return {
           role: result.data.role,
         };
