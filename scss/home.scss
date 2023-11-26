@@ -1,0 +1,96 @@
+:root {
+  --card-3d-height: 420px;
+}
+
+.Home {
+  .section-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  p.section-description {
+    font-size: var(--font-size-m);
+    color: var(--color-primary-grey);
+    font-weight: 400;
+  }
+
+  a {
+    font-size: var(--font-size-m);
+    color: var(--color-primary-green);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 16px 0;
+  }
+
+  section {
+    padding: 64px 0;
+    display: flex;
+    flex-flow: column;
+    gap: 32px;
+  }
+
+  .hero-banner {
+    span {
+      text-decoration: underline;
+    }
+
+    .threejs-container {
+      width: 100%;
+      height: 33vw;
+      border: 3px solid var(--color-border-grey);
+      border-radius: var(--border-radius);
+      background-color: #3574d3; // Remplace le canva 3D
+    }
+  }
+
+  .event-section {
+    display: flex;
+    flex-flow: column;
+    gap: 32px;
+  }
+
+  .box-explain-section {
+    .boxes-container {
+      padding: 32px;
+      gap: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+@media only screen and (max-width: 1110px) {
+  :root {
+    --font-size-xl: 2rem;
+    --card-3d-height: 343px;
+  }
+
+  .Home {
+    .hero-banner {
+      padding: 16px 0;
+      gap: 20px;
+    }
+    section {
+      padding: 32px 0;
+    }
+
+    a {
+      img {
+        width: 32px;
+      }
+    }
+
+    .box-explain-section {
+      .boxes-container {
+        padding: 20px;
+        gap: 16px;
+        > * {
+          width: 46px;
+        }
+      }
+    }
+  }
+}

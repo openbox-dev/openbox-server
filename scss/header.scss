@@ -1,0 +1,132 @@
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+
+  nav {
+    .sm-logo {
+      display: none;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+
+    .navigation-links {
+      list-style: none;
+      display: flex;
+      font-size: 1.125rem;
+      gap: 1rem;
+
+      li {
+        display: flex;
+        align-items: center;
+        a {
+          text-decoration: none;
+          color: var(--color-primary-green);
+
+          &:hover {
+            text-decoration: underline;
+            color: var(--color-primary-black);
+          }
+        }
+      }
+    }
+  }
+
+  .auth-links {
+    display: flex;
+    gap: 1rem;
+    a {
+      text-decoration: none;
+      font-size: 18px;
+      padding: 8px 32px;
+      border: none;
+      border-radius: 50px;
+      background: none;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--color-primary-green);
+
+      &:hover {
+        color: var(--color-primary-white);
+        background-color: var(--color-primary-black);
+      }
+    }
+
+    a + a {
+      color: var(--color-primary-white);
+      background-color: var(--color-primary-green);
+    }
+  }
+
+  .burger-menu {
+    display: none;
+
+    img {
+      cursor: pointer;
+    }
+  }
+}
+
+.ModalMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: var(--color-primary-white);
+  z-index: 2;
+  color: var(--color-primary-green);
+  font-size: var(--font-size-l);
+  font-weight: 600;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  background-color: var(--color-light-green);
+
+  .close-menu {
+    width: 100%;
+    background-color: var(--color-primary-green);
+    padding: 1rem;
+    color: var(--color-primary-white);
+  }
+
+  .modalNavigationLinks {
+    padding: var(--padding-section-small) var(--padding-section-large);
+    list-style: none;
+    display: flex;
+    flex-flow: column nowrap;
+    border-radius: 18px;
+    li a {
+      text-decoration: none;
+      color: var(--color-primary-black);
+    }
+  }
+}
+
+@media only screen and (max-width: 1110px) {
+  .Header {
+    nav {
+      .sm-logo {
+        display: block;
+      }
+      .md-logo {
+        display: none;
+      }
+
+      .navigation-links {
+        display: none;
+      }
+    }
+
+    .auth-links {
+      display: none;
+    }
+
+    .burger-menu {
+      display: block;
+    }
+  }
+}

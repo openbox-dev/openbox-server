@@ -28,13 +28,11 @@ model User {
 }
 
 model Authentification {
-  userId      Int
+  userId      Int @unique
   agent       String
-  token       String   @unique
+  token       String   @unique @id
   tokenStart  DateTime @default(now())
   tokenEnd    DateTime
-
-  @@id([userId, agent])
 
   // Relations
   user        User     @relation(name: "UserToAuthentication", fields: [userId], references: [id])
@@ -48,6 +46,7 @@ model Newsletter {
   heading   String
   content   String
   status    Newsletter_status      @default(VISIBLED)
+  createdAt  DateTime @default(now()) @db.Date
 
   // Relations
   user      User                   @relation(name: "UserToNewsletter", fields: [writer], references: [id])
@@ -69,6 +68,7 @@ model Box {
   name        String
   description String
   image       String?
+  createdAt  DateTime @default(now()) @db.Date
 
   // Relations
   boxAdmin    Box_admin[]    @relation(name: "BoxToBoxAdmin")

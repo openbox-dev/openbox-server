@@ -1,9 +1,15 @@
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
-import indexStyle from "../styles/index.css?inline";
+import Home from "~/ui/pages/Home/Home";
+import indexStyle from "../styles/index.css?url";
+import homeStyle from "../styles/home.css?url";
+import headerStyle from "../styles/header.css?url";
+import footerStyle from "../styles/footer.css?url";
+import { HomeLoader } from "~/controllers/loaders/home.loader";
+import { HomeAction } from "~/controllers/actions/home.action";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "OpenBox - Accueil" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
@@ -13,37 +19,19 @@ export const links: LinksFunction = () => [
     rel: "stylesheet",
     href: indexStyle,
   },
+  {
+    rel: "stylesheet",
+    href: homeStyle,
+  },
+  {
+    rel: "stylesheet",
+    href: headerStyle,
+  },
+  {
+    rel: "stylesheet",
+    href: footerStyle,
+  },
 ];
 
-export default function Index() {
-  return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
-  );
-}
+export default Home;
+export { HomeLoader as loader, HomeAction as action };
