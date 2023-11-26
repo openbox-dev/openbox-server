@@ -1,20 +1,21 @@
 import { Event } from "@prisma/client";
-import { EventWithBox } from "~/services/event.service";
+import {
+  EventService,
+  EventWithBoxAndAnimator,
+} from "~/services/event.service";
 import imagePlaceholder from "../../../assets/image/card-placeholder.png";
 import { Link } from "@remix-run/react";
 
 interface EventCardProps {
-  event: EventWithBox;
+  event: EventWithBoxAndAnimator;
 }
-
-const getEventStatus = (startDate: Date) => {
-  return "À VENIR";
-};
 
 export default function EventCard({ event }: EventCardProps) {
   return (
     <div className="EventCard">
-      <span className="event-status">{getEventStatus(event.startDate)}</span>
+      <span className="event-status">
+        {EventService.getEventStatus(event.startDate)}
+      </span>
       <div
         className="event-image-container"
         style={{
