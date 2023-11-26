@@ -10,7 +10,7 @@ import { HomeAction } from "~/controllers/actions/home.action";
 export const meta: MetaFunction = () => {
   return [
     { title: "OpenBox - Accueil" },
-    { name: "description", content: "Welcome to Remix!" },
+    { name: "description", content: "Découvrez Openbox !" },
   ];
 };
 
