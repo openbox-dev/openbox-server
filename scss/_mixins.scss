@@ -1,0 +1,105 @@
+@mixin eventSectionMixin {
+  .event-section {
+    display: flex;
+    flex-flow: column;
+    gap: 32px;
+
+    .event-card-container {
+      width: 100%;
+
+      &.three-column-grid {
+        @include itemGridOptions(three-column-grid);
+      }
+      &.two-column-grid {
+        @include itemGridOptions(two-column-grid);
+      }
+
+      .EventCard {
+        max-width: 398px;
+        color: var(--color-primary-black);
+        place-self: center;
+
+        &.passed-event {
+          opacity: 0.5;
+        }
+
+        h3 {
+          font-size: var(--font-size-m);
+          font-weight: 600;
+          a {
+            padding: 0;
+            color: var(--color-primary-black);
+
+            &:hover {
+              color: var(--color-primary-green);
+            }
+          }
+        }
+
+        .event-status {
+          font-size: var(--font-size-s);
+          font-weight: 600;
+          margin-bottom: 16px;
+        }
+
+        .event-image-container {
+          height: 325px;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          margin-bottom: 8px;
+        }
+
+        .event-details-container {
+          margin-bottom: 8px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          .event-animators {
+            width: 100%;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--color-primary-green);
+
+            .animators-name {
+              text-overflow: ellipsis;
+            }
+          }
+
+          .event-description {
+            color: var(--color-primary-grey);
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .event-box-tag {
+      font-size: 1rem;
+      padding: 4px 24px;
+      color: var(--color-primary-grey);
+      font-weight: 600px;
+      border-radius: 50px;
+      border: 1px solid var(--color-primary-grey);
+      cursor: pointer;
+    }
+  }
+}
+
+@mixin itemGridOptions($gridOption) {
+  display: grid;
+  grid-template-rows: auto;
+  gap: 32px;
+  place-content: start center;
+
+  @if $gridOption == three-column-grid {
+    grid-template-columns: repeat(3, 1fr);
+  } @else if $gridOption == two-column-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media only screen and (max-width: 1110px) {
+    grid-template-columns: 1fr;
+  }
+}
