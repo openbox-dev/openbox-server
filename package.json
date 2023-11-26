@@ -11,7 +11,7 @@
     "typecheck": "tsc",
     "prepare": "husky install | chmod ug+x .husky/*",
     "build:css": "sass --no-source-map --style=compressed ./scss:./app/styles",
-    "dev:css": "sass --watch --update ./scss:./app/styles --style=expanded"
+    "dev:css": "sass --no-source-map --watch --update ./scss:./app/styles --style=expanded"
   },
   "dependencies": {
     "@prisma/client": "^5.5.2",
