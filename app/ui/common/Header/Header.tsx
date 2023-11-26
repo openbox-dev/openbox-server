@@ -15,7 +15,7 @@ interface HeaderProps {
 
 export default function Header({ user }: HeaderProps) {
   const [isModalActive, setIsModalActive] = useState(false);
-  const [currentPageUrl, setCurrentPageUrl] = useState("/" + window.location.href.split('/')[3])
+  const [currentPageUrl, setCurrentPageUrl] = useState("/")
   const navigationLinks = {
     Accueil: "/",
     Calendrier: "/calendar",
@@ -23,7 +23,7 @@ export default function Header({ user }: HeaderProps) {
     OpenVote: "/openvote",
   };
 
-  /* TODO: vérifier si le currentPageUrl est utile une fois les pages intégrés, ou envoyer l'url de la page à l'header pour le Useeffect */
+  /* TODO: Envoyer l'url de la page à l'header pour le Useeffect */
   useEffect(() => {
     setCurrentPageUrl("/" + window.location.href.split('/')[3])
   }, [])
