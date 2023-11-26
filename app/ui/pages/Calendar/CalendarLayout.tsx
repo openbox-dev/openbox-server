@@ -49,21 +49,27 @@ export default function Calendar() {
 
       <div id="content" className="content">
         <aside id="month-information" className="month-information">
-          <p id="year" className="date">
-            {year}
-          </p>
-          <p id="month" className="date">
-            {monthInLetters}
-          </p>
-          <p id="nb-event" className="nb-event">
-            {numberOfEvent > 1
-              ? `${numberOfEvent} événements`
-              : `${numberOfEvent} événement`}
-          </p>
-          <div id="button-container" className="button-coontainer">
-            <button>Suivant</button>
-            <button>Précédent</button>
+          <div id="text-container" className="text-container">
+            <p id="year" className="date">
+              {year}
+            </p>
+
+            <p id="month" className="date">
+              {monthInLetters}
+            </p>
+
+            <p id="nb-event" className="nb-event">
+              {numberOfEvent > 1
+                ? `${numberOfEvent} événements`
+                : `${numberOfEvent} événement`}
+            </p>
           </div>
+
+          <div id="button-container" className="button-container">
+            <button className="button">Suivant</button>
+            <button className="button">Précédent</button>
+          </div>
+
           <div id="incoming-event" className="incoming-event"></div>
         </aside>
 
