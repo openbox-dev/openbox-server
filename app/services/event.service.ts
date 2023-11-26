@@ -1,20 +1,32 @@
-import { Event } from "@prisma/client";
+import { Event, Prisma } from "@prisma/client";
 import prisma from "~/utils/prisma";
+
+export type EventWithBox = Prisma.EventGetPayload<{
+  include: { box: { select: { id: true; name: true } } };
+}>;
 
 export const EventService = {
   getAllEvents: async () => {
-    const events = await prisma.event.findMany({
+    const events: EventWithBox[] = await prisma.event.findMany({
       orderBy: {
         startDate: "asc",
+      },
+      include: {
+        box: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
       },
     });
     return events;
   },
-  getThreeClosestEvents: async () => {
+  getThreeClosestEvents: async (): Promise<EventWithBox[]> => {
     const events = await EventService.getAllEvents();
     return (await EventService.sortByClosest(events)).slice(0, 3);
   },
-  sortByClosest: async (events: Event[]) => {
+  sortByClosest: async (events: EventWithBox[]) => {
     const currentDate = new Date();
 
     const sortedData = events.sort((a, b) => {

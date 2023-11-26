@@ -11,7 +11,6 @@ import SeeMore from "~/ui/common/SeeMore/SeeMore";
 import Footer from "~/ui/common/Footer/Footer";
 import Header from "~/ui/common/Header/Header";
 import EventCard from "~/ui/common/EventCard/EventCard";
-import { Event } from "@prisma/client";
 
 const boxes = [BlueBox, BrownBox, BeigeBox, RedBox];
 
@@ -44,7 +43,7 @@ export default function Home() {
           <div className="event-card-container">
             {serverData.comingEvents &&
               serverData.comingEvents.map((event) => {
-                return <EventCard event={event as any} />; // any because for some reason prisma sets dates as strings
+                return <EventCard key={event.id} event={event as any} />; // any because for some reason prisma sets dates as strings
               })}
           </div>
           <Link to={"/calendar"}>

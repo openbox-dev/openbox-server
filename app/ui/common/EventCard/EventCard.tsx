@@ -1,8 +1,10 @@
 import { Event } from "@prisma/client";
+import { EventWithBox } from "~/services/event.service";
 
 interface EventCardProps {
-  event: Event;
+  event: EventWithBox;
 }
+
 export default function EventCard({ event }: EventCardProps) {
   return (
     <div className="EventCard">
@@ -16,6 +18,9 @@ export default function EventCard({ event }: EventCardProps) {
         <p>{event.boxId}</p>
         <p>{event.room}</p>
         <p>{new Date(event.startDate).toLocaleDateString()}</p>
+      </div>
+      <div className="event-box-tag">
+        <span className="box-tag">{event.box.name}</span>
       </div>
     </div>
   );
