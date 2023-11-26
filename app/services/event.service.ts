@@ -63,7 +63,7 @@ export const EventService = {
   getEventStatus: (startDate: any) => {
     const currentDate = new Date();
     const eventDate = new Date(startDate);
-    console.log(currentDate, eventDate);
+
     if (
       currentDate.getDate() === eventDate.getDate() &&
       currentDate.getMonth() === eventDate.getMonth() &&
