@@ -1,3 +1,5 @@
+@use "./mixins";
+
 :root {
   --card-3d-height: 420px;
 }
@@ -45,20 +47,6 @@
     }
   }
 
-  .event-section {
-    display: flex;
-    flex-flow: column;
-    gap: 32px;
-    .event-card-container {
-      width: 100%;
-      display: flex;
-      flex-flow: row nowrap;
-      gap: 32px;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
   .box-explain-section {
     .boxes-container {
       padding: 32px;
@@ -68,6 +56,8 @@
       justify-content: center;
     }
   }
+
+  @include mixins.eventSectionMixin;
 }
 
 @media only screen and (max-width: 1110px) {
