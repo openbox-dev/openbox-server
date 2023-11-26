@@ -5,7 +5,6 @@ import { UserService } from "~/services/user.service";
 export async function CatalogLoader({ request }: LoaderFunctionArgs) {
   const token = await SessionService.isTokenValid({ request });
   const { data, ...rest } = await UserService.getAuthUser(token);
-
   return json({
     user: data instanceof Error ? null : data,
   });
