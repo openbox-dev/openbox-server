@@ -42,7 +42,7 @@ export default function EventCard({ event }: EventCardProps) {
             {event.name}
           </Link>
         </h3>
-        <p>{event.description}</p>
+        <p className="event-description">{event.description}</p>
       </div>
       <Link
         to={`/box/${event.box.name.split(" ").join("-").toLowerCase()}`}
