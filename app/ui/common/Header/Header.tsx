@@ -1,5 +1,5 @@
-import { Link } from "@remix-run/react";
-import { useState } from "react";
+import { Link, useParams } from "@remix-run/react";
+import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 
 import MediumLogo from "../../../assets/logo/medium-logo.svg";
@@ -15,23 +15,29 @@ interface HeaderProps {
 
 export default function Header({ user }: HeaderProps) {
   const [isModalActive, setIsModalActive] = useState(false);
+  const [currentPageUrl, setCurrentPageUrl] = useState("/" + window.location.href.split('/')[3])
   const navigationLinks = {
     Accueil: "/",
     Calendrier: "/calendar",
-    OpenVote: "/openvote",
     "Les Box": "/box",
+    OpenVote: "/openvote",
   };
+
+  /* TODO: vérifier si le currentPageUrl est utile une fois les pages intégrés, ou envoyer l'url de la page à l'header pour le Useeffect */
+  useEffect(() => {
+    setCurrentPageUrl("/" + window.location.href.split('/')[3])
+  }, [])
 
   return (
     <div className="Header">
+      <img src={MediumLogo} className="md-logo" alt="OpenBox logo" />
+      <img src={SmallLogo} className="sm-logo" alt="OpenBox logo" />
       <nav>
-        <img src={MediumLogo} className="md-logo" alt="OpenBox logo" />
-        <img src={SmallLogo} className="sm-logo" alt="OpenBox logo" />
         <ul className="navigation-links">
           {Object.entries(navigationLinks).map(([pageName, pageUrl]) => {
             return (
               <li key={pageName}>
-                <Link to={pageUrl}>{pageName}</Link>
+                <Link className={pageUrl === currentPageUrl ? "active" : ""} to={pageUrl}>{pageName}</Link>
               </li>
             );
           })}
@@ -49,8 +55,8 @@ export default function Header({ user }: HeaderProps) {
           </>
         ) : (
           <>
-            <Link to={"/login"}>Connexion</Link>
-            <Link to={"/register"}>Inscription</Link>
+            <Link className="login-button" to={"/login"}>Connexion</Link>
+            <Link className="register-button" to={"/register"}>Inscription</Link>
           </>
         )}
       </div>
