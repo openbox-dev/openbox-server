@@ -40,7 +40,7 @@ export default function Home() {
         <section className="event-section">
           <h2>Nos évènements récents</h2>
           {/* link */}
-          <div className="event-card-container">
+          <div className="event-card-container three-column-grid">
             {serverData.comingEvents &&
               serverData.comingEvents.map((event) => {
                 return <EventCard key={event.id} event={event as any} />; // any because for some reason prisma sets dates as strings
