@@ -33,6 +33,11 @@
     gap: 32px;
   }
 
+  h2 {
+    font-weight: 600;
+    font-size: var(--font-size-m);
+  }
+
   .hero-banner {
     span {
       text-decoration: underline;
@@ -40,6 +45,7 @@
 
     .threejs-container {
       width: 100%;
+      min-height: 200px;
       height: 33vw;
       border: 3px solid var(--color-border-grey);
       border-radius: var(--border-radius);

@@ -32,11 +32,18 @@
           }
         }
 
+        .event-status {
+          font-size: var(--font-size-s);
+          font-weight: 600;
+          margin-bottom: 16px;
+        }
+
         .event-image-container {
           height: 325px;
           background-repeat: no-repeat;
           background-size: cover;
           background-position: center;
+          margin-bottom: 8px;
         }
 
         .event-details-container {
