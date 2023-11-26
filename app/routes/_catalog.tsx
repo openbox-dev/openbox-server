@@ -1,6 +1,8 @@
 import { LinksFunction, MetaFunction } from "@remix-run/node";
-import Auth from "~/ui/pages/Auth/AuthLayout";
+
 import CatalogLayout from "~/ui/pages/Catalog/CatalogLayout";
+import { CatalogLoader } from "~/controllers/loaders/catalog.loader";
+
 import indexStyle from "../styles/index.css?url";
 import headerStyle from "../styles/header.css?url";
 import footerStyle from "../styles/footer.css?url";
@@ -32,4 +34,4 @@ export const links: LinksFunction = () => [
 ];
 
 export default CatalogLayout;
-// export {CatalogLoader as loader, CatalogAction as action};
+export { CatalogLoader as loader };
