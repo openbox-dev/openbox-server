@@ -40,7 +40,7 @@ model Authentification {
 
 model Newsletter {
   id        Int                    @id @default(autoincrement())
-  writer    Int
+  writerId  Int
   title     String
   image     String
   heading   String
@@ -80,9 +80,10 @@ model Event {
   boxId            Int
   name             String
   description      String
-  image            String
+  image            String?
+  conference_link  String?
   room             Event_room?
-  status           Event_status        @default(SOON)
+  status           Event_status        @default(PENDING)
   startDate        DateTime
   endDate          DateTime?
 
@@ -91,6 +92,7 @@ model Event {
   eventParticipant Event_participant[] @relation(name: "EventToEventParticipant")
   eventAnimator    Event_animator[]    @relation(name: "EventToEventAnimator")
   eventRessource   Event_ressource[]   @relation(name: "EventToEventRessource")
+  eventFeedback    Event_animator[]    @relation(name: "EventToEventFeedback")
 }
 
 model Event_ressource {
@@ -115,6 +117,16 @@ model Animator {
 
   // Relations
   eventAnimator Event_animator[] @relation(name: "AnimatorToEventAnimator")
+}
+
+model Feedback {
+  id            Int              @id @default(autoincrement())
+  eventId       Int
+  writerId      Int
+  content       String
+
+  // Relations
+  eventFeedback Event_feedback[] @relation(name: "FeedbackToEventFeedback")
 }
 
 // JOIN TABLES
@@ -165,6 +177,17 @@ model Event_animator {
   event      Event    @relation(name: "EventToEventAnimator", fields: [eventId], references: [id])
 }
 
+model Event_feedback {
+  feedbackId Int
+  eventId    Int
+
+  @@id ([feedbackId, eventId])
+
+  // Relations
+  feedback   Feedback @relation(name: "FeedbackToEventFeedback", fields: [feedbackId], references: [id])
+  event      Event    @relation(name: "EventToEventFeedback", fields: [eventId], references: [id])
+}
+
 // ENUMS
 enum User_role {
   STUDENT
@@ -202,7 +225,7 @@ enum User_promotion {
 }
 
 enum Newsletter_status {
-  VISIBLED
+  VISIBLE
   HIDDEN
 }
 
@@ -226,6 +249,7 @@ enum Event_participant_status {
 
 enum Event_room {
   TO_DEFINE
+  ONLINE
   AMPHI
   A001
   A002
@@ -320,8 +344,9 @@ enum Event_room {
 }
 
 enum Event_status {
-  CANCEL
-  PASS
+  PENDING
+  CANCELLED
+  PASSED
   SOON
   NOW
   STREAMED
