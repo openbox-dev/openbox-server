@@ -2,7 +2,14 @@ import { Event, Prisma } from "@prisma/client";
 import prisma from "~/utils/prisma";
 
 export type EventWithBox = Prisma.EventGetPayload<{
-  include: { box: { select: { id: true; name: true } } };
+  include: {
+    box: { select: { id: true; name: true } };
+    eventAnimator: {
+      select: {
+        animator: { select: { id: true; firstName: true; lastName: true } };
+      };
+    };
+  };
 }>;
 
 export const EventService = {
@@ -16,6 +23,17 @@ export const EventService = {
           select: {
             id: true,
             name: true,
+          },
+        },
+        eventAnimator: {
+          select: {
+            animator: {
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+              },
+            },
           },
         },
       },
