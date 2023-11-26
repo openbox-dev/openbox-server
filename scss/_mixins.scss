@@ -19,6 +19,10 @@
         color: var(--color-primary-black);
         place-self: center;
 
+        &.passed-event {
+          opacity: 0.5;
+        }
+
         h3 {
           font-size: var(--font-size-m);
           font-weight: 600;

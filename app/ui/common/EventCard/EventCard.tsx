@@ -12,7 +12,12 @@ interface EventCardProps {
 
 export default function EventCard({ event }: EventCardProps) {
   return (
-    <div className="EventCard">
+    <div
+      className={`EventCard ${
+        EventService.getEventStatus(event.startDate) === "PASSÉ" &&
+        "passed-event"
+      }`}
+    >
       <span className="event-status">
         {EventService.getEventStatus(event.startDate)}
       </span>
