@@ -18,4 +18,4 @@ export const meta: MetaFunction = () => {
 //   return [{ rel: "stylesheet", href: "" }];
 // };
 export default LoginForm;
-export { signInAction as action, authLoader as loader };
+export { signInAction as action };

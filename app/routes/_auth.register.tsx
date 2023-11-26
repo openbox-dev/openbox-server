@@ -21,4 +21,4 @@ export const meta: MetaFunction = () => {
 // };
 
 export default RegisterForm;
-export { registerAction as action, authLoader as loader };
+export { registerAction as action };
