@@ -1,39 +1,57 @@
+import { Prisma } from "@prisma/client";
 import prisma from "~/utils/prisma";
 
+export type BoxPageData = Prisma.BoxGetPayload<{
+  include: {
+    boxAdmin: {
+      include: {
+        user: {
+          select: {
+            firstName: true;
+            lastName: true;
+            promo: true;
+          };
+        };
+      };
+    };
+  };
+}>;
+
+export type BoxPageReturnType =
+  | { data: BoxPageData | null; success: true }
+  | { data: Error; success: false };
+
 export const BoxService = {
-  getAll: async ({ boxId }: { boxId?: number }) => {
+  getBoxById: async ({
+    boxId,
+  }: {
+    boxId?: number;
+  }): Promise<BoxPageReturnType> => {
     try {
-      if (boxId) {
-        return {
-          data: await prisma.box.findFirst({
-            where: {
-              id: boxId,
-            },
-            include: {
-              boxAdmin: {
-                include: {
-                  user: {
-                    select: {
-                      firstName: true,
-                      lastName: true,
-                      promo: true,
-                    },
+      return {
+        data: await prisma.box.findUniqueOrThrow({
+          where: {
+            id: boxId,
+          },
+          include: {
+            boxAdmin: {
+              include: {
+                user: {
+                  select: {
+                    firstName: true,
+                    lastName: true,
+                    promo: true,
                   },
                 },
               },
             },
-          }),
-          success: true,
-        };
-      } else {
-        return {
-          data: [],
-          success: true,
-        };
-      }
-    } catch {
+          },
+        }),
+        success: true,
+      };
+    } catch (e) {
       return {
-        data: [],
+        data: e as Error,
         success: false,
       };
     }
