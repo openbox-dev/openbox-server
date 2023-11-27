@@ -1,0 +1,113 @@
+.Event {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  display: flex;
+  gap: 32px;
+  flex-flow: column nowrap;
+  .title-page {
+    padding: 16px 32px;
+    background-color: var(--color-light-green);
+    h1 {
+      font-size: var(--font-size-xl);
+      font-weight: 600;
+    }
+  }
+
+  .hero-event {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    justify-content: space-around;
+
+    > * {
+      max-width: 614px;
+    }
+
+    .box-image-container {
+      border-radius: 18px;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 400px;
+      width: 100%;
+    }
+
+    p {
+      color: var(--color-primary-grey);
+      font-size: var(--font-size-m);
+      font-weight: 400;
+      text-align: center;
+    }
+  }
+
+  .body-event {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    font-weight: 600;
+
+    .ressource-event {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      font-size: 24px;
+      color: var(--color-primary-grey);
+    }
+
+    .aside-event {
+      border-radius: 18px;
+      border: 1px solid var(--color-neutral-100);
+      padding: 32px;
+      display: flex;
+      gap: 16px;
+      flex-direction: column;
+      h3 {
+        font-size: var(--font-size-m);
+        font-weight: 600;
+      }
+      h4 {
+        font-size: var(--font-size-s);
+        font-weight: 600;
+        color: var(--color-primary-grey);
+      }
+      span {
+        font-size: 16px;
+
+        & + span {
+          font-size: var(--font-size-m);
+        }
+      }
+
+      li {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1110px) {
+  .Event {
+    .title-page {
+      h1 {
+        font-size: var(--font-size-l);
+      }
+    }
+
+    .hero-event {
+      width: 100%;
+      flex-direction: column;
+
+      > * {
+        width: 100%;
+      }
+    }
+  }
+
+  .body-event {
+    flex-direction: column;
+    gap: 16px;
+  }
+}

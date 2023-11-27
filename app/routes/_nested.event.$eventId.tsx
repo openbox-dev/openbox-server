@@ -2,6 +2,7 @@ import { LinksFunction, MetaFunction } from "@remix-run/node";
 
 import Event from "~/ui/pages/Nested/Event/Event";
 
+import { NestedEventLoader } from "~/controllers/loaders/nested.event.loader";
 import eventStyle from "../styles/nested.event.css?url";
 
 export const meta: MetaFunction = () => {
@@ -20,4 +21,4 @@ export const links: LinksFunction = () => {
 };
 
 export default Event;
-// export {CatalogBoxLoader as loader, CatalogBoxAction as action};
+export { NestedEventLoader as loader };
