@@ -28,27 +28,25 @@ model User {
 }
 
 model Authentification {
-  userId      Int @unique
-  agent       String
-  token       String   @unique @id
-  tokenStart  DateTime @default(now())
-  tokenEnd    DateTime
+  userId     Int      @unique
+  agent      String
+  token      String   @id @unique
+  tokenStart DateTime @default(now())
+  tokenEnd   DateTime
 
   // Relations
   user User @relation(name: "UserToAuthentication", fields: [userId], references: [id])
-
-  @@id([userId, agent])
 }
 
 model Newsletter {
-  id        Int                    @id @default(autoincrement())
+  id        Int               @id @default(autoincrement())
   writerId  Int
   title     String
   image     String
   heading   String
   content   String
-  status    Newsletter_status      @default(VISIBLE)
-  createdAt  DateTime @default(now()) @db.Date
+  status    Newsletter_status @default(VISIBLE)
+  createdAt DateTime          @default(now()) @db.Date
 
   // Relations
   user      User                   @relation(name: "UserToNewsletter", fields: [writerId], references: [id])
@@ -65,13 +63,12 @@ model Newsletter_ressource {
 }
 
 model Box {
-  id          Int        @id @default(autoincrement())
-  status      Box_status @default(PENDING)
+  id          Int            @id @default(autoincrement())
+  status      Box_status     @default(PENDING)
   name        String
   description String
   image       String?
-  
-  createdAt  DateTime @default(now())
+  createdAt   DateTime       @default(now())
   // Relations
   boxAdmin    Box_admin[]    @relation(name: "BoxToBoxAdmin")
   boxFollower Box_follower[] @relation(name: "BoxToBoxFollower")
@@ -79,17 +76,16 @@ model Box {
 }
 
 model Event {
-
-  id               Int                 @id @default(autoincrement())
-  boxId            Int
-  name             String
-  description      String
-  image            String?
-  conference_link  String?
-  room             Event_room?
-  status           Event_status        @default(PENDING)
-  startDate        DateTime
-  endDate          DateTime?
+  id              Int          @id @default(autoincrement())
+  boxId           Int
+  name            String
+  description     String
+  image           String?
+  conference_link String?
+  room            Event_room?
+  status          Event_status @default(PENDING)
+  startDate       DateTime
+  endDate         DateTime?
 
   // Relations
   box              Box                 @relation(name: "BoxToEvent", fields: [boxId], references: [id])
@@ -124,10 +120,10 @@ model Animator {
 }
 
 model Feedback {
-  id            Int              @id @default(autoincrement())
-  eventId       Int
-  writerId      Int
-  content       String
+  id       Int    @id @default(autoincrement())
+  eventId  Int
+  writerId Int
+  content  String
 
   // Relations
   eventFeedback Event_feedback[] @relation(name: "FeedbackToEventFeedback")
@@ -185,11 +181,11 @@ model Event_feedback {
   feedbackId Int
   eventId    Int
 
-  @@id ([feedbackId, eventId])
-
   // Relations
-  feedback   Feedback @relation(name: "FeedbackToEventFeedback", fields: [feedbackId], references: [id])
-  event      Event    @relation(name: "EventToEventFeedback", fields: [eventId], references: [id])
+  feedback Feedback @relation(name: "FeedbackToEventFeedback", fields: [feedbackId], references: [id])
+  event    Event    @relation(name: "EventToEventFeedback", fields: [eventId], references: [id])
+
+  @@id([feedbackId, eventId])
 }
 
 // ENUMS

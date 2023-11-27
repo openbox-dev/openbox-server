@@ -7,3 +7,5 @@ export async function CatalogBoxLoader({ request }: LoaderFunctionArgs) {
     const acceptedBox = await boxCatalogService.getAll({ search })
     return acceptedBox
 }
+
+
