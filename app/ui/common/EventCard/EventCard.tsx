@@ -48,10 +48,7 @@ export default function EventCard({ event }: EventCardProps) {
         </h3>
         <p className="event-description">{event.description}</p>
       </div>
-      <Link
-        to={`/box/${event.box.name.split(" ").join("-").toLowerCase()}`}
-        className="event-box-tag"
-      >
+      <Link to={`/box/${event.boxId}`} className="event-box-tag">
         {event.box.name}
       </Link>
     </div>
