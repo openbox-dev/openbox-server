@@ -3,17 +3,24 @@ import { useLoaderData } from "@remix-run/react";
 
 import SeeMore from "~/ui/common/SeeMore/SeeMore";
 
-export default function Box() {
-  const data = useLoaderData<typeof loader>();
+import imagePlaceholder from "../../../../assets/image/card-placeholder.png";
+import EventCard from "~/ui/common/EventCard/EventCard";
 
-  console.log(data);
-  // return data.events?.data?.0?.name;
+export default function Box() {
+  const { box, events } = useLoaderData<typeof loader>();
 
   return (
-    <main className="Main">
-      <h1 className="box-title">{data.box?.data?.name}</h1>
-      <p className="box-description">—{data.box?.data?.description}</p>
-      {/* usestate image si null */}
+    <div className="Box">
+      <h1 className="box-title">{box.data?.name}</h1>
+      <p className="box-description">—{box.data?.description}</p>
+      <div
+        className="box-image"
+        style={{
+          backgroundImage: `url(${
+            box.data?.image ? box.data.image : imagePlaceholder
+          })`,
+        }}
+      ></div>
       <SeeMore />
       <section className="content-section">
         <div className="contributors-card">
@@ -30,10 +37,16 @@ export default function Box() {
             })} */}
           {/* ?map>div.. */}
         </div>
-        <div className="event-card-container">
-          {/* ?map>return <EventCard key={event.id} event={event as any} />; */}
+        <div className="event-section">
+          <div className="event-card-container two-column-grid">
+            {/* ?map>return <EventCard key={event.id} event={event as any} />; */}
+            {events.data &&
+              events.data.map((event) => {
+                return <EventCard key={event.id} event={event as any} />; // any because for some reason prisma sets dates as strings
+              })}
+          </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
