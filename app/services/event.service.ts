@@ -76,4 +76,40 @@ export const EventService = {
 
     return "PASSÉ";
   },
+  getBoxEvents: async ({ boxId }: { boxId?: number }) => {
+    try {
+      if (boxId) {
+        return {
+          data: await prisma.event.findMany({
+            where: {
+              boxId: boxId,
+            },
+            include: {
+              eventAnimator: {
+                include: {
+                  animator: {
+                    select: {
+                      firstName: true,
+                      lastName: true,
+                    },
+                  },
+                },
+              },
+            },
+          }),
+          success: true,
+        };
+      } else {
+        return {
+          data: [],
+          success: true,
+        };
+      }
+    } catch {
+      return {
+        data: [],
+        success: false,
+      };
+    }
+  },
 };
