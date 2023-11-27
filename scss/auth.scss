@@ -1,7 +1,8 @@
 .AuthLayout {
   display: flex;
   justify-content: center;
-  > * {
+
+  >* {
     width: 50vw;
     height: 100vh;
   }
@@ -22,6 +23,7 @@
   a {
     color: var(--color-primary-green);
     width: fit-content;
+
     img {
       height: 32px;
     }
@@ -78,54 +80,43 @@
     gap: 144px;
 
     .infinite-boxes-track {
-      display: flex;
-      gap: 32px;
-      flex-flow: row nowrap;
+      position: relative;
+      // left: -500px;
       rotate: 30deg;
 
       img {
-        aspect-ratio: 1;
         position: relative;
+        height: 100px;
         animation: slide 10s linear infinite;
       }
     }
 
-    .infinite-boxes-track:nth-child(2) {
-      img {
-        animation: slide 10s linear infinite;
-      }
-    }
-
-    .infinite-boxes-track:nth-child(3) {
-      img {
-        animation: reverseSlide 10s linear infinite;
-      }
-    }
-
+    .infinite-boxes-track:nth-child(1),
+    .infinite-boxes-track:nth-child(3),
     .infinite-boxes-track:nth-child(5) {
       img {
+        position: relative;
         animation: reverseSlide 10s linear infinite;
       }
     }
 
     @keyframes slide {
       0% {
-        left: 0;
+        left: -100px;
       }
+
       100% {
-        left: -100%;
-      }
-      0% {
-        left: 0;
+        left: -1063.3px;
       }
     }
 
     @keyframes reverseSlide {
       0% {
-        left: -50%;
+        left: -1926.6px;
       }
+
       100% {
-        left: 50%;
+        left: -963.3px;
       }
     }
   }
@@ -180,7 +171,7 @@
 }
 
 body {
-  > * {
+  >* {
     padding: 0;
   }
 }
@@ -189,7 +180,7 @@ body {
   .AuthLayout {
     flex-flow: column;
 
-    > * {
+    >* {
       width: 100vw;
     }
 
