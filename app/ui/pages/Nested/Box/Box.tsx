@@ -1,11 +1,7 @@
 import type { loader } from "~/routes/_nested.box.$boxId";
 import { useLoaderData } from "@remix-run/react";
 
-import { useState } from "react";
-import EventCard from "../../../common/EventCard/EventCard";
 import SeeMore from "~/ui/common/SeeMore/SeeMore";
-
-function 
 
 export default function Box() {
   const data = useLoaderData<typeof loader>();
