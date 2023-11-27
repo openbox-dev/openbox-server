@@ -9,6 +9,10 @@
   --color-light-green: #ebf0ec;
   --color-border-grey: #eeeeee;
   --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #CCCCCC;
+
+  --color-terciary-50: #FBEFEB;
+  --color-green-800: #1F3824;
 
   --border-radius: 18px;
 
@@ -36,7 +40,7 @@ body {
   font-family: "Open Sans", sans-serif;
   background-color: var(--color-primary-white);
 
-  > * {
+  >* {
     padding: var(--padding-section-large);
 
     padding-top: 0;

@@ -1,5 +1,8 @@
-import { LinksFunction, MetaFunction } from "@remix-run/node";
-import BoxCatalog from "~/ui/pages/Catalog/BoxCatalog/BoxCatalog";
+import { LinksFunction, MetaFunction } from "@remix-run/node"
+import BoxCatalog from "~/ui/pages/Catalog/BoxCatalog/BoxCatalog"
+import { CatalogBoxLoader } from "~/controllers/loaders/catalogBox.loader"
+import { CatalogBoxAction } from "~/controllers/actions/catalogBox.action"
+import catalogStyle from "../styles/catalog.css?url"
 
 export const meta: MetaFunction = () => {
   return [
@@ -9,12 +12,12 @@ export const meta: MetaFunction = () => {
     {
       description: "Page de catalogue des box de OpenBox",
     },
-  ];
-};
+  ]
+}
 
-// export const links: LinksFunction = () => {
-//   return [{ rel: "stylesheet", href: "" }];
-// };
+export const links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: catalogStyle }]
+}
 
-export default BoxCatalog;
-// export {CatalogBoxLoader as loader, CatalogBoxAction as action};
+export default BoxCatalog
+export { CatalogBoxLoader as loader, CatalogBoxAction as action }

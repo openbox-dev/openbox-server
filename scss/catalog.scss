@@ -1,0 +1,129 @@
+.Main {
+    background-color: var(--color-primary-white);
+
+    .Title {
+        background-color: var(--color-terciary-50);
+        margin-bottom: 32px;
+        width: 100%;
+        padding: 10px 32px;
+        margin-top: 32px;
+        font-size: var(--font-size-xl);
+        color: var(--color-green-800);
+    }
+
+    .Container-Filter-Box {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        height: 100%;
+        padding-left: 40px;
+
+        .Catalog-Box {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            height: 100%;
+            width: 80%;
+            gap: 32px;
+            margin-left: 27px;
+
+            .Box {
+                display: flex;
+                flex-direction: column;
+                // background-color: #EBF1FB;
+                border: 1px solid var(--color-neutral-200);
+                border-radius: 18px;
+                padding: 10px;
+                width: 452px;
+                height: 201px;
+
+                .Box-Title {
+                    background-color: var(--color-terciary-50);
+                    border-radius: 12px;
+                    padding: 2px 16px;
+                    margin-bottom: 16px;
+                    font-size: var(--font-size-l);
+                    color: var(--color-green-800);
+                }
+
+                .Description {
+                    font-size: var(--font-size-m);
+                }
+            }
+
+            .Box>span {
+                color: var(--color-primary-grey);
+            }
+        }
+    }
+
+    .Filter {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--color-neutral-200);
+        border-radius: 18px;
+        padding: 32px;
+        position: fixed;
+        top: 124px;
+        margin-top: 85px;
+        color: var(--color-green-800);
+
+        .Filter-Sort {
+            display: flex;
+            flex-direction: column;
+            padding-top: 32px;
+            padding-bottom: 32px;
+
+            .Sort-Title {
+                font-size: var(--font-size-m);
+                margin-bottom: 10px;
+            }
+
+            div {
+                display: flex;
+                flex-direction: column;
+
+                .Sort-Button {
+                    border: none;
+                    padding: none;
+                    color: none;
+                    background: none;
+                    font-size: var(--font-size-s);
+                }
+            }
+
+        }
+
+        .Filter-Title {
+            font-size: var(--font-size-m);
+            margin-bottom: 32px;
+        }
+
+        .Searchbar {
+            border: none;
+            font-size: var(--font-size-s);
+            padding: 16px;
+            border-radius: 18px;
+        }
+    }
+
+    .Load-Box {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 32px;
+        padding-left: 230px;
+
+        .Load-Box-Button {
+            border: none;
+            padding: none;
+            color: none;
+            background: none;
+            font-size: var(--font-size-m);
+            color: var(--color-primary-green);
+        }
+    }
+}

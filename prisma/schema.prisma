@@ -9,15 +9,15 @@ datasource db {
 
 // MAIN TABLES
 model User {
-  id               Int                 @id @default(autoincrement())
-  firstName        String
-  lastName         String
-  email            String              @unique
-  discord          String?             @unique
-  contactEmail     String?             @unique
+  id           Int            @id @default(autoincrement())
+  firstName    String
+  lastName     String
+  email        String         @unique
+  discord      String?        @unique
+  contactEmail String?        @unique
   // password String
-  promo            User_promotion
-  role             User_role[]         @default([STUDENT])
+  promo        User_promotion
+  role         User_role[]    @default([STUDENT])
 
   // Relations
   authentification Authentification[]  @relation(name: "UserToAuthentication")
@@ -28,27 +28,27 @@ model User {
 }
 
 model Authentification {
-  userId      Int
-  agent       String
-  token       String   @unique
-  tokenStart  DateTime @default(now())
-  tokenEnd    DateTime
-
-  @@id([userId, agent])
+  userId     Int
+  agent      String
+  token      String   @unique
+  tokenStart DateTime @default(now())
+  tokenEnd   DateTime
 
   // Relations
-  user        User     @relation(name: "UserToAuthentication", fields: [userId], references: [id])
+  user User @relation(name: "UserToAuthentication", fields: [userId], references: [id])
+
+  @@id([userId, agent])
 }
 
 model Newsletter {
-  id        Int                    @id @default(autoincrement())
+  id        Int               @id @default(autoincrement())
   writer    Int
   title     String
   image     String
   heading   String
   content   String
-  status    Newsletter_status      @default(VISIBLED)
-  createdAt  DateTime @default(now()) @db.Date
+  status    Newsletter_status @default(VISIBLED)
+  createdAt DateTime          @default(now()) @db.Date
 
   // Relations
   user      User                   @relation(name: "UserToNewsletter", fields: [writer], references: [id])
@@ -56,21 +56,21 @@ model Newsletter {
 }
 
 model Newsletter_ressource {
-  id           Int        @id @default(autoincrement())
+  id           Int    @id @default(autoincrement())
   newsletterId Int
   url          String
 
   // Relations
-  newslettter  Newsletter @relation(name: "NewsletterToRessource", fields: [newsletterId], references: [id])
+  newslettter Newsletter @relation(name: "NewsletterToRessource", fields: [newsletterId], references: [id])
 }
 
 model Box {
-  id          Int            @id @default(autoincrement())
-  status      Box_status     @default(PENDING)
+  id          Int        @id @default(autoincrement())
+  status      Box_status @default(PENDING)
   name        String
   description String
   image       String?
-  createdAt  DateTime @default(now()) @db.Date
+  createdAt   DateTime //@default(now()) @db.Date
 
   // Relations
   boxAdmin    Box_admin[]    @relation(name: "BoxToBoxAdmin")
@@ -79,15 +79,15 @@ model Box {
 }
 
 model Event {
-  id               Int                 @id @default(autoincrement())
-  boxId            Int
-  name             String
-  description      String
-  image            String
-  room             Event_room?
-  status           Event_status        @default(SOON)
-  startDate        DateTime?
-  endDate          DateTime?
+  id          Int          @id @default(autoincrement())
+  boxId       Int
+  name        String
+  description String
+  image       String
+  room        Event_room?
+  status      Event_status @default(SOON)
+  startDate   DateTime?
+  endDate     DateTime?
 
   // Relations
   box              Box                 @relation(name: "BoxToEvent", fields: [boxId], references: [id])
@@ -102,19 +102,19 @@ model Event_ressource {
   url     String
 
   // Relations
-  event   Event  @relation(name: "EventToEventRessource", fields: [eventId], references: [id])
+  event Event @relation(name: "EventToEventRessource", fields: [eventId], references: [id])
 }
 
 model Animator {
-  id            Int              @id @default(autoincrement())
-  firstName     String
-  lastName      String
-  email         String?          @unique
-  picture       String?
-  linkedIn      String?          @unique
-  discord       String?          @unique
-  twitter       String?          @unique
-  website       String?
+  id        Int     @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String? @unique
+  picture   String?
+  linkedIn  String? @unique
+  discord   String? @unique
+  twitter   String? @unique
+  website   String?
 
   // Relations
   eventAnimator Event_animator[] @relation(name: "AnimatorToEventAnimator")
@@ -122,14 +122,14 @@ model Animator {
 
 // JOIN TABLES
 model Box_admin {
-  boxId   Int
-  userId  Int
-  
-  @@id([boxId, userId])
+  boxId  Int
+  userId Int
 
   // Relations
-  box     Box  @relation(name: "BoxToBoxAdmin", fields: [boxId], references: [id])
-  user    User @relation(name: "UserToBoxAdmin", fields: [userId], references: [id])
+  box  Box  @relation(name: "BoxToBoxAdmin", fields: [boxId], references: [id])
+  user User @relation(name: "UserToBoxAdmin", fields: [userId], references: [id])
+
+  @@id([boxId, userId])
 }
 
 model Box_follower {
@@ -138,11 +138,11 @@ model Box_follower {
   status   Box_follower_status?
   notified Boolean              @default(false)
 
-  @@id([boxId, userId])
-
   // Relations
-  box      Box                  @relation(name: "BoxToBoxFollower", fields: [boxId], references: [id])
-  user     User                 @relation(name: "UserToBoxFollower", fields: [userId], references: [id])
+  box  Box  @relation(name: "BoxToBoxFollower", fields: [boxId], references: [id])
+  user User @relation(name: "UserToBoxFollower", fields: [userId], references: [id])
+
+  @@id([boxId, userId])
 }
 
 model Event_participant {
@@ -150,22 +150,22 @@ model Event_participant {
   eventId Int
   status  Event_participant_status
 
-  @@id([userId, eventId])
-
   // Relations
-  user    User                      @relation(name: "UserToEventParticipant", fields: [userId], references: [id])
-  event   Event                     @relation(name: "EventToEventParticipant", fields: [eventId], references: [id])
+  user  User  @relation(name: "UserToEventParticipant", fields: [userId], references: [id])
+  event Event @relation(name: "EventToEventParticipant", fields: [eventId], references: [id])
+
+  @@id([userId, eventId])
 }
 
 model Event_animator {
   animatorId Int
   eventId    Int
 
-  @@id ([animatorId, eventId])
-
   // Relations
-  animator   Animator @relation(name: "AnimatorToEventAnimator", fields: [animatorId], references: [id])
-  event      Event    @relation(name: "EventToEventAnimator", fields: [eventId], references: [id])
+  animator Animator @relation(name: "AnimatorToEventAnimator", fields: [animatorId], references: [id])
+  event    Event    @relation(name: "EventToEventAnimator", fields: [eventId], references: [id])
+
+  @@id([animatorId, eventId])
 }
 
 // ENUMS
