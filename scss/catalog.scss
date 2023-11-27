@@ -29,6 +29,11 @@
             gap: 32px;
             margin-left: 27px;
 
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+
             .Box {
                 display: flex;
                 flex-direction: column;
