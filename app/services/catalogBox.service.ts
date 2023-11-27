@@ -4,8 +4,8 @@ export const boxCatalogService = {
     getAll: async (
         { search }: { search?: string }
     ) => {
-        if (search) {
-            try {
+        try {
+            if (search) {
                 return {
                     data: await prisma.box.findMany({
                         where: {
@@ -15,14 +15,7 @@ export const boxCatalogService = {
                     }),
                     success: true,
                 }
-            } catch {
-                return {
-                    data: [],
-                    success: false,
-                }
-            }
-        } else {
-            try {
+            } else {
                 return {
                     data: await prisma.box.findMany({
                         where: {
@@ -31,13 +24,12 @@ export const boxCatalogService = {
                     }),
                     success: true,
                 }
-            } catch {
-                return {
-                    data: [],
-                    success: false,
-                }
+            }
+        } catch {
+            return {
+                data: [],
+                success: false,
             }
         }
-
-    },
+    }
 }
