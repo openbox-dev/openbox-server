@@ -38,7 +38,7 @@ export default function Home() {
         </section>
 
         <section className="event-section">
-          <h2>Nos évènements récents</h2>
+          <h2>Nos évènements</h2>
           {/* link */}
           <div className="event-card-container three-column-grid">
             {serverData.comingEvents &&
