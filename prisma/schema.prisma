@@ -28,11 +28,11 @@ model User {
 }
 
 model Authentification {
-  userId     Int
-  agent      String
-  token      String   @unique
-  tokenStart DateTime @default(now())
-  tokenEnd   DateTime
+  userId      Int @unique
+  agent       String
+  token       String   @unique @id
+  tokenStart  DateTime @default(now())
+  tokenEnd    DateTime
 
   // Relations
   user User @relation(name: "UserToAuthentication", fields: [userId], references: [id])
@@ -41,17 +41,17 @@ model Authentification {
 }
 
 model Newsletter {
-  id        Int               @id @default(autoincrement())
-  writer    Int
+  id        Int                    @id @default(autoincrement())
+  writerId  Int
   title     String
   image     String
   heading   String
   content   String
-  status    Newsletter_status @default(VISIBLED)
-  createdAt DateTime          @default(now()) @db.Date
+  status    Newsletter_status      @default(VISIBLE)
+  createdAt  DateTime @default(now()) @db.Date
 
   // Relations
-  user      User                   @relation(name: "UserToNewsletter", fields: [writer], references: [id])
+  user      User                   @relation(name: "UserToNewsletter", fields: [writerId], references: [id])
   ressource Newsletter_ressource[] @relation(name: "NewsletterToRessource")
 }
 
@@ -70,8 +70,8 @@ model Box {
   name        String
   description String
   image       String?
-  createdAt   DateTime //@default(now()) @db.Date
-
+  
+  createdAt  DateTime @default(now())
   // Relations
   boxAdmin    Box_admin[]    @relation(name: "BoxToBoxAdmin")
   boxFollower Box_follower[] @relation(name: "BoxToBoxFollower")
@@ -79,21 +79,24 @@ model Box {
 }
 
 model Event {
-  id          Int          @id @default(autoincrement())
-  boxId       Int
-  name        String
-  description String
-  image       String
-  room        Event_room?
-  status      Event_status @default(SOON)
-  startDate   DateTime?
-  endDate     DateTime?
+
+  id               Int                 @id @default(autoincrement())
+  boxId            Int
+  name             String
+  description      String
+  image            String?
+  conference_link  String?
+  room             Event_room?
+  status           Event_status        @default(PENDING)
+  startDate        DateTime
+  endDate          DateTime?
 
   // Relations
   box              Box                 @relation(name: "BoxToEvent", fields: [boxId], references: [id])
   eventParticipant Event_participant[] @relation(name: "EventToEventParticipant")
   eventAnimator    Event_animator[]    @relation(name: "EventToEventAnimator")
   eventRessource   Event_ressource[]   @relation(name: "EventToEventRessource")
+  eventFeedback    Event_feedback[]    @relation(name: "EventToEventFeedback")
 }
 
 model Event_ressource {
@@ -118,6 +121,16 @@ model Animator {
 
   // Relations
   eventAnimator Event_animator[] @relation(name: "AnimatorToEventAnimator")
+}
+
+model Feedback {
+  id            Int              @id @default(autoincrement())
+  eventId       Int
+  writerId      Int
+  content       String
+
+  // Relations
+  eventFeedback Event_feedback[] @relation(name: "FeedbackToEventFeedback")
 }
 
 // JOIN TABLES
@@ -168,6 +181,17 @@ model Event_animator {
   @@id([animatorId, eventId])
 }
 
+model Event_feedback {
+  feedbackId Int
+  eventId    Int
+
+  @@id ([feedbackId, eventId])
+
+  // Relations
+  feedback   Feedback @relation(name: "FeedbackToEventFeedback", fields: [feedbackId], references: [id])
+  event      Event    @relation(name: "EventToEventFeedback", fields: [eventId], references: [id])
+}
+
 // ENUMS
 enum User_role {
   STUDENT
@@ -205,7 +229,7 @@ enum User_promotion {
 }
 
 enum Newsletter_status {
-  VISIBLED
+  VISIBLE
   HIDDEN
 }
 
@@ -229,6 +253,7 @@ enum Event_participant_status {
 
 enum Event_room {
   TO_DEFINE
+  ONLINE
   AMPHI
   A001
   A002
@@ -323,8 +348,9 @@ enum Event_room {
 }
 
 enum Event_status {
-  CANCEL
-  PASS
+  PENDING
+  CANCELLED
+  PASSED
   SOON
   NOW
   STREAMED

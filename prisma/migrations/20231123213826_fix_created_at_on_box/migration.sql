@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Box" ALTER COLUMN "createdAt" SET DATA TYPE TIMESTAMP(3);

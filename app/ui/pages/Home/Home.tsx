@@ -10,6 +10,7 @@ import arrowLink from "../../../assets/icon/greenArrowLink.svg";
 import SeeMore from "~/ui/common/SeeMore/SeeMore";
 import Footer from "~/ui/common/Footer/Footer";
 import Header from "~/ui/common/Header/Header";
+import EventCard from "~/ui/common/EventCard/EventCard";
 
 const boxes = [BlueBox, BrownBox, BeigeBox, RedBox];
 
@@ -18,7 +19,8 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Header user={serverData.user} />
+      <ul></ul>
       <div className="Home">
         <section className="hero-banner">
           <div>
@@ -37,9 +39,13 @@ export default function Home() {
 
         <section className="event-section">
           <h2>Nos évènements récents</h2>
-          <div className="event-list"></div>
           {/* link */}
-          <div>ici les events card </div>
+          <div className="event-card-container three-column-grid">
+            {serverData.comingEvents &&
+              serverData.comingEvents.map((event) => {
+                return <EventCard key={event.id} event={event as any} />; // any because for some reason prisma sets dates as strings
+              })}
+          </div>
           <Link to={"/calendar"}>
             Voir le calendrier <img src={arrowLink} alt="Arrow icon" />
           </Link>
