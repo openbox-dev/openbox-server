@@ -31,7 +31,7 @@ export async function signInAction({ request }: ActionFunctionArgs) {
       data:
         e instanceof FirebaseError
           ? "Erreur, veuillez réessayer"
-          : "Données invalides, vérifiez que vous avez créer un compte",
+          : "Données invalides, vérifiez que vous avez créé un compte",
       success: false,
     });
   }

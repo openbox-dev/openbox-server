@@ -1,7 +1,7 @@
-import { LinksFunction, MetaFunction } from "@remix-run/node";
+import { MetaFunction, LinksFunction } from "@remix-run/node";
 
-import CatalogLayout from "~/ui/pages/Catalog/CatalogLayout";
-import { CatalogLoader } from "~/controllers/loaders/catalog.loader";
+import { NestedLoader } from "~/controllers/loaders/nested.loader";
+import NestedLayout from "~/ui/pages/Nested/NestedLayout";
 
 import indexStyle from "../styles/index.css?url";
 import headerStyle from "../styles/header.css?url";
@@ -10,10 +10,10 @@ import footerStyle from "../styles/footer.css?url";
 export const meta: MetaFunction = () => {
   return [
     {
-      title: "OpenBox - Catalogue",
+      title: "OpenBox - Page",
     },
     {
-      description: "Catalogues de OpenBox",
+      description: "Pages de OpenBox",
     },
   ];
 };
@@ -33,5 +33,5 @@ export const links: LinksFunction = () => [
   },
 ];
 
-export default CatalogLayout;
-export { CatalogLoader as loader };
+export default NestedLayout;
+export { NestedLoader as loader };

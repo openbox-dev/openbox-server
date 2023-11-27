@@ -1,5 +1,6 @@
 import { Outlet, useLoaderData } from "@remix-run/react";
-import { loader } from "~/routes/_catalog";
+import { loader } from "~/routes/_nested";
+
 import Footer from "~/ui/common/Footer/Footer";
 import Header from "~/ui/common/Header/Header";
 
