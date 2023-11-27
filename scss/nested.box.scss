@@ -1,0 +1,11 @@
+@use "./mixins";
+
+.Box {
+  .box-image {
+    width: 100%;
+    height: 419px;
+    background-position: center;
+    background-size: cover;
+  }
+  @include mixins.eventSectionMixin;
+}
