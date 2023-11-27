@@ -2,21 +2,15 @@ import prisma from "~/utils/prisma"
 
 export const boxCatalogService = {
     getAll: async (
-        {
-            q = '',
-        }: {
-            q?: string
-        } = {
-                q: ''
-            }
+        { search }: { search?: string }
     ) => {
-        if (q) {
+        if (search) {
             try {
                 return {
                     data: await prisma.box.findMany({
                         where: {
                             status: "ACCEPTED",
-                            name: q
+                            name: search
                         }
                     }),
                     success: true,
