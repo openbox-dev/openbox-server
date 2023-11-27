@@ -28,6 +28,7 @@
             width: 80%;
             gap: 32px;
             margin-left: 27px;
+            margin-bottom: 32px;
 
             a {
                 text-decoration: none;
@@ -43,6 +44,8 @@
                 padding: 10px;
                 width: 452px;
                 height: 201px;
+                overflow: hidden;
+
 
                 .Box-Title {
                     background-color: var(--color-terciary-50);
@@ -55,6 +58,9 @@
 
                 .Description {
                     font-size: var(--font-size-m);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: wrap;
                 }
             }
 
@@ -111,24 +117,6 @@
             font-size: var(--font-size-s);
             padding: 16px;
             border-radius: 18px;
-        }
-    }
-
-    .Load-Box {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        margin: 32px;
-        padding-left: 230px;
-
-        .Load-Box-Button {
-            border: none;
-            padding: none;
-            color: none;
-            background: none;
-            font-size: var(--font-size-m);
-            color: var(--color-primary-green);
         }
     }
 }

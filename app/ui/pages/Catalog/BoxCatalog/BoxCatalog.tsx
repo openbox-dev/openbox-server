@@ -4,9 +4,9 @@
 - [] styling
 - [] sensible à la casse fix it 
 - [] quand on supprime la recherche les box ne sont pas réafficher 
-- [] charger plus de box
 - [] quand description trop longue, couper et mettre ...
 - [] faire les keys pour les box
+- [] loop impair class bleu
 */
 
 import type { loader } from "~/routes/_catalog.box"
@@ -28,9 +28,7 @@ export default function BoxCatalog() {
 
   return (
     <main className="Main">
-      <div className="Title">
-        <h1>Catalogue - Box</h1>
-      </div>
+      <h1 className="Title">Catalogue - Box</h1>
       <section className="Filter">
         <Filter />
         <Sort data={data.data} onSort={handleSort} />
@@ -45,10 +43,6 @@ export default function BoxCatalog() {
             "Aucune Boxe"
           )}
         </section>
-      </div>
-      <div className="Load-Box">
-        <button className="Load-Box-Button">charger plus de box</button>
-        <img src="app/assets/icon/greenArrowLink.svg" alt="arrow pointing top corner right" />
       </div>
     </main>
   )
