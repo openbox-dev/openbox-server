@@ -58,7 +58,18 @@ export const EventService = {
       return 0;
     });
 
-    return sortedData;
+    const passedEvents = sortedData.filter(
+      (event) => EventService.getEventStatus(event.startDate) === "PASSÉ"
+    );
+    const currentEvents = sortedData.filter(
+      (event) => EventService.getEventStatus(event.startDate) === "AUJOURD'HUI"
+    );
+
+    const comingEvents = sortedData.filter(
+      (event) => EventService.getEventStatus(event.startDate) === "À VENIR"
+    );
+
+    return [...currentEvents, ...comingEvents, ...passedEvents];
   },
   getEventStatus: (startDate: any) => {
     const currentDate = new Date();
