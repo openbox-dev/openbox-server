@@ -45,11 +45,11 @@ model Newsletter {
   image     String
   heading   String
   content   String
-  status    Newsletter_status      @default(VISIBLED)
+  status    Newsletter_status      @default(VISIBLE)
   createdAt  DateTime @default(now()) @db.Date
 
   // Relations
-  user      User                   @relation(name: "UserToNewsletter", fields: [writer], references: [id])
+  user      User                   @relation(name: "UserToNewsletter", fields: [writerId], references: [id])
   ressource Newsletter_ressource[] @relation(name: "NewsletterToRessource")
 }
 
@@ -92,7 +92,7 @@ model Event {
   eventParticipant Event_participant[] @relation(name: "EventToEventParticipant")
   eventAnimator    Event_animator[]    @relation(name: "EventToEventAnimator")
   eventRessource   Event_ressource[]   @relation(name: "EventToEventRessource")
-  eventFeedback    Event_animator[]    @relation(name: "EventToEventFeedback")
+  eventFeedback    Event_feedback[]    @relation(name: "EventToEventFeedback")
 }
 
 model Event_ressource {
