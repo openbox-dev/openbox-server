@@ -1,4 +1,4 @@
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 
 import imagePlaceholder from "../../../../assets/image/card-placeholder.png";
 import { loader } from "~/routes/_nested.event.$eventId";
@@ -67,7 +67,9 @@ export default function Event() {
           {!eventData.eventRessource.length
             ? "Aucune ressource nécessaire pour cette box"
             : eventData.eventRessource.map((ressource) => (
-                <li>{ressource.url}</li>
+                <li>
+                  <Link to={ressource.url}>{ressource.url}</Link>
+                </li>
               ))}
         </div>
       </div>
