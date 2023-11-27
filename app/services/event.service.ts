@@ -12,6 +12,27 @@ export type EventWithBoxAndAnimator = Prisma.EventGetPayload<{
   };
 }>;
 
+export type EventPageData = Prisma.EventGetPayload<{
+  include: {
+    eventAnimator: {
+      include: {
+        animator: {
+          select: {
+            firstName: true;
+            lastName: true;
+            email: true;
+          };
+        };
+      };
+    };
+    eventRessource: true;
+  };
+}>;
+
+export type EventPageReturn =
+  | { data: EventPageData; success: true }
+  | { data: Error; success: false };
+
 export const EventService = {
   getAllEvents: async () => {
     const events: EventWithBoxAndAnimator[] = await prisma.event.findMany({
@@ -86,5 +107,35 @@ export const EventService = {
     }
 
     return "PASSÉ";
+  },
+  getEventPage: async (idParam: number = 0) => {
+    try {
+      const pageData: EventPageData = await prisma.event.findUniqueOrThrow({
+        where: { id: idParam },
+        include: {
+          eventAnimator: {
+            include: {
+              animator: {
+                select: {
+                  firstName: true,
+                  lastName: true,
+                  email: true,
+                },
+              },
+            },
+          },
+          eventRessource: true,
+        },
+      });
+      return {
+        data: pageData,
+        success: true,
+      };
+    } catch (e) {
+      return {
+        data: e as Error,
+        success: false,
+      };
+    }
   },
 };
