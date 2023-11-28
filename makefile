@@ -2,7 +2,7 @@ install:
 	@echo "Installing dependencies..."
 	@echo "Streamez Asinine"
 	@npm install
-	@echo "=== Preparing ==="
+	@echo "Preparing..."
 	@npm run prepare
 	
 start:
@@ -12,3 +12,5 @@ start:
 migrate:
 	@echo "Migrating database models..."
 	@npx prisma migrate dev
+	@echo "Filling database with data..."
+	@npx node --no-warnings=ExperimentalWarning --loader ts-node/esm prisma/seed.ts
