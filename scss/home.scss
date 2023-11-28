@@ -109,6 +109,8 @@
   }
 
   @include mixins.eventSectionMixin;
+
+  @include mixins.boxMixin;
 }
 
 @media only screen and (max-width: 1110px) {
