@@ -11,6 +11,9 @@ import SeeMore from "~/ui/common/SeeMore/SeeMore";
 import Footer from "~/ui/common/Footer/Footer";
 import Header from "~/ui/common/Header/Header";
 import EventCard from "~/ui/common/EventCard/EventCard";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import Box from "./components/Box";
 
 const boxes = [BlueBox, BrownBox, BeigeBox, RedBox];
 
@@ -33,7 +36,12 @@ export default function Home() {
               découverte.
             </p>
           </div>
-          <div className="threejs-container"></div>
+          <div className="threejs-container">
+            <Canvas>
+              {/* <OrbitControls /> */}
+              <Box />
+            </Canvas>
+          </div>
           <SeeMore />
         </section>
 
@@ -51,7 +59,7 @@ export default function Home() {
           </Link>
         </section>
 
-        <section className="box-explain-section">
+        <section className="box-explain-section" id="what-is-a-box">
           <div>
             <h2 className="section-title">Qu'est ce qu'une box ?</h2>
             <p className="section-description">
