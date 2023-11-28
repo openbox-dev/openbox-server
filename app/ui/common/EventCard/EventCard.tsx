@@ -44,13 +44,13 @@ export default function EventCard({ event }: EventCardProps) {
           </span>
         </p>
         <h3>
-          <Link to={`/event/${event.id}`}>{event.name}</Link>
+          <a href={`/event/${event.id}`}>{event.name}</a>
         </h3>
         <p className="event-description">{event.description}</p>
       </div>
-      <Link to={`/box/${event.boxId}`} className="event-box-tag">
+      <a href={`/box/${event.boxId}`} className="event-box-tag">
         {event.box.name}
-      </Link>
+      </a>
     </div>
   );
 }

@@ -10,8 +10,6 @@ import EventCard from "~/ui/common/EventCard/EventCard";
 export default function Box() {
   const { box, events } = useLoaderData<typeof loader>();
 
-  console.log(box.data?.boxAdmin);
-
   return (
     <div className="Box">
       <h1 className="box-title">{box.data?.name}</h1>
