@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@300;400;500;600;700&display=swap");
 
 :root {
   --color-primary-black: #182b1b;
@@ -11,6 +11,10 @@
   --color-secondary-red: #ce4e4d;
   --color-border-grey: #eeeeee;
   --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #cccccc;
+  --color-yellow-50: #fdf7e8;
+  --color-yellow-200: #f6dc93;
+  --color-neutral-green: #4a6c6f;
 
   --border-radius: 18px;
 
@@ -25,6 +29,7 @@
   --font-size-s: 16px;
 
   --font-family-primary: "Open Sans", sans-serif;
+  --font-family-secondary: "Anton", sans-serif;
 }
 
 html,
