@@ -1,6 +1,7 @@
 import { LinksFunction, MetaFunction } from "@remix-run/node";
 import CalendarLayout from "~/ui/pages/Calendar/CalendarLayout";
 import calendarStyle from "../styles/calendar.css?url";
+import { eventCalendarLoader } from "~/controllers/loaders/calendar.loader";
 
 export const meta: MetaFunction = () => {
   return [
@@ -18,3 +19,4 @@ export const links: LinksFunction = () => {
 };
 
 export default CalendarLayout;
+export { eventCalendarLoader as loader };
