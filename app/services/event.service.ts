@@ -33,6 +33,25 @@ export type EventPageReturn =
   | { data: EventPageData; success: true }
   | { data: Error; success: false };
 
+export type EventFromBoxPage = Prisma.EventGetPayload<{
+  include: {
+    eventAnimator: {
+      include: {
+        animator: {
+          select: {
+            firstName: true;
+            lastName: true;
+          };
+        };
+      };
+    };
+  };
+}>;
+
+export type EventBoxReturn =
+  | { data: EventWithBoxAndAnimator[]; success: true }
+  | { data: Error; success: false };
+
 export const EventService = {
   getAllEvents: async () => {
     const events: EventWithBoxAndAnimator[] = await prisma.event.findMany({
@@ -63,7 +82,10 @@ export const EventService = {
   },
   getThreeClosestEvents: async (): Promise<EventWithBoxAndAnimator[]> => {
     const events = await EventService.getAllEvents();
-    return (await EventService.sortByClosest(events)).slice(0, 3);
+    return (await EventService.sortByClosest(events)).slice(
+      0,
+      3
+    ) as EventWithBoxAndAnimator[];
   },
   sortByClosest: async (events: EventWithBoxAndAnimator[]) => {
     const currentDate = new Date();
@@ -129,6 +151,42 @@ export const EventService = {
       });
       return {
         data: pageData,
+        success: true,
+      };
+    } catch (e) {
+      return {
+        data: e as Error,
+        success: false,
+      };
+    }
+  },
+  getBoxEvents: async ({
+    boxId,
+  }: {
+    boxId?: number;
+  }): Promise<EventBoxReturn> => {
+    try {
+      const eventData: EventWithBoxAndAnimator[] = await prisma.event.findMany({
+        where: {
+          boxId: boxId,
+        },
+        include: {
+          box: { select: { id: true, name: true } },
+          eventAnimator: {
+            select: {
+              animator: {
+                select: { id: true, firstName: true, lastName: true },
+              },
+            },
+          },
+        },
+      });
+
+      const sortedData = (await EventService.sortByClosest(
+        eventData
+      )) as EventWithBoxAndAnimator[];
+      return {
+        data: sortedData,
         success: true,
       };
     } catch (e) {
