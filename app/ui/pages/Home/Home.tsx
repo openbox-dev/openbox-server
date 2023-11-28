@@ -14,8 +14,39 @@ import EventCard from "~/ui/common/EventCard/EventCard";
 
 const boxes = [BlueBox, BrownBox, BeigeBox, RedBox];
 
+interface Actualites {
+  id: number;
+  title: string;
+  content: string;
+  image: string;
+  heading: string;
+  user: {
+      firstName: string;
+      lastName: string;
+  };
+}
+
+/*
+  * Checks if the data is of type Actualites
+ */
+function isActualites(data: any): data is Actualites {
+  return (data as Actualites).id !== undefined;
+}
+
+/*
+  * Returns the latest actualites from the server data
+ */
+function useActualitesLoaderData(): Actualites {
+  const serverData = useLoaderData<typeof loader>();
+  if (!isActualites(serverData.latestActualites.data)) {
+    throw new Error("Server data is not of type Actualites");
+  }
+  return serverData.latestActualites.data;
+}
+
 export default function Home() {
   const serverData = useLoaderData<typeof loader>();
+  const latestActualites = useActualitesLoaderData();
 
   return (
     <>
@@ -76,9 +107,21 @@ export default function Home() {
 
         <section className="actualite-section">
           <h2>L’actu OpenBox</h2>
-          <div className="actualite-list"></div>
-          {/* link */}
-          <div>ici la derniere actualites </div>
+          <div className="last-actualite">
+            <h3 className="last-actualite-title">Dernière actualité</h3>
+            <img src={latestActualites.image} alt="Dernière actualité" className="actualite-img"/>
+            <div className="last-actualite-details">
+              <p className="actualite-details">{latestActualites.user.firstName} {latestActualites.user.lastName}</p>
+              <h4 className="actualite-title">{latestActualites.title}</h4>
+              <p className="actualite-description">{latestActualites.content}</p>
+              <Link
+                  to={"/actualites"}
+                  className="actualite-heading"
+              >
+                {latestActualites.heading}
+              </Link>
+            </div>
+          </div>
           <Link to={"/actualites"}>
             Voir toute l’actualité <img src={arrowLink} alt="Arrow icon" />
           </Link>

@@ -17,7 +17,14 @@ export const ActualiteService = {
   getLatest: async () => {
     try {
       return {
-        data: await prisma.newsletter.findFirstOrThrow(),
+        data: await prisma.newsletter.findFirst({
+          orderBy: {
+              createdAt: "desc",
+          },
+          include: {
+            user: true,
+          },
+        }),
         success: true,
       };
     } catch (e) {
