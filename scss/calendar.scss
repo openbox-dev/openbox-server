@@ -1,15 +1,31 @@
+$padding-large: 64px;
+$padding-medium: 32px;
+$padding-small: 16px;
+
+$gap-large: 64px;
+$gap-medium: 32px;
+$gap-small: 16px;
+
+$margin-large: 64px;
+$margin-medium: 32px;
+$margin-small: 16px;
+
 .Calendar {
   display: flex;
   flex-direction: column;
-  padding-top: 32px;
-  padding-bottom: 32px;
-  row-gap: 32px;
+  padding-top: $padding-medium;
+  padding-bottom: $padding-medium;
+  row-gap: $gap-medium;
 
   .title-container {
     background-color: var(--color-yellow-50);
-    font-size: 64px;
+    font-size: var(--font-size-l);
     font-weight: 600;
-    padding: 16px 32px;
+    padding: $padding-small $padding-medium;
+  }
+
+  h1 {
+    font-weight: 600;
   }
 
   .content {
@@ -21,8 +37,9 @@
       border: 1px solid var(--color-neutral-200);
       border-radius: 18px;
       height: fit-content;
-      padding: 32px;
-      row-gap: 32px;
+      padding: $padding-medium;
+      row-gap: $gap-medium;
+      max-width: 187px;
 
       .text-container {
         display: flex;
@@ -33,10 +50,10 @@
         }
 
         #year {
-          font-size: 24px;
+          font-size: var(--font-size-m);
         }
         #month {
-          font-size: 33px;
+          font-size: var(--font-size-l);
         }
 
         .nb-event {
@@ -47,7 +64,7 @@
       .button-container {
         display: flex;
         flex-direction: column;
-        row-gap: 16px;
+        row-gap: $gap-small;
 
         .button {
           padding: 10px;
@@ -62,11 +79,35 @@
       }
     }
 
+    .incoming-event {
+      .event {
+        display: flex;
+        column-gap: 10px;
+
+        .sidebar {
+          height: auto;
+          width: 10px;
+          background-color: var(--color-yellow-200);
+        }
+
+        .event-info-container {
+          overflow: hidden;
+
+          .event-name {
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+    }
+
     .calendar {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      padding: 0 16px;
+      padding: 0 $padding-small;
 
       .calendar-day {
         width: 141px;
@@ -74,8 +115,16 @@
         padding: 16px 22px;
         border: 1px solid var(--color-neutral-200);
         border-radius: 18px;
-        font-size: 32px;
+        font-size: var(--font-size-l);
         font-weight: 600;
+
+        .event-nb-day {
+          font-size: var(--font-size-s);
+        }
+
+        .event-title {
+          font-size: 10px;
+        }
       }
     }
   }
