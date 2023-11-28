@@ -11,6 +11,7 @@ import SeeMore from "~/ui/common/SeeMore/SeeMore";
 import Footer from "~/ui/common/Footer/Footer";
 import Header from "~/ui/common/Header/Header";
 import EventCard from "~/ui/common/EventCard/EventCard";
+import BoxCard from "../Catalog/BoxCatalog/components/BoxCard";
 
 const boxes = [BlueBox, BrownBox, BeigeBox, RedBox];
 
@@ -21,20 +22,20 @@ interface Actualites {
   image: string;
   heading: string;
   user: {
-      firstName: string;
-      lastName: string;
+    firstName: string;
+    lastName: string;
   };
 }
 
 /*
-  * Checks if the data is of type Actualites
+ * Checks if the data is of type Actualites
  */
 function isActualites(data: any): data is Actualites {
   return (data as Actualites).id !== undefined;
 }
 
 /*
-  * Returns the latest actualites from the server data
+ * Returns the latest actualites from the server data
  */
 function useActualitesLoaderData(): Actualites {
   const serverData = useLoaderData<typeof loader>();
@@ -99,7 +100,20 @@ export default function Home() {
             })}
           </div>
           {/* box cards */}
-          <div>ici les box cards</div>
+          <div className="Catalog-Box">
+            {serverData.boxes.map((box, index) => {
+              const isOdd = index % 2 !== 0;
+              const boxClass = isOdd ? "Odd-Box" : "Even-Box";
+              return (
+                <BoxCard
+                  id={box.id}
+                  description={box.description}
+                  title={box.name}
+                  className={boxClass}
+                />
+              );
+            })}
+          </div>
           <Link to={"/box"}>
             Découvrir nos Box <img src={arrowLink} alt="Arrow icon" />
           </Link>
@@ -109,14 +123,23 @@ export default function Home() {
           <h2>L’actu OpenBox</h2>
           <div className="last-actualite">
             <h3 className="last-actualite-title">Dernière actualité</h3>
-            <img src={latestActualites.image} alt="Dernière actualité" className="actualite-img"/>
+            <img
+              src={latestActualites.image}
+              alt="Dernière actualité"
+              className="actualite-img"
+            />
             <div className="last-actualite-details">
-              <p className="actualite-details">{latestActualites.user.firstName} {latestActualites.user.lastName}</p>
+              <p className="actualite-details">
+                {latestActualites.user.firstName}{" "}
+                {latestActualites.user.lastName}
+              </p>
               <h4 className="actualite-title">{latestActualites.title}</h4>
-              <p className="actualite-description">{latestActualites.content}</p>
+              <p className="actualite-description">
+                {latestActualites.content}
+              </p>
               <Link
-                  to={`/actualites/${latestActualites.id}`}
-                  className="actualite-heading"
+                to={`/actualites/${latestActualites.id}`}
+                className="actualite-heading"
               >
                 {latestActualites.heading}
               </Link>
