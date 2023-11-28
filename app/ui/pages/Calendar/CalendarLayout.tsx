@@ -1,10 +1,38 @@
 import { useState } from "react";
+import { Event } from "@prisma/client";
+import { loader } from "~/routes/_catalog.calendar";
+import {
+  EventService,
+  EventWithBoxAndAnimator,
+} from "~/services/event.service";
+import { useLoaderData } from "@remix-run/react";
 
 const date = new Date();
 
 const month = date.getMonth();
 
 const monthDateOptions: Intl.DateTimeFormatOptions = { month: "long" };
+const eventOptions: Intl.DateTimeFormatOptions = {
+  day: "numeric",
+  month: "long",
+  hour: "numeric",
+  minute: "numeric",
+};
+
+const monthMap = new Map([
+  [0, "Janvier"],
+  [1, "Février"],
+  [2, "Mars"],
+  [3, "Avril"],
+  [4, "Mai"],
+  [5, "Juin"],
+  [6, "Juillet"],
+  [7, "Août"],
+  [8, "Septembre"],
+  [9, "Octobre"],
+  [10, "Novembre"],
+  [11, "Décembre"],
+]);
 
 function getMonthInLetter(date: Date) {
   let monthInLetters: string = date.toLocaleString("fr-Fr", monthDateOptions);
@@ -31,19 +59,13 @@ function getDaysInMonth(year: number, month: number) {
       day: date.getDate(),
       weekDay: new Intl.DateTimeFormat("fr-Fr", weekDayOptions).format(date),
       month: new Intl.DateTimeFormat("fr-Fr", monthDateOptions).format(date),
+      monthNumber: date.getMonth(),
+      year: date.getFullYear(),
     };
     daysInMonth.push(dayInfo);
     date.setDate(date.getDate() + 1);
   }
   return daysInMonth;
-}
-
-function convertMonthNumberToText(year: number, month: number) {
-  const date = new Date(year, month, 1);
-  let monthInLetters = date.toLocaleString("fr-FR", monthDateOptions);
-  monthInLetters =
-    monthInLetters.charAt(0).toLocaleUpperCase() + monthInLetters.slice(1);
-  return monthInLetters;
 }
 
 const daysInMonth = getDaysInMonth(year, month);
@@ -53,15 +75,64 @@ export default function Calendar() {
   const [displayedMonth, setDisplayedMonth] = useState(monthInLetters);
   const [displayedYear, setDisplayedYear] = useState(year);
   const [displayedDaysInMonth, setDisplayedDaysInMonth] = useState(daysInMonth);
+  const [allEventBox, closestEventBox] = useLoaderData<typeof loader>();
+  const allEventBoxArray: any = [];
+
+  allEventBox.map((event) => {
+    const dateString = event.startDate;
+    const dateNumberFormat = Date.parse(dateString);
+    const date = new Date(dateNumberFormat);
+    const readableFormatDate = date.toLocaleString("fr-FR", eventOptions);
+    const dateDay = date.getDate();
+    const dateMonth = date.getMonth();
+    const dateYear = date.getFullYear();
+    const animatorArray: any = [];
+    const eventAnimator = event.eventAnimator;
+    eventAnimator.forEach((animator) => {
+      const firstName = animator.animator.firstName;
+      const lastName = animator.animator.lastName;
+      const fullName = `${firstName} ${lastName}`;
+      animatorArray.push(fullName);
+    });
+
+    const eventObject = {
+      Titre: event.name,
+      Animateurs: animatorArray,
+      "Date de l'event": readableFormatDate,
+      Jour: dateDay,
+      Mois: dateMonth,
+      Année: dateYear,
+    };
+    allEventBoxArray.push(eventObject);
+  });
+
+  function eventInMonth(year: number, month: number) {
+    let monthEventCount = 0; // Initialisez le compteur en dehors de la map
+
+    allEventBoxArray.map((event: any) => {
+      if (event["Mois"] === month && event["Année"] === year) {
+        monthEventCount++;
+      }
+      return null; // Assurez-vous de retourner quelque chose dans la map
+    });
+
+    return monthEventCount; // Retournez le nombre total d'événements
+  }
+
+  const nbEventInMonth = eventInMonth(displayedYear, monthNumber);
+  const [nbEvent, setNbEvent] = useState(nbEventInMonth);
+
+  const [asideEventTitle, setAsideEventTitle] = useState();
+  const [asideEventAnimator, setAsideEventAnimator] = useState();
+  const [asideEventDate, setAsideEventDate] = useState();
 
   function handleNextButton() {
     if (monthNumber < 11) {
       const nextMonthNumber = monthNumber + 1;
       const nextDaysInMonth = getDaysInMonth(displayedYear, nextMonthNumber);
-      const nextMonth = convertMonthNumberToText(
-        displayedYear,
-        nextMonthNumber
-      );
+      const nextMonth = monthMap.get(nextMonthNumber) ?? "";
+      const nextNbEvent = eventInMonth(displayedYear, nextMonthNumber);
+      setNbEvent(nextNbEvent);
       setMonthNumber(nextMonthNumber);
       setDisplayedDaysInMonth(nextDaysInMonth);
       setDisplayedMonth(nextMonth);
@@ -69,7 +140,9 @@ export default function Calendar() {
       const nextMonthNumber = 0;
       const nextYear = displayedYear + 1;
       const nextDaysInMonth = getDaysInMonth(nextYear, nextMonthNumber);
-      const nextMonth = convertMonthNumberToText(nextYear, nextMonthNumber);
+      const nextMonth = monthMap.get(nextMonthNumber) ?? "";
+      const nextNbEvent = eventInMonth(nextYear, nextMonthNumber);
+      setNbEvent(nextNbEvent);
       setMonthNumber(nextMonthNumber);
       setDisplayedDaysInMonth(nextDaysInMonth);
       setDisplayedMonth(nextMonth);
@@ -81,10 +154,9 @@ export default function Calendar() {
     if (monthNumber > 0) {
       const nextMonthNumber = monthNumber - 1;
       const nextDaysInMonth = getDaysInMonth(displayedYear, nextMonthNumber);
-      const nextMonth = convertMonthNumberToText(
-        displayedYear,
-        nextMonthNumber
-      );
+      const nextMonth = monthMap.get(nextMonthNumber) ?? "";
+      const nextNbEvent = eventInMonth(displayedYear, nextMonthNumber);
+      setNbEvent(nextNbEvent);
       setMonthNumber(nextMonthNumber);
       setDisplayedDaysInMonth(nextDaysInMonth);
       setDisplayedMonth(nextMonth);
@@ -92,13 +164,29 @@ export default function Calendar() {
       const nextMonthNumber = 11;
       const nextYear = displayedYear - 1;
       const nextDaysInMonth = getDaysInMonth(nextYear, nextMonthNumber);
-      const nextMonth = convertMonthNumberToText(nextYear, nextMonthNumber);
+      const nextMonth = monthMap.get(nextMonthNumber) ?? "";
+      const nextNbEvent = eventInMonth(nextYear, nextMonthNumber);
+      setNbEvent(nextNbEvent);
       setMonthNumber(nextMonthNumber);
       setDisplayedDaysInMonth(nextDaysInMonth);
       setDisplayedMonth(nextMonth);
       setDisplayedYear(nextYear);
     }
   }
+
+  const handleCardDay = (childProps: any) => {
+    const classChild = childProps.target.className.split("_");
+    const classToUse = classChild.slice(1);
+
+    const eventObject = {
+      Titre: classToUse[0],
+      Animateurs: classToUse[1],
+      "Date de l'event": classToUse[2],
+    };
+    setAsideEventTitle(eventObject.Titre);
+    setAsideEventAnimator(eventObject.Animateurs);
+    setAsideEventDate(eventObject["Date de l'event"]);
+  };
 
   return (
     <div id="Calendar" className="Calendar">
@@ -118,9 +206,7 @@ export default function Calendar() {
             </p>
 
             <p id="nb-event" className="nb-event">
-              {numberOfEvent > 1
-                ? `${numberOfEvent} événements`
-                : `${numberOfEvent} événement`}
+              {nbEvent > 1 ? `${nbEvent} évènements` : `${nbEvent} évènement`}
             </p>
           </div>
 
@@ -133,14 +219,71 @@ export default function Calendar() {
             </button>
           </div>
 
-          <div id="incoming-event" className="incoming-event"></div>
+          <div id="incoming-event" className="incoming-event">
+            {/* {allEventBox.map((event) => {
+              let eventDate = Date.parse(event.startDate);
+              const eventDate2 = new Date(eventDate);
+              const formattedDate = eventDate2.toLocaleString(
+                "fr-Fr",
+                eventOptions
+              );
+              if (eventDate2 > date) {
+                return (
+                  <div className="event" key={event.name}>
+                    <div className="sidebar"></div>
+
+                    <div className="event-info-container">
+                      <p className="event-name" title={event.name}>
+                        {event.name}
+                      </p>
+                      <p className="alumni">
+                        {event.eventAnimator[0].animator.firstName}{" "}
+                        {event.eventAnimator[0].animator.lastName}
+                      </p>
+                      <p className="event-hour">{formattedDate}</p>
+                    </div>
+                  </div>
+                );
+              }
+            })} */}
+          </div>
         </aside>
 
         <main id="calendar" className="calendar">
           {displayedDaysInMonth.map((day) => {
+            let eventCount = 0;
             return (
-              <div className="calendar-day" key={day.day}>
+              <div
+                id={day.day.toString()}
+                className="calendar-day"
+                key={day.day}
+              >
                 <span>{day.day}</span>
+                {allEventBoxArray.map((event: any) => {
+                  if (
+                    day.day === event["Jour"] &&
+                    day.monthNumber === event["Mois"] &&
+                    day.year === event["Année"]
+                  ) {
+                    eventCount++;
+                    return (
+                      <div onClick={handleCardDay}>
+                        <p className="event-nb-day">
+                          {eventCount > 1
+                            ? `${eventCount} évènements`
+                            : `${eventCount} évènement`}
+                        </p>
+                        <p
+                          className={`event-title _ ${event["Titre"]} _ ${event["Animateurs"]} _ ${event["Date de l'event"]}`}
+                          key={event["Titre"]}
+                        >
+                          {event["Titre"]}
+                        </p>
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
               </div>
             );
           })}
