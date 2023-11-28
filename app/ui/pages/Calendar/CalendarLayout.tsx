@@ -49,8 +49,6 @@ const weekDayOptions: Intl.DateTimeFormatOptions = { weekday: "long" };
 
 const year = date.getFullYear();
 
-const numberOfEvent = 5;
-
 function getDaysInMonth(year: number, month: number) {
   const date = new Date(year, month, 1);
   const daysInMonth = [];
@@ -122,9 +120,15 @@ export default function Calendar() {
   const nbEventInMonth = eventInMonth(displayedYear, monthNumber);
   const [nbEvent, setNbEvent] = useState(nbEventInMonth);
 
-  const [asideEventTitle, setAsideEventTitle] = useState();
-  const [asideEventAnimator, setAsideEventAnimator] = useState();
-  const [asideEventDate, setAsideEventDate] = useState();
+  const [asideEventTitle, setAsideEventTitle] = useState<string | undefined>(
+    undefined
+  );
+  const [asideEventAnimator, setAsideEventAnimator] = useState<
+    string | undefined
+  >(undefined);
+  const [asideEventDate, setAsideEventDate] = useState<string | undefined>(
+    undefined
+  );
 
   function handleNextButton() {
     if (monthNumber < 11) {
@@ -136,6 +140,9 @@ export default function Calendar() {
       setMonthNumber(nextMonthNumber);
       setDisplayedDaysInMonth(nextDaysInMonth);
       setDisplayedMonth(nextMonth);
+      setAsideEventTitle(undefined);
+      setAsideEventAnimator(undefined);
+      setAsideEventDate(undefined);
     } else if (monthNumber === 11) {
       const nextMonthNumber = 0;
       const nextYear = displayedYear + 1;
@@ -147,6 +154,9 @@ export default function Calendar() {
       setDisplayedDaysInMonth(nextDaysInMonth);
       setDisplayedMonth(nextMonth);
       setDisplayedYear(nextYear);
+      setAsideEventTitle(undefined);
+      setAsideEventAnimator(undefined);
+      setAsideEventDate(undefined);
     }
   }
 
@@ -160,6 +170,9 @@ export default function Calendar() {
       setMonthNumber(nextMonthNumber);
       setDisplayedDaysInMonth(nextDaysInMonth);
       setDisplayedMonth(nextMonth);
+      setAsideEventTitle(undefined);
+      setAsideEventAnimator(undefined);
+      setAsideEventDate(undefined);
     } else if (monthNumber === 0) {
       const nextMonthNumber = 11;
       const nextYear = displayedYear - 1;
@@ -171,22 +184,11 @@ export default function Calendar() {
       setDisplayedDaysInMonth(nextDaysInMonth);
       setDisplayedMonth(nextMonth);
       setDisplayedYear(nextYear);
+      setAsideEventTitle(undefined);
+      setAsideEventAnimator(undefined);
+      setAsideEventDate(undefined);
     }
   }
-
-  const handleCardDay = (childProps: any) => {
-    const classChild = childProps.target.className.split("_");
-    const classToUse = classChild.slice(1);
-
-    const eventObject = {
-      Titre: classToUse[0],
-      Animateurs: classToUse[1],
-      "Date de l'event": classToUse[2],
-    };
-    setAsideEventTitle(eventObject.Titre);
-    setAsideEventAnimator(eventObject.Animateurs);
-    setAsideEventDate(eventObject["Date de l'event"]);
-  };
 
   return (
     <div id="Calendar" className="Calendar">
@@ -220,32 +222,19 @@ export default function Calendar() {
           </div>
 
           <div id="incoming-event" className="incoming-event">
-            {/* {allEventBox.map((event) => {
-              let eventDate = Date.parse(event.startDate);
-              const eventDate2 = new Date(eventDate);
-              const formattedDate = eventDate2.toLocaleString(
-                "fr-Fr",
-                eventOptions
-              );
-              if (eventDate2 > date) {
-                return (
-                  <div className="event" key={event.name}>
-                    <div className="sidebar"></div>
+            {asideEventTitle && asideEventAnimator && asideEventDate ? (
+              <div className="event">
+                <div className="sidebar"></div>
 
-                    <div className="event-info-container">
-                      <p className="event-name" title={event.name}>
-                        {event.name}
-                      </p>
-                      <p className="alumni">
-                        {event.eventAnimator[0].animator.firstName}{" "}
-                        {event.eventAnimator[0].animator.lastName}
-                      </p>
-                      <p className="event-hour">{formattedDate}</p>
-                    </div>
-                  </div>
-                );
-              }
-            })} */}
+                <div className="event-info-container">
+                  <p className="event-name" title={asideEventTitle}>
+                    {asideEventTitle}
+                  </p>
+                  <p className="alumni">{asideEventAnimator}</p>
+                  <p className="event-hour">{asideEventDate}</p>
+                </div>
+              </div>
+            ) : null}
           </div>
         </aside>
 
@@ -254,6 +243,29 @@ export default function Calendar() {
             let eventCount = 0;
             return (
               <div
+                onClick={(event) => {
+                  const targetedElement = event.currentTarget;
+                  const childElement = targetedElement.children;
+                  const childElementClasses = Array.from(childElement);
+                  if (childElementClasses[1]) {
+                    const childElementToUse = childElementClasses[1].children;
+                    const childElementToUseClasses =
+                      Array.from(childElementToUse);
+                    const classChild = childElementToUseClasses[1].classList
+                      .toString()
+                      .split("_");
+                    const classToUse = classChild.slice(1);
+
+                    const eventObject = {
+                      Titre: classToUse[0],
+                      Animateurs: classToUse[1],
+                      "Date de l'event": classToUse[2],
+                    };
+                    setAsideEventTitle(eventObject.Titre);
+                    setAsideEventAnimator(eventObject.Animateurs);
+                    setAsideEventDate(eventObject["Date de l'event"]);
+                  }
+                }}
                 id={day.day.toString()}
                 className="calendar-day"
                 key={day.day}
@@ -267,7 +279,7 @@ export default function Calendar() {
                   ) {
                     eventCount++;
                     return (
-                      <div onClick={handleCardDay}>
+                      <div className="event-day">
                         <p className="event-nb-day">
                           {eventCount > 1
                             ? `${eventCount} évènements`
