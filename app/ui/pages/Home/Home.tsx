@@ -115,7 +115,7 @@ export default function Home() {
               <h4 className="actualite-title">{latestActualites.title}</h4>
               <p className="actualite-description">{latestActualites.content}</p>
               <Link
-                  to={"/actualites"}
+                  to={`/actualites/${latestActualites.id}`}
                   className="actualite-heading"
               >
                 {latestActualites.heading}
