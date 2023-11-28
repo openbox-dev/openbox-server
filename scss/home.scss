@@ -9,6 +9,9 @@
     font-size: var(--font-size-xl);
     font-weight: 600;
     margin-bottom: 20px;
+    span {
+      text-decoration: underline;
+    }
   }
 
   p.section-description {
@@ -39,10 +42,6 @@
   }
 
   .hero-banner {
-    span {
-      text-decoration: underline;
-    }
-
     .threejs-container {
       width: 100%;
       min-height: 200px;

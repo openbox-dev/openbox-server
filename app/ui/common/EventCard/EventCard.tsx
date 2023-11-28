@@ -44,9 +44,7 @@ export default function EventCard({ event }: EventCardProps) {
           </span>
         </p>
         <h3>
-          <Link to={`/event/${event.name.split(" ").join("-").toLowerCase()}`}>
-            {event.name}
-          </Link>
+          <Link to={`/event/${event.id}`}>{event.name}</Link>
         </h3>
         <p className="event-description">{event.description}</p>
       </div>
