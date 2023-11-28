@@ -93,6 +93,11 @@ $margin-small: 16px;
         .event-info-container {
           overflow: hidden;
 
+          a {
+            color: inherit;
+            text-decoration: none;
+          }
+
           .event-name {
             font-weight: 600;
             white-space: nowrap;

@@ -5,7 +5,7 @@ import {
   EventService,
   EventWithBoxAndAnimator,
 } from "~/services/event.service";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 
 const date = new Date();
 
@@ -94,6 +94,7 @@ export default function Calendar() {
     });
 
     const eventObject = {
+      id: event.id,
       Titre: event.name,
       Animateurs: animatorArray,
       "Date de l'event": readableFormatDate,
@@ -130,6 +131,8 @@ export default function Calendar() {
     undefined
   );
 
+  const [asideId, setAsideId] = useState<number | undefined>(undefined);
+
   function handleNextButton() {
     if (monthNumber < 11) {
       const nextMonthNumber = monthNumber + 1;
@@ -143,6 +146,7 @@ export default function Calendar() {
       setAsideEventTitle(undefined);
       setAsideEventAnimator(undefined);
       setAsideEventDate(undefined);
+      setAsideId(undefined);
     } else if (monthNumber === 11) {
       const nextMonthNumber = 0;
       const nextYear = displayedYear + 1;
@@ -157,6 +161,7 @@ export default function Calendar() {
       setAsideEventTitle(undefined);
       setAsideEventAnimator(undefined);
       setAsideEventDate(undefined);
+      setAsideId(undefined);
     }
   }
 
@@ -226,13 +231,16 @@ export default function Calendar() {
               <div className="event">
                 <div className="sidebar"></div>
 
-                <div className="event-info-container">
+                <Link
+                  to={asideId ? `/event/${asideId}` : "/calendar"}
+                  className="event-info-container"
+                >
                   <p className="event-name" title={asideEventTitle}>
                     {asideEventTitle}
                   </p>
                   <p className="alumni">{asideEventAnimator}</p>
                   <p className="event-hour">{asideEventDate}</p>
-                </div>
+                </Link>
               </div>
             ) : null}
           </div>
@@ -255,15 +263,16 @@ export default function Calendar() {
                       .toString()
                       .split("_");
                     const classToUse = classChild.slice(1);
-
                     const eventObject = {
                       Titre: classToUse[0],
                       Animateurs: classToUse[1],
                       "Date de l'event": classToUse[2],
+                      id: classToUse[3],
                     };
                     setAsideEventTitle(eventObject.Titre);
                     setAsideEventAnimator(eventObject.Animateurs);
                     setAsideEventDate(eventObject["Date de l'event"]);
+                    setAsideId(Number(eventObject["id"]));
                   }
                 }}
                 id={day.day.toString()}
@@ -279,14 +288,22 @@ export default function Calendar() {
                   ) {
                     eventCount++;
                     return (
-                      <div className="event-day" key={index}>
+                      <div
+                        className={`event-day ${
+                          day.day === event["Jour"] &&
+                          day.monthNumber === event["Mois"] &&
+                          day.year === event["Année"] &&
+                          "active"
+                        }`}
+                        key={index}
+                      >
                         <p className="event-nb-day">
                           {eventCount > 1
                             ? `${eventCount} évènements`
                             : `${eventCount} évènement`}
                         </p>
                         <p
-                          className={`event-title _ ${event["Titre"]} _ ${event["Animateurs"]} _ ${event["Date de l'event"]}`}
+                          className={`event-title _ ${event["Titre"]} _ ${event["Animateurs"]} _ ${event["Date de l'event"]} _ ${event.id}`}
                           key={event["Titre"]}
                         >
                           {event["Titre"]}
