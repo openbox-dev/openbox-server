@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Event } from "@prisma/client";
-import { loader } from "~/routes/_catalog.calendar";
+import { loader } from "~/routes/_nested.calendar";
 import {
   EventService,
   EventWithBoxAndAnimator,
