@@ -69,8 +69,8 @@
     }
 
     .last-actualite-title {
-      color: var(--green-green-900, #182B1B);
-      font-size: var(--font-size-m);
+      color: var(--green-green-900, #182b1b);
+      font-size: var(--font-size-s);
       font-weight: 600;
     }
 
@@ -104,7 +104,7 @@
     }
 
     .actualite-heading {
-      @include  mixins.eventTag;
+      @include mixins.eventTag;
     }
   }
 
