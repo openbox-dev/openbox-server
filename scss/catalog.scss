@@ -14,14 +14,12 @@
 
   .Container-Filter-Box {
     display: flex;
-    flex-direction: row-reverse;
     align-items: center;
     height: 100%;
     width: 100%;
 
     .Catalog-Box {
       display: flex;
-      flex-direction: row-reverse;
       align-items: center;
       justify-content: space-evenly;
       flex-wrap: wrap;
@@ -138,13 +136,17 @@
       div {
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
 
         .Sort-Button {
           border: none;
-          padding: none;
-          color: none;
+          padding: 4px;
           background: none;
           font-size: var(--font-size-s);
+          &:hover {
+            cursor: pointer;
+            color: var(--color-primary-green);
+          }
         }
       }
     }
@@ -156,9 +158,8 @@
 
     .Searchbar {
       border: none;
-      width: 100%;
       font-size: var(--font-size-s);
-      padding: 16px 4px;
+      padding: 16px 8px;
       border-radius: 18px;
     }
   }

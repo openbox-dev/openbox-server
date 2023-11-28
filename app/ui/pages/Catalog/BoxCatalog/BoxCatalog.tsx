@@ -32,10 +32,6 @@ export default function BoxCatalog() {
     setData(acceptedBox);
   };
 
-  useEffect(() => {
-    console.log("new ones");
-  }, [acceptedBox]);
-
   return (
     <main className="Main">
       <h1 className="Title">Catalogue - Box</h1>
