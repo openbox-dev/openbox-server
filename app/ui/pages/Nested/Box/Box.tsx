@@ -33,7 +33,7 @@ export default function Box() {
           <div className="contributors">
             {box.data?.boxAdmin &&
               box.data.boxAdmin.map((contributor) => (
-                <div className="contributor" key={contributor.firstName}>
+                <div className="contributor" key={contributor.userId}>
                   <h4 className="contributor-group">
                     {contributor.user.promo}
                   </h4>

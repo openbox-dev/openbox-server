@@ -13,9 +13,10 @@ interface EventCardProps {
 export default function EventCard({ event }: EventCardProps) {
   return (
     <div
-      className={`EventCard ${
-        EventService.getEventStatus(event.startDate) === "PASSÉ" &&
-        "passed-event"
+      className={`EventCard${
+        EventService.getEventStatus(event.startDate) === "PASSÉ"
+          ? " passed-event"
+          : ""
       }`}
     >
       <span className="event-status">
