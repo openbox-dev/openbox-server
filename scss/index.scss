@@ -10,11 +10,11 @@
   --color-secondary-red: #ce4e4d;
   --color-border-grey: #eeeeee;
   --color-neutral-100: #f5f5f5;
-  --color-neutral-200: #CCCCCC;
-  --color-blue-50: #EBF1FB;
+  --color-neutral-200: #cccccc;
+  --color-blue-50: #ebf1fb;
 
-  --color-terciary-50: #FBEFEB;
-  --color-green-800: #1F3824;
+  --color-terciary-50: #fbefeb;
+  --color-green-800: #1f3824;
 
   --border-radius: 18px;
 
@@ -23,10 +23,10 @@
 
   --spacing-margin: 32px;
 
-  --font-size-xl: 32px;
-  --font-size-l: 20px;
-  --font-size-m: 16px;
-  --font-size-s: 14px;
+  --font-size-xl: 64px;
+  --font-size-l: 32px;
+  --font-size-m: 24px;
+  --font-size-s: 16px;
 
   --font-family-primary: "Open Sans", sans-serif;
 }
@@ -42,7 +42,7 @@ body {
   font-family: "Open Sans", sans-serif;
   background-color: var(--color-primary-white);
 
-  >* {
+  > * {
     padding: var(--padding-section-large);
 
     padding-top: 0;

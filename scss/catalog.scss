@@ -1,163 +1,183 @@
 .Main {
-    background-color: var(--color-primary-white);
+  background-color: var(--color-primary-white);
 
-    .Title {
-        background-color: var(--color-terciary-50);
-        margin-bottom: 32px;
-        width: 100%;
-        padding: 10px 32px;
-        margin-top: 32px;
-        font-size: var(--font-size-xl);
-        color: var(--color-green-800);
-    }
+  .Title {
+    background-color: var(--color-terciary-50);
+    margin-bottom: 32px;
+    width: 100%;
+    padding: 10px 32px;
+    margin-top: 32px;
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-green-800);
+  }
 
-    .Container-Filter-Box {
-        display: flex;
-        flex-direction: row-reverse;
-        align-items: center;
-        height: 100%;
-        padding-left: 40px;
+  .Container-Filter-Box {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 
-        .Catalog-Box {
-            display: flex;
-            flex-direction: row-reverse;
-            align-items: center;
-            justify-content: space-evenly;
-            flex-wrap: wrap;
-            height: 100%;
-            width: 80%;
-            gap: 32px;
-            margin-left: 27px;
-            margin-bottom: 32px;
+    .Catalog-Box {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      height: 100%;
+      gap: 32px;
 
-            a {
-                text-decoration: none;
-                color: inherit;
-            }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
 
-            .Odd-Box {
-                display: flex;
-                flex-direction: column;
-                // background-color: #EBF1FB;
-                border: 1px solid var(--color-neutral-200);
-                border-radius: 18px;
-                padding: 10px;
-                width: 290px;
-                height: 180px;
-                overflow: hidden;
-
-
-                .Box-Title {
-                    background-color: var(--color-terciary-50);
-                    border-radius: 12px;
-                    padding: 2px 16px;
-                    margin-bottom: 16px;
-                    font-size: var(--font-size-l);
-                    color: var(--color-green-800);
-                }
-
-                .Description {
-                    font-size: var(--font-size-m);
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: wrap;
-                }
-            }
-
-            .Even-Box {
-                display: flex;
-                flex-direction: column;
-                background-color: var(--color-blue-50);
-                border-radius: 18px;
-                padding: 10px;
-                width: 290px;
-                height: 180px;
-                overflow: hidden;
-
-
-                .Box-Title {
-                    border: 1px solid var(--color-neutral-200);
-                    background-color: var(--color-primary-white);
-                    border-radius: 12px;
-                    padding: 2px 16px;
-                    margin-bottom: 16px;
-                    font-size: var(--font-size-l);
-                    color: var(--color-green-800);
-                }
-
-                .Description {
-                    font-size: var(--font-size-m);
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: wrap;
-                }
-            }
-
-            .Even-Box>span {
-                color: var(--color-primary-grey);
-            }
-
-            .Odd-Box>span {
-                color: var(--color-primary-grey);
-            }
-        }
-    }
-
-    .Filter {
+      .Odd-Box {
         display: flex;
         flex-direction: column;
         border: 1px solid var(--color-neutral-200);
         border-radius: 18px;
-        padding: 32px;
-        position: fixed;
-        top: 124px;
-        margin-top: 85px;
-        color: var(--color-green-800);
+        padding: 10px;
+        width: 290px;
+        height: 180px;
+        overflow: hidden;
 
-        .Remove-Sort {
-            border: none;
-            padding: none;
-            color: none;
-            background: none;
-            font-size: var(--font-size-s);
+        .Box-Title {
+          background-color: var(--color-terciary-50);
+          border-radius: 12px;
+          padding: 2px 16px;
+          margin-bottom: 16px;
+          font-size: var(--font-size-m);
+          color: var(--color-green-800);
         }
 
-        .Filter-Sort {
-            display: flex;
-            flex-direction: column;
-            padding-top: 32px;
-            padding-bottom: 32px;
+        .Description {
+          font-size: var(--font-size-s);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: wrap;
+        }
+      }
 
-            .Sort-Title {
-                font-size: var(--font-size-m);
-                margin-bottom: 10px;
-            }
+      .Even-Box {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--color-blue-50);
+        border-radius: 18px;
+        padding: 10px;
+        width: 290px;
+        height: 180px;
+        overflow: hidden;
 
-            div {
-                display: flex;
-                flex-direction: column;
-
-                .Sort-Button {
-                    border: none;
-                    padding: none;
-                    color: none;
-                    background: none;
-                    font-size: var(--font-size-s);
-                }
-            }
-
+        .Box-Title {
+          border: 1px solid var(--color-neutral-200);
+          background-color: var(--color-primary-white);
+          border-radius: 12px;
+          padding: 2px 16px;
+          margin-bottom: 16px;
+          font-size: var(--font-size-m);
+          color: var(--color-green-800);
         }
 
-        .Filter-Title {
-            font-size: var(--font-size-m);
-            margin-bottom: 32px;
+        .Description {
+          font-size: var(--font-size-s);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: wrap;
         }
+      }
 
-        .Searchbar {
-            border: none;
-            font-size: var(--font-size-s);
-            padding: 16px;
-            border-radius: 18px;
-        }
+      .Even-Box > span {
+        color: var(--color-primary-grey);
+      }
+
+      .Odd-Box > span {
+        color: var(--color-primary-grey);
+      }
     }
+  }
+
+  .Filter {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-neutral-200);
+    border-radius: 18px;
+    padding: 32px;
+    position: sticky;
+    min-width: 244px;
+    height: fit-content;
+    top: 187px;
+
+    color: var(--color-green-800);
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .Remove-Sort {
+      border: none;
+      padding: none;
+      color: none;
+      background: none;
+      font-size: var(--font-size-s);
+    }
+
+    .Filter-Sort {
+      display: flex;
+      flex-direction: column;
+      padding-top: 32px;
+      padding-bottom: 32px;
+
+      .Sort-Title {
+        font-size: var(--font-size-m);
+        margin-bottom: 10px;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+
+        .Sort-Button {
+          border: none;
+          padding: none;
+          color: none;
+          background: none;
+          font-size: var(--font-size-s);
+        }
+      }
+    }
+
+    .Filter-Title {
+      font-size: var(--font-size-m);
+      margin-bottom: 32px;
+    }
+
+    .Searchbar {
+      border: none;
+      width: 100%;
+      font-size: var(--font-size-s);
+      padding: 16px 4px;
+      border-radius: 18px;
+    }
+  }
+
+  .search-result-text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    a {
+      color: var(--color-primary-black);
+      &:hover {
+        color: var(--color-neutral-200);
+      }
+    }
+  }
+}
+
+.layout-section {
+  display: flex;
+  margin-bottom: 32px;
+  gap: 32px;
 }
