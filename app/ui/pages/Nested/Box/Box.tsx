@@ -27,7 +27,11 @@ export default function Box() {
       <SeeMore />
       <section className="content-section">
         <div className="contributors-card">
-          <h3 className="contributors-title">Contributeurs</h3>
+          <h3 className="contributors-title">
+            {box.data && box.data.boxAdmin.length > 1
+              ? "Contributeurs"
+              : "Contributeur"}
+          </h3>
           <div className="contributors">
             {box.data?.boxAdmin &&
               box.data.boxAdmin.map((contributor) => (
