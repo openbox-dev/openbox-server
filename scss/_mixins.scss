@@ -15,9 +15,13 @@
       }
 
       .EventCard {
-        max-width: 398px;
+        width: 398px;
         color: var(--color-primary-black);
         place-self: center;
+
+        @media (max-width: 460px) {
+          width: 342px;
+        }
 
         &.passed-event {
           opacity: 0.5;
