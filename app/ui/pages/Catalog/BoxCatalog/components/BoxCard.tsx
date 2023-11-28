@@ -3,11 +3,12 @@ interface BoxCardProps {
     id: number,
     title: string,
     description: string,
+    className: string
 }
-const BoxCard: React.FC<BoxCardProps> = ({ title, description, id }) => {
+const BoxCard: React.FC<BoxCardProps> = ({ title, description, id, className }) => {
     return (
         <Link to={'http://localhost:3000/box/' + id}>
-            <div className="Box">
+            <div className={className}>
                 <h3 className="Box-Title">{title}</h3>
                 <span>Description</span>
                 <p className="Description">{description}</p>

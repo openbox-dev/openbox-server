@@ -11,6 +11,7 @@
   --color-border-grey: #eeeeee;
   --color-neutral-100: #f5f5f5;
   --color-neutral-200: #CCCCCC;
+  --color-blue-50: #EBF1FB;
 
   --color-terciary-50: #FBEFEB;
   --color-green-800: #1F3824;
@@ -22,10 +23,10 @@
 
   --spacing-margin: 32px;
 
-  --font-size-xl: 64px;
-  --font-size-l: 32px;
-  --font-size-m: 24px;
-  --font-size-s: 16px;
+  --font-size-xl: 32px;
+  --font-size-l: 20px;
+  --font-size-m: 16px;
+  --font-size-s: 14px;
 
   --font-family-primary: "Open Sans", sans-serif;
 }
@@ -47,6 +48,7 @@ body {
     padding-top: 0;
     padding-bottom: 0;
   }
+
   a {
     width: fit-content;
   }

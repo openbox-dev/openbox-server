@@ -35,15 +35,15 @@
                 color: inherit;
             }
 
-            .Box {
+            .Odd-Box {
                 display: flex;
                 flex-direction: column;
                 // background-color: #EBF1FB;
                 border: 1px solid var(--color-neutral-200);
                 border-radius: 18px;
                 padding: 10px;
-                width: 452px;
-                height: 201px;
+                width: 290px;
+                height: 180px;
                 overflow: hidden;
 
 
@@ -64,7 +64,40 @@
                 }
             }
 
-            .Box>span {
+            .Even-Box {
+                display: flex;
+                flex-direction: column;
+                background-color: var(--color-blue-50);
+                border-radius: 18px;
+                padding: 10px;
+                width: 290px;
+                height: 180px;
+                overflow: hidden;
+
+
+                .Box-Title {
+                    border: 1px solid var(--color-neutral-200);
+                    background-color: var(--color-primary-white);
+                    border-radius: 12px;
+                    padding: 2px 16px;
+                    margin-bottom: 16px;
+                    font-size: var(--font-size-l);
+                    color: var(--color-green-800);
+                }
+
+                .Description {
+                    font-size: var(--font-size-m);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: wrap;
+                }
+            }
+
+            .Even-Box>span {
+                color: var(--color-primary-grey);
+            }
+
+            .Odd-Box>span {
                 color: var(--color-primary-grey);
             }
         }
@@ -80,6 +113,14 @@
         top: 124px;
         margin-top: 85px;
         color: var(--color-green-800);
+
+        .Remove-Sort {
+            border: none;
+            padding: none;
+            color: none;
+            background: none;
+            font-size: var(--font-size-s);
+        }
 
         .Filter-Sort {
             display: flex;
