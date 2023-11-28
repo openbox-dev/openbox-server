@@ -239,7 +239,7 @@ export default function Calendar() {
         </aside>
 
         <main id="calendar" className="calendar">
-          {displayedDaysInMonth.map((day) => {
+          {displayedDaysInMonth.map((day, index) => {
             let eventCount = 0;
             return (
               <div
@@ -271,7 +271,7 @@ export default function Calendar() {
                 key={day.day}
               >
                 <span>{day.day}</span>
-                {allEventBoxArray.map((event: any) => {
+                {allEventBoxArray.map((event: any, index: number) => {
                   if (
                     day.day === event["Jour"] &&
                     day.monthNumber === event["Mois"] &&
@@ -279,7 +279,7 @@ export default function Calendar() {
                   ) {
                     eventCount++;
                     return (
-                      <div className="event-day">
+                      <div className="event-day" key={index}>
                         <p className="event-nb-day">
                           {eventCount > 1
                             ? `${eventCount} évènements`
