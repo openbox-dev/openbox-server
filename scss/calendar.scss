@@ -1,0 +1,136 @@
+$padding-large: 64px;
+$padding-medium: 32px;
+$padding-small: 16px;
+
+$gap-large: 64px;
+$gap-medium: 32px;
+$gap-small: 16px;
+
+$margin-large: 64px;
+$margin-medium: 32px;
+$margin-small: 16px;
+
+.Calendar {
+  display: flex;
+  flex-direction: column;
+  padding-top: $padding-medium;
+  padding-bottom: $padding-medium;
+  row-gap: $gap-medium;
+
+  .title-container {
+    background-color: var(--color-yellow-50);
+    font-size: var(--font-size-l);
+    font-weight: 600;
+    padding: $padding-small $padding-medium;
+  }
+
+  h1 {
+    font-weight: 600;
+  }
+
+  .content {
+    display: flex;
+
+    .month-information {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: 18px;
+      height: fit-content;
+      padding: $padding-medium;
+      row-gap: $gap-medium;
+      max-width: 187px;
+
+      .text-container {
+        display: flex;
+        flex-direction: column;
+
+        .date {
+          font-family: var(--font-family-secondary);
+        }
+
+        #year {
+          font-size: var(--font-size-m);
+        }
+        #month {
+          font-size: var(--font-size-l);
+        }
+
+        .nb-event {
+          font-weight: 600;
+        }
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        row-gap: $gap-small;
+
+        .button {
+          padding: 10px;
+          background-color: green;
+          border-radius: 10.5px;
+          border: none;
+          color: var(--color-primary-white);
+          background-color: var(--color-neutral-green);
+          font-weight: 600;
+          width: 187px;
+        }
+      }
+    }
+
+    .incoming-event {
+      .event {
+        display: flex;
+        column-gap: 10px;
+
+        .sidebar {
+          height: auto;
+          width: 10px;
+          background-color: var(--color-yellow-200);
+        }
+
+        .event-info-container {
+          overflow: hidden;
+
+          a {
+            color: inherit;
+            text-decoration: none;
+          }
+
+          .event-name {
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+    }
+
+    .calendar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0 $padding-small;
+
+      .calendar-day {
+        width: 141px;
+        height: 139.75px;
+        padding: 16px 22px;
+        border: 1px solid var(--color-neutral-200);
+        border-radius: 18px;
+        font-size: var(--font-size-l);
+        font-weight: 600;
+
+        .event-nb-day {
+          font-size: var(--font-size-s);
+        }
+
+        .event-title {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}

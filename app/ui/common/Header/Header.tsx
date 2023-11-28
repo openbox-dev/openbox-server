@@ -15,7 +15,7 @@ interface HeaderProps {
 
 export default function Header({ user }: HeaderProps) {
   const [isModalActive, setIsModalActive] = useState(false);
-  const [currentPageUrl, setCurrentPageUrl] = useState("/")
+  const [currentPageUrl, setCurrentPageUrl] = useState("/");
   const navigationLinks = {
     Accueil: "/",
     Calendrier: "/calendar",
@@ -25,8 +25,8 @@ export default function Header({ user }: HeaderProps) {
 
   /* TODO: Envoyer l'url de la page à l'header pour le Useeffect */
   useEffect(() => {
-    setCurrentPageUrl("/" + window.location.href.split('/')[3])
-  }, [])
+    setCurrentPageUrl("/" + window.location.href.split("/")[3]);
+  }, []);
 
   return (
     <div className="Header">
@@ -37,7 +37,12 @@ export default function Header({ user }: HeaderProps) {
           {Object.entries(navigationLinks).map(([pageName, pageUrl]) => {
             return (
               <li key={pageName}>
-                <Link className={pageUrl === currentPageUrl ? "active" : ""} to={pageUrl}>{pageName}</Link>
+                <Link
+                  className={pageUrl === currentPageUrl ? "active" : ""}
+                  to={pageUrl}
+                >
+                  {pageName}
+                </Link>
               </li>
             );
           })}
@@ -55,8 +60,12 @@ export default function Header({ user }: HeaderProps) {
           </>
         ) : (
           <>
-            <Link className="login-button" to={"/login"}>Connexion</Link>
-            <Link className="register-button" to={"/register"}>Inscription</Link>
+            <Link className="login-button" to={"/login"}>
+              Connexion
+            </Link>
+            <Link className="register-button" to={"/register"}>
+              Inscription
+            </Link>
           </>
         )}
       </div>

@@ -1,0 +1,108 @@
+@use "./mixins";
+
+.Box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-margin);
+  padding-top: var(--spacing-margin);
+  padding-bottom: var(--spacing-margin);
+
+  h1.box-title {
+    padding: var(--padding-section-small) var(--spacing-margin);
+    background: var(--color-light-blue);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+  }
+  p.box-description {
+    font-size: var(--font-size-m);
+    color: var(--color-primary-grey);
+    font-weight: 400;
+  }
+  .box-image {
+    width: 100%;
+    height: 419px;
+    background-position: center;
+    background-size: cover;
+    border-radius: var(--border-radius);
+  }
+
+  @include mixins.eventSectionMixin;
+}
+
+.content-section {
+  display: flex;
+  flex-direction: row;
+
+  .contributors-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-section-small);
+    padding: var(--spacing-margin);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-neutral-100);
+    height: fit-content;
+
+    h3.contributor-title {
+      font-size: var(--font-size-m);
+      font-weight: 600;
+    }
+    .contributors {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      .contributor {
+        display: flex;
+        flex-direction: column;
+
+        h4.contributor-group {
+          font-size: var(--font-size-s);
+          font-weight: 600;
+          color: var(--color-primary-grey);
+        }
+        span.contributor-firstname {
+          font-size: var(--font-size-s);
+        }
+        span.contributor-lastname {
+          font-size: var(--font-size-m);
+        }
+      }
+    }
+  }
+
+  .event-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 var(--spacing-margin);
+    gap: var(--spacing-margin);
+
+    a {
+      font-size: var(--font-size-m);
+      color: var(--color-primary-green);
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 16px 0;
+    }
+  }
+}
+@media only screen and (max-width: 740px) {
+  .content-section {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-margin);
+    width: -webkit-fill-available;
+
+    .contributors-card {
+      padding: var(--padding-section-small);
+      align-self: baseline;
+      width: inherit;
+    }
+    .event-section {
+      width: 100%;
+      padding: 0;
+    }
+  }
+}
