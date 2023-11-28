@@ -10,6 +10,7 @@ export const boxCatalogService = {
               status: "ACCEPTED",
               name: {
                 contains: search,
+                mode: "insensitive",
               },
             },
           }),
