@@ -1,0 +1,111 @@
+@use "./mixins";
+
+.Main {
+  background-color: var(--color-primary-white);
+
+  .Title {
+    background-color: var(--color-terciary-50);
+    margin-bottom: 32px;
+    width: 100%;
+    padding: 10px 32px;
+    margin-top: 32px;
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-green-800);
+  }
+
+  .Container-Filter-Box {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    @include mixins.boxMixin;
+  }
+
+  .Filter {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-neutral-200);
+    border-radius: 18px;
+    padding: 32px;
+    position: sticky;
+    min-width: 244px;
+    height: fit-content;
+    top: 187px;
+
+    color: var(--color-green-800);
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .Remove-Sort {
+      border: none;
+      padding: none;
+      color: none;
+      background: none;
+      font-size: var(--font-size-s);
+    }
+
+    .Filter-Sort {
+      display: flex;
+      flex-direction: column;
+      padding-top: 32px;
+      padding-bottom: 32px;
+
+      .Sort-Title {
+        font-size: var(--font-size-m);
+        margin-bottom: 10px;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .Sort-Button {
+          border: none;
+          padding: 4px;
+          background: none;
+          font-size: var(--font-size-s);
+          &:hover {
+            cursor: pointer;
+            color: var(--color-primary-green);
+          }
+        }
+      }
+    }
+
+    .Filter-Title {
+      font-size: var(--font-size-m);
+      margin-bottom: 32px;
+    }
+
+    .Searchbar {
+      border: none;
+      font-size: var(--font-size-s);
+      padding: 16px 8px;
+      border-radius: 18px;
+    }
+  }
+
+  .search-result-text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    a {
+      color: var(--color-primary-black);
+      &:hover {
+        color: var(--color-neutral-200);
+      }
+    }
+  }
+}
+
+.layout-section {
+  display: flex;
+  margin-bottom: 32px;
+  gap: 32px;
+}

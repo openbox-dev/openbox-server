@@ -1,6 +1,7 @@
 import { LinksFunction, MetaFunction } from "@remix-run/node";
 
 import Box from "~/ui/pages/Nested/Box/Box";
+import { BoxLoader } from "~/controllers/loaders/nested.box.loader";
 
 import boxStyle from "../styles/nested.box.css?url";
 
@@ -20,4 +21,4 @@ export const links: LinksFunction = () => {
 };
 
 export default Box;
-// export {CatalogBoxLoader as loader, CatalogBoxAction as action};
+export { BoxLoader as loader };

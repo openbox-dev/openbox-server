@@ -13,9 +13,10 @@ interface EventCardProps {
 export default function EventCard({ event }: EventCardProps) {
   return (
     <div
-      className={`EventCard ${
-        EventService.getEventStatus(event.startDate) === "PASSÉ" &&
-        "passed-event"
+      className={`EventCard${
+        EventService.getEventStatus(event.startDate) === "PASSÉ"
+          ? " passed-event"
+          : ""
       }`}
     >
       <span className="event-status">
@@ -44,16 +45,13 @@ export default function EventCard({ event }: EventCardProps) {
           </span>
         </p>
         <h3>
-          <Link to={`/event/${event.id}`}>{event.name}</Link>
+          <a href={`/event/${event.id}`}>{event.name}</a>
         </h3>
         <p className="event-description">{event.description}</p>
       </div>
-      <Link
-        to={`/box/${event.box.name.split(" ").join("-").toLowerCase()}`}
-        className="event-box-tag"
-      >
+      <a href={`/box/${event.boxId}`} className="event-box-tag">
         {event.box.name}
-      </Link>
+      </a>
     </div>
   );
 }

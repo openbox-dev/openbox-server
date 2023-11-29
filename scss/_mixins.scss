@@ -15,9 +15,13 @@
       }
 
       .EventCard {
-        max-width: 398px;
+        width: 398px;
         color: var(--color-primary-black);
         place-self: center;
+
+        @media (max-width: 460px) {
+          width: 342px;
+        }
 
         &.passed-event {
           opacity: 0.5;
@@ -79,7 +83,7 @@
       font-size: 1rem;
       padding: 4px 24px;
       color: var(--color-primary-grey);
-      font-weight: 600px;
+      font-weight: 600;
       border-radius: 50px;
       border: 1px solid var(--color-primary-grey);
       cursor: pointer;
@@ -101,5 +105,94 @@
 
   @media only screen and (max-width: 1110px) {
     grid-template-columns: 1fr;
+  }
+}
+
+@mixin eventTag {
+  font-size: 1rem;
+  padding: 4px 24px;
+  color: var(--color-primary-grey);
+  font-weight: 600;
+  border-radius: 50px;
+  border: 1px solid var(--color-primary-grey);
+  cursor: pointer;
+}
+
+@mixin boxMixin {
+  .Catalog-Box {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    height: 100%;
+    gap: 32px;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .Odd-Box {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: 18px;
+      padding: 10px;
+      width: 290px;
+      height: 180px;
+      overflow: hidden;
+
+      .Box-Title {
+        background-color: var(--color-terciary-50);
+        border-radius: 12px;
+        padding: 2px 16px;
+        margin-bottom: 16px;
+        font-size: var(--font-size-m);
+        color: var(--color-green-800);
+      }
+
+      .Description {
+        font-size: var(--font-size-s);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: wrap;
+      }
+    }
+
+    .Even-Box {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--color-blue-50);
+      border-radius: 18px;
+      padding: 10px;
+      width: 290px;
+      height: 180px;
+      overflow: hidden;
+
+      .Box-Title {
+        border: 1px solid var(--color-neutral-200);
+        background-color: var(--color-primary-white);
+        border-radius: 12px;
+        padding: 2px 16px;
+        margin-bottom: 16px;
+        font-size: var(--font-size-m);
+        color: var(--color-green-800);
+      }
+
+      .Description {
+        font-size: var(--font-size-s);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: wrap;
+      }
+    }
+
+    .Even-Box > span {
+      color: var(--color-primary-grey);
+    }
+
+    .Odd-Box > span {
+      color: var(--color-primary-grey);
+    }
   }
 }
