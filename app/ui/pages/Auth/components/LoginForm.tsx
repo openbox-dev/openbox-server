@@ -35,7 +35,7 @@ export default function LoginForm() {
             placeholder="i0'c4xg9CqG}h!"
           />
         </label>
-        <button type="submit">S'inscrire</button>
+        <button type="submit">Se connecter</button>
         <Link to="/register">
           Je n'ai pas de compte
           <img src={arrowLink} alt="Arrow icon" />
