@@ -77,20 +77,6 @@ export default function Home() {
           <SeeMore />
         </section>
 
-        <section className="event-section">
-          <h2>Nos évènements</h2>
-          {/* link */}
-          <div className="event-card-container three-column-grid">
-            {serverData.comingEvents &&
-              serverData.comingEvents.map((event) => {
-                return <EventCard key={event.id} event={event as any} />; // any because for some reason prisma sets dates as strings
-              })}
-          </div>
-          <Link to={"/calendar"}>
-            Voir le calendrier <img src={arrowLink} alt="Arrow icon" />
-          </Link>
-        </section>
-
         <section className="box-explain-section" id="what-is-a-box">
           <div>
             <h2 className="section-title">Qu'est ce qu'une box ?</h2>
@@ -124,6 +110,20 @@ export default function Home() {
           </div>
           <Link to={"/box"}>
             Découvrir nos Box <img src={arrowLink} alt="Arrow icon" />
+          </Link>
+        </section>
+
+        <section className="event-section">
+          <h2>Nos évènements</h2>
+          {/* link */}
+          <div className="event-card-container three-column-grid">
+            {serverData.comingEvents &&
+              serverData.comingEvents.map((event) => {
+                return <EventCard key={event.id} event={event as any} />; // any because for some reason prisma sets dates as strings
+              })}
+          </div>
+          <Link to={"/calendar"}>
+            Voir le calendrier <img src={arrowLink} alt="Arrow icon" />
           </Link>
         </section>
 

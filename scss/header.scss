@@ -9,7 +9,6 @@
   }
 
   nav {
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -33,7 +32,7 @@
           color: var(--color-primary-green);
 
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             bottom: 0;
             left: 0;
@@ -64,6 +63,7 @@
 
   .auth-links {
     display: flex;
+    align-items: center;
 
     a {
       text-decoration: none;
@@ -86,7 +86,7 @@
       }
     }
 
-    a+a {
+    a + a {
       color: var(--color-primary-white);
       background-color: var(--color-primary-green);
     }
