@@ -7,7 +7,7 @@ interface BoxCardProps {
 }
 const BoxCard: React.FC<BoxCardProps> = ({ title, description, id, className }) => {
     return (
-        <Link to={'http://localhost:3000/box/' + id}>
+        <Link to={'box/' + id}>
             <div className={className}>
                 <h3 className="Box-Title">{title}</h3>
                 <span>Description</span>
