@@ -1,5 +1,7 @@
 # OpenBox
 
+/!\ Projet non maintenu, le service d'hébergement de base de donnée est terminé
+
 ## Installation
 
 ### MakeFile
